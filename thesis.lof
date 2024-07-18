@@ -1,0 +1,9 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Figure captions should be long and descriptive because people actually read them, unlike the rest of the text. (Left) A block diagram make using Tikz. (Right) A plot made using Pgfplots. Note that the figures are not scaled, so the text size in the figures is consistent with the rest of the document. The source files for the figures are in the \texttt {graphics/} folder.}}{10}{figure.caption.5}%

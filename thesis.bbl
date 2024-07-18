@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{pepit}
+Baptiste Goujaud, Céline Moucer, François Glineur, Julien Hendrickx, Adrien Taylor, and Aymeric Dieuleveut.
+\newblock Pepit: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
+
+\bibitem{adam}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization, 2017.
+
+\bibitem{drori2012}
+Yoel Drori and Marc Teboulle.
+\newblock Performance of first-order methods for smooth convex minimization: a novel approach, 2012.
+
+\bibitem{taylor2016}
+Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
+\newblock Smooth strongly convex interpolation and exact worst-case performance of first-order methods, 2016.
+
+\bibitem{lessard2016}
+Laurent Lessard, Benjamin Recht, and Andrew Packard.
+\newblock Analysis and design of optimization algorithms via integral quadratic constraints.
+\newblock {\em SIAM Journal on Optimization}, 26(1):57–95, January 2016.
+
+\bibitem{julia}
+Jeff Bezanson, Stefan Karpinski, Viral~B. Shah, and Alan Edelman.
+\newblock Julia: A fast dynamic language for technical computing, 2012.
+
+\bibitem{tutorial}
+Bryan Van~Scoy and Laurent Lessard.
+\newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
+\newblock In {\em IEEE Conference on Decision and Control}, 2023.
+
+\end{thebibliography}

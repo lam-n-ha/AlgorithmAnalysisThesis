@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+The style file: unsrt.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "lessard16"
+Warning--I didn't find a database entry for "lessard2015optimal"
+Warning--I didn't find a database entry for "sundararajan2020analysis"
+Warning--I didn't find a database entry for "tmm"
+You've used 7 entries,
+            1791 wiz_defined-function locations,
+            480 strings with 4710 characters,
+and the built_in function-call counts, 1212 in all, are:
+= -- 77
+> -- 80
+< -- 0
++ -- 29
+- -- 22
+* -- 63
+:= -- 196
+add.period$ -- 16
+call.type$ -- 7
+change.case$ -- 7
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 46
+empty$ -- 140
+format.name$ -- 22
+if$ -- 270
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 2
+newline$ -- 33
+num.names$ -- 7
+pop$ -- 43
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 29
+stack$ -- 0
+substring$ -- 21
+swap$ -- 8
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 8
+width$ -- 8
+write$ -- 63
+(There were 4 warnings)

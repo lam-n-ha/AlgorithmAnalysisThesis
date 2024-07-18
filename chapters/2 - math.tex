@@ -1,0 +1,9 @@
+ \chapter{Literature Review}
+
+There exist in the literature many approaches to performing algorithm analysis. In 2014, Drori and Teboulle first introduced the method of reformulating worst-case algorithm analysis into a semidefinite program (SDP). Taylor, Hendrickx and Glineur built upon this work by turning the SDP into a convex optimization problem, creating the performance estimation problem (PEP) methodology. PEP showed by creating a finite representation for a class of smooth strongly convex functions using closed-form necessary and sufficient conditions, computing the worst-case performance of a first order method can be reduced to a convex SDP whose size is proportionate with the number of iterations the algorithm is run.
+
+IQCs here
+
+Of the methodologies above, PEP has been implemented into a computer program in PESTO, a MATLAB toolbox and PEPit, a Python package. The program when given a first-order method, a class of function, a performance measure, and an initial condition, will find the worst-case performance automatically. PESTO and PEPit presented an easy way to use the PEP approach to analyze gradient-based algorithms.
+
+The main contribution of this thesis paper is to create a package sharing the same goal as PESTO and PEPit of providing an accessible and fast way to analyze the performance of first-order methods, leveraging the approach presented in [], in the Julia programming language.
