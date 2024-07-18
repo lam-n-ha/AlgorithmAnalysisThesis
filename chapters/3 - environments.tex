@@ -41,4 +41,13 @@ While an LTI system is relatively simple to solve, the addition of the nonlinear
 
 	\(2(L-m)(f_i - f_j) - mL||y_i - y_j||^2 + 2(y_i - y_j)^{T}(mu_i - Lu_j) - ||u_i - u_j||^2 > 0\) for \(i ,j \in I\)
 \end{theorem}
+Where the Euclidean-norm of a vector \(x\) is denoted as \(||x||\). Using this inequality, constraint matrices \(M\) and \(m\) can be constructed:
+
+When the interpolation conditions are satisfied, \(M\) and \(m\) are positive definite, meaning they are symmetric and and its eigenvalues are positive.
+
+This step in the methodology is similar to that in \cite{pepit}. By using interpolation conditions, the smooth strongly convex class of function inputted is represented by a matrix that is positive semidefinite.
+
+\section{Lifting algorithm}
+
+\section{Lyapunov function certification}
 

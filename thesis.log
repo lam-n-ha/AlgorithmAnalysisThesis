@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  18 JUL 2024 00:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  18 JUL 2024 02:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/nlam1/.julia/dev/latex/thesis template/thesis.tex"
-(c:/Users/nlam1/.julia/dev/latex/thesis template/thesis.tex
+**c:/Users/nlam1/.julia/dev/Thesis/Thesis/thesis.tex
+(c:/Users/nlam1/.julia/dev/Thesis/Thesis/thesis.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
 (./thesis.cls
@@ -537,7 +537,7 @@ Package: thm-amsthm 2023/05/04 v0.76
 \thmt@style@headstyle=\toks38
 ))
 \c@theorem=\count325
-Package thmtools Info: Automatically pulling in `thmdef-shaded' on input line 48.
+Package thmtools Info: Automatically pulling in `thmdef-shaded' on input line 47.
  (c:/texlive/2024/texmf-dist/tex/latex/thmtools/thmdef-shaded.sty
 Package: thmdef-shaded 2023/05/04 v0.76
 ) (c:/texlive/2024/texmf-dist/tex/latex/shadethm/shadethm.sty
@@ -585,30 +585,30 @@ Package cleveref Info: include cross-reference names in hyperlinks on input line
 Package cleveref Info: always capitalise cross-reference names on input line 7852.
 Package cleveref Info: include cross-reference names in hyperlinks on input line 7852.
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 96.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 95.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -644,7 +644,7 @@ LaTeX Font Info:    ... okay on input line 96.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 96.
+Package hyperref Info: Link coloring ON on input line 95.
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write3
 \openout3 = `thesis.out'.
@@ -676,12 +676,12 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) (c:/texlive/2024/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 96.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 95.
 
 Couldn't patch \deferred@thm@head!
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 107.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 102.
 (c:/texlive/2024/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1
@@ -692,39 +692,39 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.118 \end{abstract}
+l.113 \end{abstract}
                      [1]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 125.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 125.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 125.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 125.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 125.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 125.
+(Font)              <12> on input line 120.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 125.
+(Font)              <8> on input line 120.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 125.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 125.
+(Font)              <6> on input line 120.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 125.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 120.
  (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./thesis.toc)
@@ -733,19 +733,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [3
 
-] (./thesis.lot)
-\tf@lot=\write5
-\openout5 = `thesis.lot'.
-
- [4
-
-] (./thesis.lof
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9.
- (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-\tf@lof=\write6
-\openout6 = `thesis.lof'.
+] [4] (./thesis.lof)
+\tf@lof=\write5
+\openout5 = `thesis.lof'.
 
  (./chapters/dedication.tex [5
 
@@ -759,12 +749,6 @@ LaTeX Warning: Hyper reference `acro:FG' on page viii undefined on input line 4.
 
 
 LaTeX Warning: Hyper reference `acro:FG' on page viii undefined on input line 4.
-
-
-LaTeX Warning: Hyper reference `acro:TCP/IP' on page viii undefined on input line 5.
-
-
-LaTeX Warning: Hyper reference `acro:TCP/IP' on page viii undefined on input line 5.
 
 ) [8
 
@@ -783,44 +767,24 @@ Chapter 3.
 
 ]
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 38.
-) (./chapters/4 - more.tex [8{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+ [8{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]) (./chapters/4 - more.tex [9]
 Chapter 4.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 7.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 7.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 7.
+) (./chapters/5 - results.tex [10
 
-LaTeX Warning: Citation `lessard16' on page 9 undefined on input line 9.
+]
+Chapter 5.
+) [11
 
+] (./thesis.bbl)
 
-LaTeX Warning: Citation `lessard2015optimal' on page 9 undefined on input line 9.
-
-
-LaTeX Warning: Citation `sundararajan2020analysis' on page 9 undefined on input line 9.
+Package caption Warning: Unused \captionsetup[figure] on input line 57.
+See the caption package documentation for explanation.
 
 
-LaTeX Warning: Citation `tmm' on page 9 undefined on input line 9.
+Package caption Warning: Unused \captionsetup[table] on input line 58.
+See the caption package documentation for explanation.
 
-<graphics/text_figure.pdf, id=246, 144.44865pt x 80.46762pt>
-File: graphics/text_figure.pdf Graphic file (type pdf)
-<use graphics/text_figure.pdf>
-Package pdftex.def Info: graphics/text_figure.pdf  used on input line 22.
-(pdftex.def)             Requested size: 144.44829pt x 80.4674pt.
-<graphics/test_plot.pdf, id=247, 155.97774pt x 93.36581pt>
-File: graphics/test_plot.pdf Graphic file (type pdf)
-<use graphics/test_plot.pdf>
-Package pdftex.def Info: graphics/test_plot.pdf  used on input line 22.
-(pdftex.def)             Requested size: 155.97734pt x 93.36557pt.
-
-Overfull \hbox (23.74364pt too wide) in paragraph at lines 30--30
-[][][][]$\T1/lmtt/m/n/10 https : / / lazyscientist . wordpress . com / 2021 / 07 / 23 / make-[]better-[]tables-[]in-[]latex-[]using-[]booktabs/$[][]| 
- []
-
-) [9
-
-] [10 <./graphics/text_figure.pdf> <./graphics/test_plot.pdf>] (./thesis.bbl) [11
+[12
 
 
 ] (./thesis.aux)
@@ -833,30 +797,21 @@ L3 programming layer <2024-03-14>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 03F1611B5809A8B2B8587A23A8A062DC;2569.
+(rerunfilecheck)             Checksum: D03FA6E3081BA25AFC9C36F9CBCF11ED;2888.
  ) 
 Here is how much of TeX's memory you used:
- 22394 strings out of 474103
- 430732 string characters out of 5747481
- 1940496 words of memory out of 5000000
- 44326 multiletter control sequences out of 15000+600000
- 638406 words of font info for 91 fonts, out of 8000000 for 9000
+ 22273 strings out of 474103
+ 428733 string characters out of 5747481
+ 1938496 words of memory out of 5000000
+ 44224 multiletter control sequences out of 15000+600000
+ 619449 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,93p,1312b,1041s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
-
-<c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (20 pages, 363926 bytes).
+ 90i,13n,93p,1302b,1041s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
+Output written on thesis.pdf (21 pages, 193904 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
- 336 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 339 PDF objects out of 1000 (max. 8388607)
+ 291 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 

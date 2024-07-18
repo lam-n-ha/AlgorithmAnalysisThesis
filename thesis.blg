@@ -3,13 +3,9 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "lessard16"
-Warning--I didn't find a database entry for "lessard2015optimal"
-Warning--I didn't find a database entry for "sundararajan2020analysis"
-Warning--I didn't find a database entry for "tmm"
 You've used 7 entries,
             1791 wiz_defined-function locations,
-            480 strings with 4710 characters,
+            476 strings with 4656 characters,
 and the built_in function-call counts, 1212 in all, are:
 = -- 77
 > -- 80
@@ -48,4 +44,3 @@ warning$ -- 0
 while$ -- 8
 width$ -- 8
 write$ -- 63
-(There were 4 warnings)
