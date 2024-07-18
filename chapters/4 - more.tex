@@ -9,7 +9,7 @@ To in order to perform algorithm analysis with JuPE, the user need to follow the
 JuPE then perform analysis automatically and return a worst-case guarantee convergence rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data structures}
-JuPE is a package 
 \subsection*{Expressions}
 \subsection*{Oracles}
+Oracles can be described as data structures that contain relation information between expressions. Oracles can be sampled at different expressions to return different expressions, and the fields that exist within each oracle and the relations it support are determined by the kind of function the oracle represent. For example, while a "DifferentiableFunctional" oracle contains a dictionary mapping two expression in a "Gradient" relation, a "TwiceDifferentiableFunctional" oracle contains in addition a dictionary mapping two expression in a "Hessian" relation.
 \section{Analysis Process}

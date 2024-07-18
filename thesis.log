@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  18 JUL 2024 02:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  18 JUL 2024 02:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/nlam1/.julia/dev/Thesis/Thesis/thesis.tex
-(c:/Users/nlam1/.julia/dev/Thesis/Thesis/thesis.tex
+**c:/Users/nlam1/.julia/dev/AlgorithmAnalysisThesis/thesis.tex
+(c:/Users/nlam1/.julia/dev/AlgorithmAnalysisThesis/thesis.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
 (./thesis.cls
@@ -801,14 +801,14 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  22273 strings out of 474103
- 428733 string characters out of 5747481
+ 428763 string characters out of 5747481
  1938496 words of memory out of 5000000
  44224 multiletter control sequences out of 15000+600000
  619449 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,93p,1302b,1041s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,13n,93p,1312b,1041s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on thesis.pdf (21 pages, 193904 bytes).
+Output written on thesis.pdf (21 pages, 194386 bytes).
 PDF statistics:
  339 PDF objects out of 1000 (max. 8388607)
  291 compressed objects within 3 object streams

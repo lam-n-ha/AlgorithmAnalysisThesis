@@ -1,8 +1,8 @@
-PWD c:/Users/nlam1/.julia/dev/Thesis/Thesis
+PWD c:/Users/nlam1/.julia/dev/AlgorithmAnalysisThesis
 INPUT c:/texlive/2024/texmf.cnf
 INPUT c:/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/nlam1/.julia/dev/Thesis/Thesis/thesis.tex
+INPUT c:/Users/nlam1/.julia/dev/AlgorithmAnalysisThesis/thesis.tex
 OUTPUT thesis.log
 INPUT ./thesis.cls
 INPUT thesis.cls
