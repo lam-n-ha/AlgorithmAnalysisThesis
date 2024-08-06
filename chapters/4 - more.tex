@@ -6,10 +6,29 @@ To in order to perform algorithm analysis with JuPE, the user need to follow the
 	\item Choose an algorithm to be analyzed from a supported list or entering a new one 
 	\item Specify a performance measure
   \end{enumerate}
-JuPE then perform analysis automatically and return a worst-case guarantee convergence rate
+JuPE then perform analysis automatically and return a worst-case guarantee convergence rate.
+
+This chapter goes into the core component code that enables JuPE and the analysis process.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data structures}
+\section{Core Components}
+
+In a broad sense, JuPE's analysis functionality is a set of instructions that use the input to create and solve an optimization problem to derive a performance certification. This optimization problem consists of the Lur'e representations of the algorithms as well as the interpolation conditions. This requires the program to be able to keep track of and differentiate between variables representing concepts such as functions, gradients or values amongst others. Not only are these variables then able to be used to create optimization problems, it should also be simple for the user to define them as they provide input for the program. JuPE uses data structures to intuitively represent these concepts.
+
 \subsection*{Expressions}
+Expressions are data structures acing as the small building block upon which every other concepts are built. Expressions must belong to one of the defined types, which are: . Algebra can be done on expressions, and each expression contains information on its decomposition of expressions. 
+
 \subsection*{Oracles}
-Oracles can be described as data structures that contain relation information between expressions. Oracles can be sampled at different expressions to return different expressions, and the fields that exist within each oracle and the relations it support are determined by the kind of function the oracle represent. For example, while a "DifferentiableFunctional" oracle contains a dictionary mapping two expression in a "Gradient" relation, a "TwiceDifferentiableFunctional" oracle contains in addition a dictionary mapping two expression in a "Hessian" relation.
+As JuPE perform analysis over sets of functions using only constraints on the \(\nabla (f)\) block of \ref{}, the block can be treated as a blackbox. These blackboxes are represented by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
+
+Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions and create every constraints on them following the function class' interpolation conditions.
+
+\subsection*{States}
+States are linear combinations of expressions representing the states of an algorithms. By inputing how the states are updated, the "next" and "prev" fields of the expressions inside the states are stored.
+
+\subsection*{Constraints}
+
 \section{Analysis Process}
+
+Using this inequality, constraint matrices \(M\) and \(m\) can be constructed:
+When the interpolation conditions are satisfied, \(M\) and \(m\) are positive definite, meaning they are symmetric and and its eigenvalues are positive.

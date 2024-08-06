@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  18 JUL 2024 02:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.18)  6 AUG 2024 05:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -767,13 +767,18 @@ Chapter 3.
 
 ]
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 38.
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 48.
  [8{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]) (./chapters/4 - more.tex [9]
 Chapter 4.
-) (./chapters/5 - results.tex [10
+[10
 
 ]
+
+LaTeX Warning: Reference `' on page 11 undefined on input line 22.
+
+) (./chapters/5 - results.tex [11]
 Chapter 5.
-) [11
+) [12
 
 ] (./thesis.bbl)
 
@@ -784,7 +789,7 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-[12
+[13
 
 
 ] (./thesis.aux)
@@ -797,21 +802,21 @@ L3 programming layer <2024-03-14>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D03FA6E3081BA25AFC9C36F9CBCF11ED;2888.
+(rerunfilecheck)             Checksum: FE30B6B4F958E5BE8B8C5548F443A748;2888.
  ) 
 Here is how much of TeX's memory you used:
- 22273 strings out of 474103
- 428763 string characters out of 5747481
- 1938496 words of memory out of 5000000
- 44224 multiletter control sequences out of 15000+600000
+ 22285 strings out of 474103
+ 428983 string characters out of 5747481
+ 1939496 words of memory out of 5000000
+ 44232 multiletter control sequences out of 15000+600000
  619449 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,93p,1312b,1041s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on thesis.pdf (21 pages, 194386 bytes).
+ 90i,13n,93p,1312b,1104s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (22 pages, 202946 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 291 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
+ 73 named destinations out of 1000 (max. 500000)
  161 words of extra memory for PDF output out of 10000 (max. 10000000)
 

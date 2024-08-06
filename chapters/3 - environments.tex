@@ -33,21 +33,31 @@ Beyond the three listed examples, this step can be applied to any other first or
 
 For the remainder of this paper, we will focus on the only class of function currently supported by JuPE, m strong L smooth convex function \(f \in \) \(F_{m,L}\).
 
-While an LTI system is relatively simple to solve, the addition of the nonlinearity representing the gradient of the function is not. This step replaces the gradient of a smooth strongly convex function with a set of conditions on the input and output of that linearity using the characteristics of the class of function. This step relies on a theorem first presented in \cite{taylor2016} and reformatted in \cite{tutorial}:
+In the field of robust control theory utilized by this Lyapunov-based approach, while an LTI system is relatively simple, the nonlinearity representing the gradient of the function cannot be efficiently solved. As a result, our approach replaces the nonlinearity with a set of conditions on its input and output, which provides necessary and sufficient conditions under which there exists a function \(f \in \) \(F_{m,L}\) that interpolates a given finite set of argument-function value-gradient triplets. These interpolation conditions depends on the characteristics of the function class and was first formulated in \cite{taylor2016} and reformatted in \cite{tutorial}:
 
 \begin{theorem}[\cite{taylor2016}, Thm. 4; \cite{tutorial}, Thm. 3]
 	\label{thm:interpolation_condition}
 	Given index set \(I\), a set of triplets \({(y_k, u_k, f_k)}_{k \in I}\) is \(F_{m,L}-interpolable\), meaning there exists a function \(f \in F_{m,L}\) satisfying \(f(y_k) = f_k\) and \(\nabla f(y_k) = u_k\) if and only if:
 
 	\(2(L-m)(f_i - f_j) - mL||y_i - y_j||^2 + 2(y_i - y_j)^{T}(mu_i - Lu_j) - ||u_i - u_j||^2 > 0\) for \(i ,j \in I\)
+
 \end{theorem}
-Where the Euclidean-norm of a vector \(x\) is denoted as \(||x||\). Using this inequality, constraint matrices \(M\) and \(m\) can be constructed:
 
-When the interpolation conditions are satisfied, \(M\) and \(m\) are positive definite, meaning they are symmetric and and its eigenvalues are positive.
+Where the Euclidean-norm of a vector \(x\) is denoted as \(||x||\). Basing on this theorem, [\cite{tutorial}, Cor 4] presented a non-negative linear combination of inequalities to create a tight representation of the class of function, which can be rewritten in a way easier to implement into code as:
 
-This step in the methodology is similar to that in \cite{pepit}. By using interpolation conditions, the smooth strongly convex class of function inputted is represented by a matrix that is positive semidefinite.
+\begin{corollary}[\cite{tutorial}, Cor. 4]
+	Given a function \(f \in F_{m,L}\) and let \(y_k,...,y_{k-l}\) be a sequence of iterates; \(u_{k-i} = \nabla f(y_{k-i})\) and \(f_{k-i} = f(y_{k-i})\) for \(i \in 0,...l\). Then the inequality:
+	
+	holds for all \(\Lambda \in \mathbb{R}^{(l+2) * (l+2)}\) and \(\Lambda >= 0\), and \(\Pi(\Lambda)\) and  \(\pi(\Lambda)\) are defined as:
+
+\end{corollary}
+
+This step in the methodology is similar to that in \cite{pepit}. By using interpolation conditions, the gradient of smooth strongly convex class of function inputted is represented by non-negative inequalities. This combined with the use of Lyapunov-functions to prove convergence rate which will be presented in 3.4 allows analysis to be done be solving a convex program
 
 \section{Lifting algorithm}
 
 \section{Lyapunov function certification}
+\begin{equation} \label{eqn:Lyapunov}
+	V(x) = <P, X[x; u]> = <X^T P, [x; u]>
+\end{equation}
 
