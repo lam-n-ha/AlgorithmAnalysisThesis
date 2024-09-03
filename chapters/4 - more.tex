@@ -1,4 +1,4 @@
-\chapter{Code Structure}
+\chapter{Code Components}
 
 To in order to perform algorithm analysis with JuPE, the user need to follow the folliowing 3 steps:
 \begin{enumerate}
@@ -6,29 +6,92 @@ To in order to perform algorithm analysis with JuPE, the user need to follow the
 	\item Choose an algorithm to be analyzed from a supported list or entering a new one 
 	\item Specify a performance measure
   \end{enumerate}
-JuPE then perform analysis automatically and return a worst-case guarantee convergence rate.
 
-This chapter goes into the core component code that enables JuPE and the analysis process.
+\begin{lstlisting}[mathescape]
+	m,L = 1,10
+	$ \alpha $ = 2/(L+m)
+	@algorithm begin
+		f = DifferentiableFunctional{R$ ^n $}()
+		xs, fs, gs = first_order_stationary_point(f)
+		f' $ \in $ SectorBounded(m, L, xs, gs)
+
+		x0 = R$ x^n $()
+		x1 = x0 - $ \alpha $*f'(x0)
+
+		x0 => x1
+		(x0-xs)^2 $ \leq $ 1
+
+		performance = (x1-xs)^2
+	end
+	bsmin( certify, a, b, tol=1e-5 )
+\end{lstlisting}
+
+In the example code, the user while using JuPE's provided macro to simplify the input process:
+\begin{itemize}
+	\item Defined the class of function f and its gradient f' by calling one of the provided functions
+	\item Defined an initial state x0 and specified the algorithm with which the state is updated using algebra
+	\item Set the performance measure
+\end{itemize}
+JuPE then derives the inputted information from the performance measure and performs analysis automatically to return a worst-case guarantee convergence rate. This analysis is done by following the set of instructions presented in section 3 to create and solve an optimization problem and derive a performance certification. To overcome the challenges of implementing a mathematical procedure into code, JuPE must be able to understand and differentiate between variables, represent concepts such as gradients or states, or formulating and solving a convex optimization problem on top of other requirements, while keeping the process of interacting with the program simple for users. This chapter goes into the code that constitutes JuPE and enables these functionalities.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Core Components}
+\section{Expressions}
 
-In a broad sense, JuPE's analysis functionality is a set of instructions that use the input to create and solve an optimization problem to derive a performance certification. This optimization problem consists of the Lur'e representations of the algorithms as well as the interpolation conditions. This requires the program to be able to keep track of and differentiate between variables representing concepts such as functions, gradients or values amongst others. Not only are these variables then able to be used to create optimization problems, it should also be simple for the user to define them as they provide input for the program. JuPE uses data structures to intuitively represent these concepts.
+Expressions are data structures acting as the smallest building block upon which every other concepts are built. Expressions contain Expressions must exist in a field and belong to one of the defined types, which are: 
+\begin{itemize}
+	\item Vector space
+	\item Normed vector space
+	\item Inner product space
+\end{itemize}
 
-\subsection*{Expressions}
-Expressions are data structures acing as the small building block upon which every other concepts are built. Expressions must belong to one of the defined types, which are: . Algebra can be done on expressions, and each expression contains information on its decomposition of expressions. 
+An expression data structure contains the following fields:
+\begin{description}
+	\item[Label] When an expression is defined, the variable name used is stored in the expression as a string
+	\item[Value] This field stores the value or decomposition of an expression.
+	\item[Constraints] 
+	\item[Oracles] When an expression is defined by sampling one or multiple oracles, the oracles used are stored in the expression data structure
+	\item[Next] When a state is defined as the 'next' state of another state, it is stored in the original state under the 'next' field.
+ \end{description}
 
-\subsection*{Oracles}
-As JuPE perform analysis over sets of functions using only constraints on the \(\nabla (f)\) block of \ref{}, the block can be treated as a blackbox. These blackboxes are represented by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
+\subsection*{Decomposition}
+Each expression contains in its 'value' field a decomposition dictionary. Expression can be categorized as:
+\begin{description}
+	\item['Base' expression] an expression defined to be in a field. Its decomposition would be itself
+	\item[Expression with decomposition] formed by performing algebra on other expressions. Its decompostion contain how many of each 'base' expression forms it.
+\end{description}
 
-Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions and create every constraints on them following the function class' interpolation conditions.
 
-\subsection*{States}
-States are linear combinations of expressions representing the states of an algorithms. By inputing how the states are updated, the "next" and "prev" fields of the expressions inside the states are stored.
+\subsection*{Algebra}
+Certain algebraic operations can be performed on expression. The supported operation are:
+\begin{description}
+	\item[Addition or subtraction between expressions] If both expressions of the operation posess a 'value', they are added or subtracted respectively to producing the resulting expression's value. Otherwise, the expressions in the operation are added or subtracted to create the decomposition of the resulting expression.
+	\item[Multiplication or division between an expression and a scalar] This operation scales the value or decomposition of an expression by the scalar value.
+	\item[Squared norm] An expression of the normed vector vpace type can be squared to produce a an inner product space expression 
+	\item[Outer product]
+\end{description}
 
-\subsection*{Constraints}
+\section{Oracles}
+As JuPE perform analysis over sets of functions using only constraints on the \( \nabla (f) \) block of, the block can be treated as a blackbox. These blackboxes are represented by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
 
-\section{Analysis Process}
+Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions. As an oracle is sampled, JuPE uses the set of interpolation conditions to create every constraints on the two expressions.
 
-Using this inequality, constraint matrices \(M\) and \(m\) can be constructed:
-When the interpolation conditions are satisfied, \(M\) and \(m\) are positive definite, meaning they are symmetric and and its eigenvalues are positive.
+\section{States}
+JuPE represents the states of an algorithm using expressions. As the user inputs the algorithm being analyzed, an initial state is created and an updated state is defined as some linear combination of the initial state and the gradient. Expressions in the previous state must be the same type as ones in the next state. The relationship between the states can be defined using the "=>" operation inside the labeling macro:
+\begin{lstlisting}
+	@algorithm begin
+		x0 => x1
+	end
+\end{lstlisting}
+
+\section{Label}
+JuPE uses macro to keep the process of providing inputs to the program simple. As some of the programming rules of programming might be difficult to navigate for users who might not be used to programming, in order to make the process of using JuPE as accessible as possible, JuPE's macro:
+\begin{description}
+	\item[Describe] When an expression is referenced, JuPE will describe the expression and any relevant field without the user having to access it.
+	\item[Define] During the inputing process, users can define a new expression or oracle with only one line specifying its trait, instead of the usual steps of declaring a new object and filling in its fields that typically exist in programming. The macro will calls the necessary functions to create the object, assign every relevant field as well as updating every  object associated with the one being created.
+\end{description}
+
+\section{Constraints}
+constraint on expression to be in a set - cone/nonnegative orthant, zero set,SDP
+\section{Performance measure}
+\section{JuMP}
+\section{Lyapunov function formulation}
