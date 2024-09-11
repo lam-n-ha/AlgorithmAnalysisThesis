@@ -37,6 +37,29 @@
 \usepackage{acronym}
 \usepackage{thmtools}
 \usepackage{listings}
+%\usepackage[margin=0.25in]{geometry}
+
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while, @show, rate, @algorithm, DifferentiableFunctional, first_order_stationary_point,
+      SectorBounded, R$ ^n $},%
+   sensitive=true,%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
 
 \theoremstyle{definition}
 \declaretheorem[name=Theorem, Refname={Theorem,Theorems}]{theorem}
