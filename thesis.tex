@@ -1,4 +1,6 @@
+\let\origtime\time
 \documentclass{thesis}
+\let\time\origtime
 % Class options: [singlespacing, onehalfspacing]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,7 +39,9 @@
 \usepackage{acronym}
 \usepackage{thmtools}
 \usepackage{listings}
-%\usepackage[margin=0.25in]{geometry}
+\usepackage{svg}
+\usepackage[capposition=bottom]{floatrow}
+% \usepackage[margin=0.25in]{geometry}
 
 \lstdefinelanguage{Julia}%
   {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
@@ -54,11 +58,13 @@
 
 \lstset{%
     language         = Julia,
+    breaklines       = true,
+    %postbreak        = \mbox{\textcolor{red}{$\hookrightarrow$}\space},
     basicstyle       = \ttfamily,
     keywordstyle     = \bfseries\color{blue},
     stringstyle      = \color{magenta},
     commentstyle     = \color{ForestGreen},
-    showstringspaces = false,
+    showstringspaces = false
 }
 
 \theoremstyle{definition}

@@ -203,6 +203,56 @@ INPUT c:/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/listings/listings.cfg
 INPUT c:/texlive/2024/texmf-dist/tex/latex/listings/listings.cfg
 INPUT c:/texlive/2024/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/texlive/2024/texmf-dist/tex/latex/svg/svg.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/svg/svg.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrbase.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrbase.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlfile.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlfile.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlogo.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/koma-script/scrlogo.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/tools/shellesc.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/tools/shellesc.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/transparent/transparent.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/transparent/transparent.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/pgf.revision.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/pgf.revision.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+INPUT c:/texlive/2024/texmf-dist/tex/latex/floatrow/floatrow.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/floatrow/floatrow.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/graphics/rotating.sty
+INPUT c:/texlive/2024/texmf-dist/tex/latex/graphics/rotating.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/thmtools/thmdef-shaded.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/thmtools/thmdef-shaded.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/thmtools/thmdef-shaded.sty
@@ -211,8 +261,6 @@ INPUT c:/texlive/2024/texmf-dist/tex/latex/shadethm/shadethm.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/graphics/color.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption.sty
-INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
-INPUT c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/cleveref/cleveref.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/cleveref/cleveref.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
@@ -307,6 +355,9 @@ INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT chapters/dedication.tex
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
@@ -325,21 +376,22 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./chapters/2 - math.tex
 INPUT ./chapters/2 - math.tex
 INPUT chapters/2 - math.tex
 INPUT ./chapters/3 - environments.tex
 INPUT ./chapters/3 - environments.tex
 INPUT chapters/3 - environments.tex
+INPUT ./graphics/block-diagram.pdf
+INPUT ./graphics/block-diagram.pdf
+INPUT ./graphics/block-diagram.pdf
+INPUT ./graphics/block-diagram.pdf
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT ./chapters/4 - more.tex
 INPUT ./chapters/4 - more.tex
 INPUT chapters/4 - more.tex
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -351,6 +403,15 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT ./chapters/5 - results.tex
 INPUT ./chapters/5 - results.tex
 INPUT chapters/5 - results.tex
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmmi10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT ./graphics/plot.pdf
+INPUT ./graphics/plot.pdf
+INPUT ./graphics/plot.pdf
+INPUT ./graphics/plot.pdf
 INPUT ./thesis.bbl
 INPUT ./thesis.bbl
 INPUT thesis.bbl
@@ -358,9 +419,13 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT thesis.aux
 INPUT ./thesis.out
 INPUT ./thesis.out
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb

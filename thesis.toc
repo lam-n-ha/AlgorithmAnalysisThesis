@@ -16,12 +16,17 @@
 \contentsline {section}{\numberline {3.4}Lyapunov function certification}{10}{section.3.4}%
 \contentsline {chapter}{\numberline {4}Code Components}{11}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Expressions}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Oracles}{15}{section.4.2}%
-\contentsline {section}{\numberline {4.3}States}{16}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Label}{16}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Constraints}{17}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Performance measure}{17}{section.4.6}%
-\contentsline {section}{\numberline {4.7}JuMP}{18}{section.4.7}%
-\contentsline {section}{\numberline {4.8}Lyapunov function formulation}{18}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Analysis Process and Result}{19}{chapter.5}%
-\contentsline {chapter}{References}{20}{chapter.5}%
+\contentsline {section}{\numberline {4.2}Algebra}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Oracles}{16}{section.4.3}%
+\contentsline {section}{\numberline {4.4}States}{17}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Label macro}{18}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Constraints}{19}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Performance measure}{19}{section.4.7}%
+\contentsline {section}{\numberline {4.8}JuMP modeling language}{20}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Analysis Process and Result}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Performance measure}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Algorithm and state update}{23}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Constraints}{25}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Derived feasibility and bisection search}{27}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Result}{27}{section.5.5}%
+\contentsline {chapter}{References}{28}{figure.caption.25}%

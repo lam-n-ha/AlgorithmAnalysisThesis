@@ -8,19 +8,22 @@
 
     \begin{tikzpicture}
         \begin{axis}[
-            xlabel=Cost,
-            ylabel=Error,
-            width=6cm,
-            height=4cm,
+            xlabel=Condition number L/m,
+            ylabel=Convergence rate,
+            width=10cm,
+            height=6cm,
             font=\footnotesize]
         \addplot[color=blue,mark=*] coordinates {
-            (2,-2.8559703)
-            (3,-3.5301677)
-            (4,-4.3050655)
-            (5,-5.1413136)
-            (6,-6.0322865)
-            (7,-6.9675052)
-            (8,-7.9377747)
+            (1, 0)
+            (2, 0.1105194091796875)
+            (3, 0.24938201904296875)
+            (4, 0.3593597412109375)
+            (5, 0.44379425048828125)
+            (6, 0.5095367431640625)
+            (7, 0.5612030029296875)
+            (8, 0.604248046875)
+            (9, 0.6392974853515625)
+            (10, 0.6687164306640625)
         };
         \end{axis}
     \end{tikzpicture}

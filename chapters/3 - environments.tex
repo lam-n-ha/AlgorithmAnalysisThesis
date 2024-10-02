@@ -8,6 +8,13 @@ The steps of this technique, which will be discussed in detail over the sections
 
 The first step in the technique is to view optimization algorithms from a control theory perspective: As iterative gradient-based algorithms uses the gradient of the function to update \(x\), they can be reformulated into a linear time-invariant (LTI) system (how the algorithm update) in feedback with a static nonlinearity (the gradient of \(f\)) at point \(x\). Using a block diagram, the algorithm can be seen as:
 
+\begin{figure}[h]
+    \centering
+	\includegraphics[width = .3 \textwidth]{block-diagram}
+    \caption{Block diagram representation of iterative algorithms}
+    \label{plot_result}
+\end{figure}
+
 Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and output of the gradient nonlinearity. For example, (FG) equation \ref{eqn:FG} can be rewritten to match this view as:
 \begin{subequations} \label{eqn:FG2}
 	\begin{align}

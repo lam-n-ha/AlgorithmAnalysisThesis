@@ -20,15 +20,24 @@
 }
 
 \tikzset{block diagram/.style={every path/.style={signal},every node/.style={block,draw=none}}}
-
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
 \begin{document}
 
 \begin{tikzpicture}[block diagram]
   
-  \node (system) [block] {system};
+  \node (system) [block] {G};
   
-  \draw ($(system.west)-(1.2cm,0)$) -- node[pos=0,anchor=south] {inputs} (system);
-  \draw (system) -- node[pos=1,anchor=south] {outputs} ($(system.east)+(1.2cm,0)$);
+  \node (grad) [block, below of=system] {\( \nabla (f) \)};
+
+  \coordinate [right of=system] (tmp1);
+  \coordinate [right of=grad] (tmp2); 
+  \coordinate [left of=grad] (tmp3);
+  \coordinate [left of=system] (tmp4);
+  
+
+  \draw [->, rounded corners=2pt] (system.east) -- (tmp1) -- (tmp2) -- (grad); 
+  \draw [->, rounded corners=2pt] (grad.west) -- (tmp3) -- (tmp4) -- (system); 
 \end{tikzpicture}
 
 \end{document}

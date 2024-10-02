@@ -30,4 +30,8 @@ Bryan Van~Scoy and Laurent Lessard.
 \newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
 \newblock In {\em IEEE Conference on Decision and Control}, 2023.
 
+\bibitem{SCS}
+Brendan O'Donoghue, Eric Chu, Neal Parikh, and Stephen Boyd.
+\newblock Conic optimization via operator splitting and homogeneous self-dual embedding, June 2016.
+
 \end{thebibliography}
