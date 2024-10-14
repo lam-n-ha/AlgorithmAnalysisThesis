@@ -388,7 +388,13 @@ INPUT ./graphics/block-diagram.pdf
 INPUT ./graphics/block-diagram.pdf
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx6.tfm
 INPUT ./chapters/4 - more.tex
 INPUT ./chapters/4 - more.tex
 INPUT chapters/4 - more.tex
@@ -397,15 +403,13 @@ INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT ./chapters/5 - results.tex
 INPUT ./chapters/5 - results.tex
 INPUT chapters/5 - results.tex
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmmi10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT ./graphics/plot.pdf
@@ -424,6 +428,7 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb
@@ -437,4 +442,3 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
-INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
