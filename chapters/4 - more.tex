@@ -36,7 +36,7 @@ In the example code, the user:
 	\item Define the class of function f and its gradient f' by calling one of the provided functions. In this example, the class of function is 1 - 10 sector bounded functions.
 	\item Set the global minimum goal as a stationary point $ x_s $
 	\item Define an initial state $ x_0 $ and the algorithm with which its next state $ x_1$ is updated. In this example, the algorithm being analyzed is gradient descent with a step size $ \alpha $= 2/11.
-	\item Set the performance measure as the norm distance between the updated state and the goal $ (x_1 - x_s)^2 $.
+	\item Set the performance measure as the norm distance between the initial state and the goal $ (x_0 - x_s)^2 $. The returned convergence rate guarantee is the rate at which the performance measure is decreasing after each iteration of the algorithm.
 	\item Call the rate function perform automated algorithm analysis.
 \end{itemize}
 
@@ -236,7 +236,7 @@ Set of constraints with 3 elements:
 
 \subsection*{Transpose oracle}
 
-As both the transpose of a vector and the gradient of a function uses the notation " ' ", the transpose of a vector as mentioned in section 4.1 is an oracle. This oracle is created when a vector expression is defined and is stored inside a wrapper data structure. During the inner product operation, an oracle representing the transpose of a vector is sampled at another expression to create an scalar inner product expression. In this case, the oracle is not based on any class of function and therefore attribute no constraint to the vector being sampled. 
+The transpose of a vector is coded in Julia to be an oracle, whic is created when a vector expression is defined and is stored inside a wrapper data structure. During the inner product operation or norm operation, an oracle representing the transpose of a vector is sampled at another expression to create an scalar inner product expression. In this case, the oracle is not based on any class of function and create the constraint on the Gram matrix detailed in seciton 3.2. 
 
 \section{States}
 JuPE represents the states of an algorithm using expressions. As the user inputs the algorithm being analyzed, an initial state is created and an updated state is defined as some algebraic combination of the initial state and the gradient. The relationship between a state and its next state can be defined using the "=>" operation inside the labeling macro, as can be seen in \ref{ex_analysis}, and the next state is stored in the "next" field of a state expression.

@@ -14,7 +14,7 @@ The first step in the technique is to view optimization algorithms from a contro
     \centering
 	\includegraphics[width = .3 \textwidth]{block-diagram}
     \caption{Block diagram representation of iterative algorithms}
-    \label{plot_result}
+    \label{plot_block_diagram}
 \end{figure}
 
 Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and output of the gradient nonlinearity. For example, (FG) equation \ref{eqn:FG} can be rewritten to match this view as:
@@ -70,11 +70,12 @@ when satisfied interpolates 1 strong 10 smooth convex functions. Theorem \ref{th
 \end{equation}
 % With $H = \bmat{-mL & mL & m & -L\\mL & -mL & -m & L\\m & -m & -1 & 1\\-L & L & 1 & -1}$ 
 
-For all $\Lambda \in \Re^{4x4}$ such that $\Lambda_{i,j} \geq 0$. We perform this transformation in order to represent the gradient of smooth strongly convex functions or any function class with interpolation condition inside the optimization problem: For a function \(f \in F_{m,L}\) satisfying \(f(y_k) = f_k\) and \(\nabla f(y_k) = u_k\), if $\Lambda $ is constrained so that every of its element is non-negative, then the left hand side of the inequalities defined by \ref{eqn:int_cond2} is non-negative. Following this transformation, \ref{eqn:int_cond} can be transformed into:
-\begin{equation}
-	\Lambda\bmat{-2 & 4 & -2 & 2.2 & -2.2 & -0.2}\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2} \geq 0
+%\in \Re^{6x6}%
+For all $\Lambda $ such that $\Lambda_{i,j} \geq 0$. Using this equation, \ref{eqn:int_cond} can be scaled by 10 and rewritten as: \label{eqn:int_cond3}
+\begin{equation} 
+	\Lambda\bmat{-2 & 4 & -2 & 2.2 & -2.2 & -0.2}\bmat{||x_0||^2 \\ \innerproduct{x_0}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_0)}{x_0} \\ \innerproduct{\nabla f(x_0)}{x_s} \\ ||\nabla f(x_0)||^2} \geq 0
 \end{equation}
-The constraints on $\Lambda $ are added to the optimization problem, and the resulting nonnegative inequalities \ref{eqn:int_cond2} are combined and used in the formulation of Lyapunov functions discussed in the next section.
+% The constraints on $\Lambda $ are added to the optimization problem, and the resulting nonnegative inequalities \ref{eqn:int_cond2} are combined and used in the formulation of Lyapunov functions discussed in the next section.
 % Whether an algorithm being analyzed uses the gradient of multiple past states to update, or the state-space representation of an algorithm include the gradient of more than one iterate, there might exists multiple iterate-gradient pairs, each creating an inequality for their interpolation. By combining these inequalities, each scaled by a nonnegative optimization variable $\lambda $, a tight representation of the function class can be created. The inequalities in \ref{eqn:int_cond} can be combined to create:
 
 % Basing on this theorem, [\cite{tutorial}, Cor 4] presented a non-negative linear combination of inequalities to create a tight representation of the class of function, which can be rewritten in a way easier to implement into code as:
@@ -86,15 +87,23 @@ The constraints on $\Lambda $ are added to the optimization problem, and the res
 
 % \end{corollary}
 
-% The left hand side of each constraint, such as \ref{eqn:int_cond}, is scaled by an optimization variable $\Lambda$ and added to the Lyapunov functions. The optimization varibles $\Lambda$s are constrained in the optimization problem to be greater or equal to zero if the left hand side is a vector or scalar or postive semidefinite if the left hand side is a matrix
+The left hand side of each constraint, such as \ref{eqn:int_cond2} is added to the Lyapunov functions.
 
 \subsection*{Transpose interpolation condition}
 
+The performance measure and the left hand side of the interpolation conditions are formulated from the norm and inner products of the state vector the end point vector, with the Lyapunov function detailed in the next section formulated using the same elements along with the gradient of the function used by the algorithm. These expressions are elements of the Gram-matrix of the vector containing every expressions the algorithm uses to update the iterates and goal vector expression. For the interpolation condition \ref{eqn:int_cond2} and a gradient descent algorithm which derive the first iterate $x_1$ using the gradient at the initial state $x_0$, the Gram matrix is:
+
+\begin{equation} \label{eqn:trans_cond}
+	\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2]}	
+\end{equation}
+
+The elements of the Gram matrix are interpolable - meaning there exists vectors $x0$, $x_s$ and $\nabla f(x0)$ with which they exists, if and only if the Gram matrix is positive semidefinite. This constraint similar to those created from interpolation conditions are later added to the Lyapunov function.
+
 \section{Lyapunov function certification}
 
-\cite{tutorial} presents the Lyapunov based approach, in which a Lyapunov function is created using the state-space representation of the algorithm, an optimization variable $P$, and the constraints created by the interpolation conditions. A convergence rate guarantee is found by solving for $P$ so that the Lyapunov function would satisfy 2 linear matrix inequalities. The mathematical basis of JuPE follows this approach with some modification. 
+In the final step of the Lyapunov method, Lyapunov function is created as a linear function of the state-space representation of the algorithm, an optimization variable $P$, and the constraints created by the interpolation conditions scaled by optimization variable $\lambda$. Theorem 7 proved a convergence rate can be guaranteed if there exist a $\lambda \geq 0$ and $P$ which makes the Lyapunov function nonpositive. Therefore, a minimum convergence rate can be guaranteed by solving for $P$ and $\lambda$ so that the Lyapunov function would satisfy 2 linear matrix inequalities. The mathematical basis of JuPE follows this approach with some modification. 
 
-Define $\mathbf{x_k} = \xi _k - \xi _s $, the Lyapunov function would take the form of:
+Define $\mathbf{x_k} = \xi _k - \xi _s $, the Lyapunov function takes the form:
 % = \bmat{x_{k} - x_s \\ x_{k-1} - x_s}$, the Lyapunov function would take the form of:
 
 \begin{equation}
@@ -111,33 +120,33 @@ Where $P$ is a 2x2 optimization variable. If given an algorithm with state-space
 
 Then the convergence rate of that algorithm is guaranteed to be larger than $\rho $ for every function in the function class. While the Lyapunov function is quadratic in $\mathbf{x_k}$, due to the characteristics of matrix trace, we can see that $V(\mathbf{x})$ is linear in $\mathbf{x}^T\mathbf{x}$, reducing the inequalities to linear matrix inequalities. For gradient descent where the augmented state $\xi_k$ is just the state $x_k$, the Lyapunov function can be simplified into:
 \begin{subequations}  \label{eqn:Vx}
-	\begin{align}
+	\begin{align*}
 		V(\mathbf{x_{k}}) = tr[(x_k - x_s)^TP(x_k - x_s)]\\
 						  = tr[P(x_k - x_s)(x_k - x_s)^T]\\
 						  = tr[P(x_kx_k^T - x_sx_k^T - x_kx_s^T + x_sx_s^T)] \\
 						  = \bmat{P & -2P & P}\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2}
-	\end{align}
+	\end{align*}
 \end{subequations}
 Where $x_kx_s^T = x_sx_k^T = \innerproduct{x_k}{x_s}$. Similarly, $V(\mathbf{x_{k+1}})$ can be defined as:
 \begin{subequations}  \label{eqn:Vx+}
-	\begin{align}
+	\begin{align*}
 		V(\mathbf{x_{k+1}}) = V(x_k - \alpha \nabla f(x_k)) \\
 						  	= tr[(x_k - \alpha \nabla f(x_k) - x_s)^TP(x_k - \alpha \nabla f(x_k) - x_s]\\
 						  	= tr[P(x_k - \alpha \nabla f(x_k) - x_s)(x_k - \alpha \nabla f(x_k) - x_s)^T]\\
 						  	= \bmat{P & -2P & P & 2P\alpha & -2P\alpha & P\alpha^2}\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2}
-	\end{align}
+	\end{align*}
 \end{subequations}
 
-The Lyapunov functions inequalities can now be completed by adding the constraints created by the interpolation conditions. For each constraint created by the interpolation conditions, an optimization variable $\Lambda $ is created and constrained to be nonnegative element-wise if it is a vector or scalar, positive semidefiinite if it is a matrix. The left hand side of \ref{eqn:int_cond2} can be added to each Lyapunov function. Continuing the example, substituting the updated state $x_k$ for the initial state $x_0$ in the left hand side of the constraint, the final Lyapunov functions for gradient descent would be:
+The Lyapunov functions inequalities can now be completed by adding the constraints created by function class and transpose interpolation conditions. These constraints similar to the Lyapunov functions are a linear function of an optimization variable and elements of the Gram matrix. The transformation in \ref{int_con2} was done so that each nonnegative constraint is scaled by a nonnegative obtimization variable $\Lambda$, and the solver can search for $\Lambda$ just as it does for $P$ so that the linear matrix inequality is satisfied. For each constraint created by the interpolation conditions, an optimization variable $\Lambda $ is created and constrained in the optimization problem to be nonnegative if it is a scalar, nonnegative element-wise if it is a vector, or positive semidefiinite if it is a matrix. The left hand side of \ref{eqn:int_cond3} and the trace of the Gram matrix scaled by $\Lambda $ is added to both Lyapunov function. The final linear matrix inequality for gradient descent would be:
 
-\begin{subequations} \label{eqn:Ly_ineq}
-	\begin{align}
-		L1 = \bmat{1-P-2\Lambda \\ -2+2P+4\Lambda \\ 1-P-2\Lambda \\ 2.2\Lambda \\ -2.2\Lambda \\ -0.2\Lambda}^T\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2} \leq 0 \\
-		\bmat{P-P\rho^2-2\Lambda \\ -2P+2P\rho^2+4\Lambda \\ P-P\rho^2-2\Lambda \\ 2P\alpha+2.2\Lambda \\ -2P\alpha-2.2\Lambda \\ P\alpha^2-0.2\Lambda}^T\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2} \leq 0
-	\end{align}
+\begin{subequations} \label{eqn:Ly_ineq2}
+	\begin{align*}
+		\bmat{1-P-2\Lambda \\ -2+2P+4\Lambda \\ 1-P-2\Lambda \\ 2.2\Lambda \\ -2.2\Lambda \\ -0.2\Lambda}^T\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2} + \Lambda tr(\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2]}) \leq 0 \\
+		\bmat{P-P\rho^2-2\Lambda \\ -2P+2P\rho^2+4\Lambda \\ P-P\rho^2-2\Lambda \\ 2P\alpha+2.2\Lambda \\ -2P\alpha-2.2\Lambda \\ P\alpha^2-0.2\Lambda}^T\bmat{||x_k||^2 \\ \innerproduct{x_k}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{\nabla f(x_k)}{x_s} \\ ||\nabla f(x_k)||^2} + \Lambda tr(\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2]}	)\leq 0
+	\end{align*}
 \end{subequations}
 
-By using Lyapunov functions, we have reduced the optimization problem to a pair of linear matrix inequalities in the variables $P$ and $\Lambda$ which are added to our optimization problem. The optimization problem can now be solved for any $\rho$ whether there exist values for optimization varibles $P$ and $\Lambda $ so that the inequality constraints added to the problems are satisfied, proving whether a convergence rate guarantee of $\rho$ is feasible. The smallest convergence rate guarantee can be found by performing bisection search on $\rho$ between 0 and 1 and checking if the optimization problem is feasible at each search step.
+By using Lyapunov functions, we have reduced the optimization problem to a pair of linear matrix inequalities in the variables $P$ and $\Lambda$. The optimization problem can now be solved for any convergence rate $\rho$ whether there exist $P$ and $\Lambda $ so that the inequality are satisfied, proving whether $\rho$ can be guaranteed. The smallest convergence rate guarantee can be found by performing bisection search for the smallest value $\rho$ between 0 and 1 with which the optimization problem is feasible.
 
 % By expanding \ref{eqn:xTPx}, we can see that $\mathbf{x}^T\mathbf{x}$ is a linear function of real variable, which can be transformed into a linear form. For example, for a gradient descent algorithm with step size $\alpha $ and $\xi _{k+1} - \xi _s = \bmat{x_k - \alpha * \nabla f(x_k) - x_s \\ x_k - x_s}$, we can define $o = \bmat{||x_k||^2 \\ <x_k, x_s> \\ ||x_s|| \\ ||\nabla f(x_k)||^2 \\ <\nabla f(x_k), x_k> \\ <\nabla f(x_k), x_s>}$ and $\mathbf{X}$ and $\mathbf{X^+}$as:
 % \begin{subequations}  \label{eqn:X}
