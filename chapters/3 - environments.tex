@@ -12,7 +12,7 @@ The first step in the technique is to view optimization algorithms from a contro
 
 \begin{figure}[h]
     \centering
-	\includegraphics[width = .3 \textwidth]{block-diagram}
+	\includegraphics[width = .3 \textwidth]{text_figure1}
     \caption{Block diagram representation of iterative algorithms}
     \label{plot_block_diagram}
 \end{figure}
@@ -34,18 +34,26 @@ The algorithm can then be put into state-space representation with augmented sta
 	\end{align}
 	\end{subequations}
 
-It should be noted that the function $f$ is n-multivariate, and iterate $x_k$ is n-dimensional $\in \Re^n$, represented by a 1xn vector. $\xi $ therefore is a 2xn matrix.
+Due to the fact that function $f$ is n-multivariate, each iterate $x_k$ is n-dimensional $x_k \in \mathbb{R}^n$ and is a 1 by n vector. $\xi $ in this case therefore is a 2 by n matrix.
 
 The LTI system \(G\) can be expressed with four matrices that change in value depending on the algorithm and size depending on the number of past states used to update \(x\). For (GD), (FG), and (HB) as they are described in 1.1, these matrices are:
 
-Beyond the three listed examples, this step can be applied to any other first order methods. Deriving an LTI system represented by matrices out of an algorithm not only creates a representation easy to understand and operate on, but also in next sections enable the representation of the past states of an algorithm and the forming of a Lyapunov function.
+Beyond the three listed examples, any other first order methods can be transformed into an LTI system represented by state-space matrices, enabling the formulation of Lyapunov functions in the next sections and forming the first step at transforming the algorithm analysis problem into a convex SDP.
+% not only creates a representation easy to understand and operate on, but also in next sections enable the representation of the past states of an algorithm and the forming of a Lyapunov function.
 
 \section{Interpolation condition}
 
 % For the remainder of this paper, we will focus on the only class of function currently supported by JuPE, m strong L smooth convex function \(f \in \) \(F_{m,L}\).
 \subsection*{Function class interpolation conditions}
 
-In the field of robust control theory utilized by this Lyapunov-based approach, while an LTI system is relatively simple, the nonlinearity representing the gradient of the function cannot be efficiently solved. As a result, the Lyapunov-based approach replaces the nonlinearity with a characterization of the class of function. Since the algorithm is being analyzed at discrete iterates, the characterization of a function class can be done using interpolation conditions, a set of conditions on the linearity's input and output $y$ and $u$. The interpolation conditions of a function class provide necessary and sufficient conditions under which there exists a function in that class that interpolates a given finite set of iterate-gradient pairs. These interpolation conditions depends on the characteristics of and can be derived from the function class. The interpolation condition of m strong L smooth convex functions was first formulated in \cite{taylor2016} and reformatted in \cite{tutorial} as:
+In the field of robust control theory utilized by this Lyapunov-based approach, while an LTI system is relatively simple, the nonlinearity representing the gradient of the function cannot be efficiently solved. As a result, the Lyapunov-based approach replaces the nonlinearity with a characterization of the class of function. Since the algorithm is being analyzed at discrete iterates, the characterization of a function class can be done using interpolation conditions, a set of conditions on the linearity's input and output $y$ and $u$. Through this characterization, the block diagram representation is transformed into:
+\begin{figure}[h]
+    \centering
+	\includegraphics[width = .5 \textwidth]{text_figure2}
+    \caption{Block diagram of iterative algorithms with gradient replaced by interpolation condition blackbox}
+    \label{plot_block_diagram2}
+\end{figure}
+Here, the nonlinear gradient block is replaced with blackbox $\Psi$ and characterized by constraints on the block's input and output $y$ and $u$. The interpolation conditions of a function class provide necessary and sufficient conditions under which there exists a function in that class that interpolates a given finite set of iterate-gradient pairs. These interpolation conditions depends on the characteristics of and can be derived from the function class. The interpolation condition of m strong L smooth convex functions was first formulated in \cite{taylor2016} and reformatted in \cite{tutorial} as:
 
 \begin{theorem}[\cite{taylor2016}, Thm. 4; \cite{tutorial}, Thm. 3]
 	\label{thm:interpolation_condition}

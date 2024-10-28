@@ -301,6 +301,7 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ts1-lmr12.tfm
 INPUT c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
@@ -351,15 +352,15 @@ OUTPUT thesis.toc
 INPUT ./thesis.lof
 INPUT ./thesis.lof
 INPUT thesis.lof
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 OUTPUT thesis.lof
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT chapters/dedication.tex
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
@@ -415,13 +416,17 @@ INPUT chapters/2 - math.tex
 INPUT ./chapters/3 - environments.tex
 INPUT ./chapters/3 - environments.tex
 INPUT chapters/3 - environments.tex
-INPUT ./graphics/block-diagram.pdf
-INPUT ./graphics/block-diagram.pdf
-INPUT ./graphics/block-diagram.pdf
-INPUT ./graphics/block-diagram.pdf
+INPUT ./graphics/text_figure1.pdf
+INPUT ./graphics/text_figure1.pdf
+INPUT ./graphics/text_figure1.pdf
+INPUT ./graphics/text_figure1.pdf
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
+INPUT ./graphics/text_figure2.pdf
+INPUT ./graphics/text_figure2.pdf
+INPUT ./graphics/text_figure2.pdf
+INPUT ./graphics/text_figure2.pdf
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
@@ -450,7 +455,6 @@ INPUT ./graphics/plot.pdf
 INPUT ./thesis.bbl
 INPUT ./thesis.bbl
 INPUT thesis.bbl
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT thesis.aux
 INPUT ./thesis.out
 INPUT ./thesis.out
@@ -473,3 +477,4 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
