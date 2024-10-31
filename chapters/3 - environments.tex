@@ -24,7 +24,7 @@ Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and outpu
 	  y_{k+1} &=x_{k+1}+\beta (x_{k+1}-x_k), \label{eq_FGinterpolated point}, \\
 	  u_k &= \nabla f(y_k) \label{eq_FGggradient}
 	\end{align}
-	\end{subequations}
+\end{subequations}
 The algorithm can then be put into state-space representation with augmented state $\xi _k = (x_k, x_{k-1})$ as:
 \begin{subequations} \label{eqn:FGss }
 	\begin{align}
@@ -32,7 +32,7 @@ The algorithm can then be put into state-space representation with augmented sta
 	  y_k &= \bmat{1+\beta & \beta}\xi_k, \label{eq_FGssinterpolation},\\
 	  u_k &= \nabla f(y_k) \label{eq_FGssgradient}
 	\end{align}
-	\end{subequations}
+\end{subequations}
 
 Due to the fact that function $f$ is n-multivariate, each iterate $x_k$ is n-dimensional $x_k \in \mathbb{R}^n$ and is a 1 by n vector. $\xi $ in this case therefore is a 2 by n matrix.
 

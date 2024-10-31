@@ -6,28 +6,28 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Performance of 3 GD variants of different step sizes solving a quadratic function}}{4}{figure.caption.4}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Block diagram representation of iterative algorithms}}{9}{figure.caption.5}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Block diagram of iterative algorithms with gradient replaced by interpolation condition blackbox}}{10}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Block diagram representation of iterative algorithms}}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Block diagram of iterative algorithms with gradient replaced by interpolation condition blackbox}}{11}{figure.caption.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Analysis Example}}{15}{figure.caption.7}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Analysis result}}{16}{figure.caption.8}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of a variable expression representing a vector}}{17}{figure.caption.9}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Example of a decomposition expression}}{17}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Example of addition and subtraction operation}}{18}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Example of multiplication operation}}{19}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Example of transpose operation}}{19}{figure.caption.13}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of an inner product between two vector expressions}}{20}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Example of norm of vector expression}}{20}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Example of an expression created by sampling an oracle}}{21}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Example of constraints created by sampling an oracle}}{21}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Example of an unlabeled expression}}{22}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Example of a labeled oracle}}{22}{figure.caption.19}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Example of user added constraint}}{23}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Analysis Example}}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Analysis result}}{17}{figure.caption.8}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of a variable expression representing a vector}}{18}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Example of a decomposition expression}}{18}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Example of addition and subtraction operation}}{19}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Example of multiplication operation}}{20}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Example of transpose operation}}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of an inner product between two vector expressions}}{21}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Example of norm of vector expression}}{21}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Example of an expression created by sampling an oracle}}{22}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Example of constraints created by sampling an oracle}}{22}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Example of an unlabeled expression}}{23}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Example of a labeled oracle}}{23}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Example of user added constraint}}{24}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Initial state real scalar expressions from example \ref {ex_analysis}}}{26}{figure.caption.21}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Updated state and input real scalar expressions from example \ref {ex_analysis}}}{27}{figure.caption.22}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Example of linear form of a scalar expression \ref {ex_analysis}}}{27}{figure.caption.23}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Linear form matrix of expression $(x0-xs)^2$}}{27}{figure.caption.24}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces next field of a state vector expressions and a scalar formed from a state expression}}{28}{figure.caption.25}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Linear form state matrices x and x$^+$}}{29}{figure.caption.26}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Convergence rate guarantee for 3 algorithms over m strong L smooth convex function}}{32}{figure.caption.27}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Initial state real scalar expressions from example \ref {ex_analysis}}}{27}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Updated state and input real scalar expressions from example \ref {ex_analysis}}}{28}{figure.caption.22}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Example of linear form of a scalar expression \ref {ex_analysis}}}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Linear form matrix of expression $(x0-xs)^2$}}{28}{figure.caption.24}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces next field of a state vector expressions and a scalar formed from a state expression}}{29}{figure.caption.25}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Linear form state matrices x and x$^+$}}{30}{figure.caption.26}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Convergence rate guarantee for 3 algorithms over m strong L smooth convex function}}{33}{figure.caption.27}%

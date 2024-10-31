@@ -121,6 +121,9 @@
 \newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
 
+\usepackage[normalem]{ulem}
+\newcommand{\comment}[1]{\textcolor{blue}{#1}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% MAIN DOCUMENT
@@ -139,10 +142,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
   JuPE is a computer program written in the Julia language that seeks to provide an accessible way of finding the worst-case performance guarantee of any gradient-based optmization algorithm in a process called \textit{algorithm analysis}. As first-order optimization methods are used to optimize large-scale problems in fields such as machine learning or data science, savings in computational capacity can be made if algorithms can be compared on their performance. JuPE by implementing the Lyapunov-based approach to algorithm analysis and creating a domain-specific compiler simplifies and automate the process of analyzing algorithms.
-  %\texttt{pdflatex thesis.tex}\\
-  %\texttt{bibtex thesis.aux}\\
-  %\texttt{pdflatex thesis.tex}\\
-  %\texttt{pdflatex thesis.tex}
+  
+  \comment{Instead of starting with the solution (JuPE), start with the goal and the problem: optimization problems appear throughout science and engineering, analyzing their performance is difficult, so you design a program to make the analysis accessible. Also, the last sentence is a little awkward (you at least need comma's after ``JuPE'' and ``compiler'', but it would be better to rearrange it).}
 \end{abstract}
 
 % the title page is the first numbered page (not the abstract),
