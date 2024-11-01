@@ -11,21 +11,21 @@
 \contentsline {chapter}{\numberline {2}Literature Review}{7}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Lyapunov-based approach}{10}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Iterative algorithms as Lur'e problems}{10}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Interpolation condition}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Interpolation condition}{12}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Lyapunov function certification}{14}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Code Components}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Expressions}{19}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Algebra}{20}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Oracles}{22}{section.4.3}%
-\contentsline {section}{\numberline {4.4}States}{24}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Label macro}{24}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Constraints}{26}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Performance measure}{26}{section.4.7}%
-\contentsline {section}{\numberline {4.8}JuMP modeling language}{27}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Analysis Process and Result}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Performance measure}{30}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Algorithm, state update and Lyapunov function formulation}{31}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Constraints}{32}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Derived feasibility and bisection search}{34}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Result}{34}{section.5.5}%
-\contentsline {chapter}{References}{36}{figure.caption.27}%
+\contentsline {chapter}{\numberline {4}Code Components}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Expressions}{20}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Algebra}{21}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Oracles}{23}{section.4.3}%
+\contentsline {section}{\numberline {4.4}States}{25}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Label macro}{25}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Constraints}{27}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Performance measure}{27}{section.4.7}%
+\contentsline {section}{\numberline {4.8}JuMP modeling language}{28}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Analysis Process and Result}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Performance measure}{31}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Algorithm, state update and Lyapunov function formulation}{32}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Constraints}{33}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Derived feasibility and bisection search}{35}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Result}{35}{section.5.5}%
+\contentsline {chapter}{References}{37}{figure.caption.27}%

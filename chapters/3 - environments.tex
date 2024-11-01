@@ -2,13 +2,13 @@
 
 JuPE performs algorithm analysis by using the technique layed out by Van Scoy and Lessard in \cite{tutorial}. While JuPE is a blackbox tool, understanding the mathematical approach on which it is based is \comment{a} prequisite to understanding the package's code and functionalities.
 
-The technique is based on the idea that certifying whether a convergence rate of an algorithm optimizing a function can be guaranteed is itself an optimization problem. This approach, which will be discussed over the sections of this chapter, 1) represents the algorithm being analyzed in state-space, 2) replaces the nonlinear gradient with constraints derived from interpolation conditions of a function class, 3) form an optimization problem using Lyapunov functions and constraints and solve it to certify whether a certain convergence rate can be guaranteed.
+The technique is based on the idea that certifying whether a convergence rate of an algorithm optimizing a function can be guaranteed is itself an optimization problem. This approach, which will be discussed over the sections of this chapter, 1) represents the algorithm being analyzed in state-space \comment{form}, 2) replaces the nonlinear gradient with constraints derived from interpolation conditions of a function class, 3) form an optimization problem using Lyapunov functions and constraints, and \comment{4)} solve it to certify whether a certain convergence rate can be guaranteed.
 % The steps of this technique, which will be discussed in detail over the sections of this chapter, consists of 
 % 1) viewing the algorithm as a Lur'e problem, 2) Replacing the nonlinear gradient with interpolation conditions that represent the class of smooth strongly convex functions, 3) Use lifting matrices to tighten to the interpolation condition representations, and 4) Prove whether a convergence rate is guaranteed by solving a convex semidefinte program.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Iterative algorithms as Lur'e problems}
 
-The first step in the technique is to view optimization algorithms from a control theory perspective: As iterative gradient-based algorithms uses the gradient of the function to update \(x\), they can be reformulated into a linear time-invariant (LTI) system (how the algorithm update) in feedback with a static nonlinearity (the gradient of \(f\)) at point \(x\). Using a block diagram, the algorithm can be seen as:
+The first step in the technique is to view optimization algorithms from a control theory perspective: As \comment{(do not capitalize)} iterative gradient-based algorithms uses the gradient of the function to update \(x\) \comment{(have not defined $x$ yet)}, they can be reformulated into a linear time-invariant (LTI) system (how the algorithm update) in feedback with a static nonlinearity (the gradient of \(f\)) at point \(x\). Using a block diagram, the algorithm can be seen as: \comment{(always reference figures using \texttt{ref})}
 
 \begin{figure}[h]
     \centering
@@ -17,7 +17,7 @@ The first step in the technique is to view optimization algorithms from a contro
     \label{plot_block_diagram}
 \end{figure}
 
-Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and output of the gradient nonlinearity. For example, (FG) equation \ref{eqn:FG} can be rewritten to match this view as:
+Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and output of the gradient nonlinearity. For example, (FG) \comment{(this was defined in another chapter, so probably best to just write out Fast Gradient)} equation \ref{eqn:FG} can be rewritten to match this view as:
 \begin{subequations} \label{eqn:FG2}
 	\begin{align}
 	  x_{k+1}     &=x_k-\alpha u_k \label{eq_FGstate},       \\
@@ -25,6 +25,7 @@ Here, \(G\) represents the LTI system, while \(y\) and \(u\) are input and outpu
 	  u_k &= \nabla f(y_k) \label{eq_FGggradient}
 	\end{align}
 \end{subequations}
+\comment{(no comma after the label, and need period at the end)}
 The algorithm can then be put into state-space representation with augmented state $\xi _k = (x_k, x_{k-1})$ as:
 \begin{subequations} \label{eqn:FGss }
 	\begin{align}
@@ -34,36 +35,39 @@ The algorithm can then be put into state-space representation with augmented sta
 	\end{align}
 \end{subequations}
 
-Due to the fact that function $f$ is n-multivariate, each iterate $x_k$ is n-dimensional $x_k \in \mathbb{R}^n$ and is a 1 by n vector. $\xi $ in this case therefore is a 2 by n matrix.
+\comment{(The extra line in latex produces extra space in the pdf, so only use a blank line if starting a new paragraph.)} Due to the fact that function $f$ is n-multivariate \comment{($n$)}, each iterate $x_k$ is n-dimensional $x_k \in \mathbb{R}^n$ and is a 1 by n vector. $\xi $ in this case therefore is a 2 by n matrix \comment{(avoid starting sentences with symbols, ``The state $\xi$\ldots'')}.
 
-The LTI system \(G\) can be expressed with four matrices that change in value depending on the algorithm and size depending on the number of past states used to update \(x\). For (GD), (FG), and (HB) as they are described in 1.1, these matrices are:
+The LTI system \(G\) can be expressed with four matrices that change in value depending on the algorithm and size depending on the number of past states used to update \(x\). For (GD), (FG), and (HB) as they are described in \comment{(equation? table? figure?)} 1.1, these matrices are: \comment{(missing?)}
 
-Beyond the three listed examples, any other first order methods can be transformed into an LTI system represented by state-space matrices, enabling the formulation of Lyapunov functions in the next sections and forming the first step at transforming the algorithm analysis problem into a convex SDP.
+Beyond the three listed examples, any other first\comment{-}order methods can be transformed into an LTI system represented by state-space matrices, enabling the formulation of Lyapunov functions in the next sections and forming the first step at transforming the algorithm analysis problem into a convex SDP \comment{(semidefinite program)}.
 % not only creates a representation easy to understand and operate on, but also in next sections enable the representation of the past states of an algorithm and the forming of a Lyapunov function.
 
 \section{Interpolation condition}
 
+\comment{Need some overview statement here. At a high level, what is meant by interpolation conditions?}
+
 % For the remainder of this paper, we will focus on the only class of function currently supported by JuPE, m strong L smooth convex function \(f \in \) \(F_{m,L}\).
 \subsection*{Function class interpolation conditions}
 
-In the field of robust control theory utilized by this Lyapunov-based approach, while an LTI system is relatively simple, the nonlinearity representing the gradient of the function cannot be efficiently solved. As a result, the Lyapunov-based approach replaces the nonlinearity with a characterization of the class of function. Since the algorithm is being analyzed at discrete iterates, the characterization of a function class can be done using interpolation conditions, a set of conditions on the linearity's input and output $y$ and $u$. Through this characterization, the block diagram representation is transformed into:
+In the field of robust control theory utilized by this Lyapunov-based approach, while an LTI system is relatively simple, the nonlinearity representing the gradient of the function cannot be efficiently solved. As a result, the Lyapunov-based approach replaces the nonlinearity with a characterization of the class of function. Since the algorithm is being analyzed at discrete iterates, the characterization of a function class can be done using interpolation conditions, a set of conditions on the linearity's \comment{(the gradient is typically \textit{not} linear)} \sout{input and output $y$ and $u$} \comment{input $y$ and output $u$}. Through this characterization, the block diagram representation is transformed into: \comment{always use \texttt{ref} to reference figures}
 \begin{figure}[h]
     \centering
 	\includegraphics[width = .5 \textwidth]{text_figure2}
     \caption{Block diagram of iterative algorithms with gradient replaced by interpolation condition blackbox}
     \label{plot_block_diagram2}
 \end{figure}
-Here, the nonlinear gradient block is replaced with blackbox $\Psi$ and characterized by constraints on the block's input and output $y$ and $u$. The interpolation conditions of a function class provide necessary and sufficient conditions under which there exists a function in that class that interpolates a given finite set of iterate-gradient pairs. These interpolation conditions depends on the characteristics of and can be derived from the function class. The interpolation condition of m strong L smooth convex functions was first formulated in \cite{taylor2016} and reformatted in \cite{tutorial} as:
+Here, the nonlinear gradient block is replaced with blackbox $\Psi$ and characterized by constraints on the block's input and output $y$ and $u$ \comment{($\Psi$ is not a black box, it is a filter or dynamical system. The constraints are then on the output $z$ of the filter. Both the filter and the corresponding constraints depend on the properties of the gradient of the objective function)}. The interpolation conditions of a function class provide necessary and sufficient conditions under which there exists a function in that class that interpolates a given finite set of iterate-gradient pairs. These interpolation conditions depends on the characteristics of and can be derived from the function class. The interpolation condition of \sout{m strong L smooth convex} \comment{$L$-smooth and $m$-strongly convex} functions was first formulated in \cite{taylor2016} and reformatted in \cite{tutorial} as: \comment{(before describing interpolation conditions for this class of functions, you need to define what it means for a function to be smooth and strongly convex)}
 
 \begin{theorem}[\cite{taylor2016}, Thm. 4; \cite{tutorial}, Thm. 3]
 	\label{thm:interpolation_condition}
-	Given index set \(I\), a set of triplets \({(y_k, u_k, f_k)}_{k \in I}\) is \(F_{m,L}-interpolable\), meaning there exists a function \(f \in F_{m,L}\) satisfying \(f(y_k) = f_k\) and \(\nabla f(y_k) = u_k\) if and only if:
-
-	\(2(L-m)(f_i - f_j) - mL||y_i - y_j||^2 + 2(y_i - y_j)^{T}(mu_i - Lu_j) - ||u_i - u_j||^2 \geq 0\) for \(i ,j \in I\)
-
+	Given index set \(I\), a set of triplets \(\{(y_k, u_k, f_k)\}_{k \in I}\) is \(F_{m,L}-interpolable\) \comment{(interpolable should not be in math mode)}, meaning there exists a function \(f \in F_{m,L}\) \comment{($F_{m,L}$ has not been defined)} satisfying \(f(y_k) = f_k\) and \(\nabla f(y_k) = u_k\) if and only if
+	\[
+	 	2(L-m)(f_i - f_j) - mL\|y_i - y_j\|^2 + 2(y_i - y_j)^\tp (mu_i - Lu_j) - \|u_i - u_j\|^2 \geq 0
+	\]
+	for all $i,j\in I$. \comment{I fixed up the above equation to use $x^\tp$ for transpose and $\|x\|$ for norm (this needs updated throughout).}
 \end{theorem}
 
-As an example, if we define $x_0$ as the initial iterate of an algorithm optimization a 1 strong 10 smooth convex function (\(f \in \) \(F_{1,10}\)), $\nabla f(x_0)$ as the gradient of $x_0$ at $f$, $x_s$ as the minimizer where  $\nabla f(x_s) = 0$, we can define set $I$ of \ref{thm:interpolation_condition} as including $s$ and $0$ and get the inequality:
+As an example, if we define $x_0$ as the initial iterate of an algorithm optimization a 1 strong 10 smooth convex function (\(f \in \) \(F_{1,10}\)), $\nabla f(x_0)$ as the gradient of $x_0$ at $f$, $x_s$ as the minimizer where  $\nabla f(x_s) = 0$, we can define set $I$ of \ref{thm:interpolation_condition} as including $s$ and $0$ \comment{(so $m=1$, $L=10$, and $I = \{s,0\}$)} and get the inequality:
 \begin{equation} \label{eqn:int_cond}
 	-20||x_0||^2 -20||x_s||^2 + 40\innerproduct{x_0}{x_s} + 22\innerproduct{\nabla f(x_0)}{x_0} - 22\innerproduct{\nabla f(x_0)}{x_s} - 2||\nabla f(x_0)||^2 \geq 0
 \end{equation}
@@ -79,7 +83,7 @@ when satisfied interpolates 1 strong 10 smooth convex functions. Theorem \ref{th
 % With $H = \bmat{-mL & mL & m & -L\\mL & -mL & -m & L\\m & -m & -1 & 1\\-L & L & 1 & -1}$ 
 
 %\in \Re^{6x6}%
-For all $\Lambda $ such that $\Lambda_{i,j} \geq 0$. Using this equation, \ref{eqn:int_cond} can be scaled by 10 and rewritten as: \label{eqn:int_cond3}
+\comment{(do not capitalize since this is part of the same sentence, do not include extra line in latex since it produces extra space, and need to specify the size of $\Lambda$)} For all $\Lambda $ such that $\Lambda_{i,j} \geq 0$. Using this equation, \ref{eqn:int_cond} can be scaled by 10 and rewritten as: \label{eqn:int_cond3}
 \begin{equation} 
 	\Lambda\bmat{-2 & 4 & -2 & 2.2 & -2.2 & -0.2}\bmat{||x_0||^2 \\ \innerproduct{x_0}{x_s} \\ ||x_s||^2 \\ \innerproduct{\nabla f(x_0)}{x_0} \\ \innerproduct{\nabla f(x_0)}{x_s} \\ ||\nabla f(x_0)||^2} \geq 0
 \end{equation}
@@ -95,30 +99,32 @@ For all $\Lambda $ such that $\Lambda_{i,j} \geq 0$. Using this equation, \ref{e
 
 % \end{corollary}
 
-The left hand side of each constraint, such as \ref{eqn:int_cond2} is added to the Lyapunov functions.
+The left hand side of each constraint, such as \ref{eqn:int_cond2} is added to the Lyapunov functions \comment{(have not described what a Lyapunov function is yet)}.
 
 \subsection*{Transpose interpolation condition}
 
 The performance measure and the left hand side of the interpolation conditions are formulated from the norm and inner products of the state vector the end point vector, with the Lyapunov function detailed in the next section formulated using the same elements along with the gradient of the function used by the algorithm. These expressions are elements of the Gram-matrix of the vector containing every expressions the algorithm uses to update the iterates and goal vector expression. For the interpolation condition \ref{eqn:int_cond2} and a gradient descent algorithm which derive the first iterate $x_1$ using the gradient at the initial state $x_0$, the Gram matrix is:
 
 \begin{equation} \label{eqn:trans_cond}
-	\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2]}	
+	\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2}	\comment{.}
 \end{equation}
 
-The elements of the Gram matrix are interpolable - meaning there exists vectors $x0$, $x_s$ and $\nabla f(x0)$ with which they exists, if and only if the Gram matrix is positive semidefinite. This constraint similar to those created from interpolation conditions are later added to the Lyapunov function.
+The elements of the Gram matrix are interpolable - meaning there exists vectors $x0$, $x_s$ and $\nabla f(x0)$ with which they exists, if and only if the Gram matrix is positive semidefinite \comment{(also need the dimension $n$ in $x_0\in\real^n$ to be greater than or equal to the rank of the Gram matrix, which is why we need to assume that the dimension is sufficiently large)}. This constraint \comment{is} similar to those created from interpolation conditions are later added to the Lyapunov function.
 
 \section{Lyapunov function certification}
 
-In the final step of the Lyapunov method, Lyapunov function is created as a linear function of the state-space representation of the algorithm, an optimization variable $P$, and the constraints created by the interpolation conditions scaled by optimization variable $\lambda$. Theorem 7 proved a convergence rate can be guaranteed if there exist a $\lambda \geq 0$ and $P$ which makes the Lyapunov function nonpositive. Therefore, a minimum convergence rate can be guaranteed by solving for $P$ and $\lambda$ so that the Lyapunov function would satisfy 2 linear matrix inequalities. The mathematical basis of JuPE follows this approach with some modification. 
+\comment{This section needs a lot of work. It would be helpful to start out by describing what is meant by a Lyapunov function and why they are useful. It might be helpful to first describe Lyapunov functions for the autonomous LTI system $x_{k+1} = A x_k$, and then move on to systems with inputs where the state and input satisfy constraints.}
 
-Define $\mathbf{x_k} = \xi _k - \xi _s $, the Lyapunov function takes the form:
+In the final step of the Lyapunov method, Lyapunov function is created as a linear function of the state-space representation of the algorithm, an optimization variable $P$, and the constraints created by the interpolation conditions scaled by optimization variable $\lambda$. Theorem 7 \comment{(link or reference?)} proved a convergence rate can be guaranteed if there exist a $\lambda \geq 0$ and $P$ which makes the Lyapunov function nonpositive. Therefore, a minimum convergence rate can be guaranteed by solving for $P$ and $\lambda$ so that the Lyapunov function would satisfy 2 linear matrix inequalities. The mathematical basis of JuPE follows this approach with some modification. 
+
+Define $\mathbf{x_k} = \xi _k - \xi _s $ \comment{(what is $\xi_s$?)}, the Lyapunov function takes the form:
 % = \bmat{x_{k} - x_s \\ x_{k-1} - x_s}$, the Lyapunov function would take the form of:
 
 \begin{equation}
 	V(\mathbf{x}) = tr(\mathbf{x_k}^TP\mathbf{x_k}) \label{eqn:Lyapunov}
 \end{equation}
 
-Where $P$ is a 2x2 optimization variable. If given an algorithm with state-space representation $\xi _k$ and whose Lyapunov function satisfy the conditions:
+\comment{(use $\trace$ for trace)} Where $P$ is a 2x2 \comment{($2\times 2$ symmetric matrix)} optimization variable. If given an algorithm with state-space representation $\xi _k$ and whose Lyapunov function satisfy the conditions:
 \begin{subequations} \label{eqn:Ly_ineq}
 	\begin{align}
 	  ||\xi _k - \xi _s||^2 - V(\mathbf{x_k}) \leq 0,      \\
@@ -126,7 +132,7 @@ Where $P$ is a 2x2 optimization variable. If given an algorithm with state-space
 	\end{align}
 \end{subequations}
 
-Then the convergence rate of that algorithm is guaranteed to be larger than $\rho $ for every function in the function class. While the Lyapunov function is quadratic in $\mathbf{x_k}$, due to the characteristics of matrix trace, we can see that $V(\mathbf{x})$ is linear in $\mathbf{x}^T\mathbf{x}$, reducing the inequalities to linear matrix inequalities. For gradient descent where the augmented state $\xi_k$ is just the state $x_k$, the Lyapunov function can be simplified into:
+\comment{(remove extra space and do not capitalize)} Then the convergence rate of that algorithm is guaranteed to be larger than $\rho $ for every function in the function class \comment{(do you mean smaller? i.e., faster?)}. While the Lyapunov function is quadratic in $\mathbf{x_k}$, due to the characteristics of matrix trace, we can see that $V(\mathbf{x})$ is linear in $\mathbf{x}^T\mathbf{x}$, reducing the inequalities to linear matrix inequalities. For gradient descent where the augmented state $\xi_k$ is just the state $x_k$, the Lyapunov function can be simplified into:
 \begin{subequations}  \label{eqn:Vx}
 	\begin{align*}
 		V(\mathbf{x_{k}}) = tr[(x_k - x_s)^TP(x_k - x_s)]\\
@@ -154,7 +160,10 @@ The Lyapunov functions inequalities can now be completed by adding the constrain
 	\end{align*}
 \end{subequations}
 
+\comment{From these equations, it is not exactly clear how this is a linear matrix inequality. Here, quantities such as $\|x_k\|^2$ are not considered as a variable in $x_k$, but are themselves scalar variables in the analysis. Moreover, these are \textit{algorithm variables}, not \textit{optimization variables} (the optimization variables are $P$ and $\Lambda$). Each of the above expressions is written as a linear function of the optimization variables using the \texttt{linearform} method in Julia, and then this linear function is set equal to zero.}
+
 By using Lyapunov functions, we have reduced the optimization problem to a pair of linear matrix inequalities in the variables $P$ and $\Lambda$. The optimization problem can now be solved for any convergence rate $\rho$ whether there exist $P$ and $\Lambda $ so that the inequality are satisfied, proving whether $\rho$ can be guaranteed. The smallest convergence rate guarantee can be found by performing bisection search for the smallest value $\rho$ between 0 and 1 with which the optimization problem is feasible.
+
 
 % By expanding \ref{eqn:xTPx}, we can see that $\mathbf{x}^T\mathbf{x}$ is a linear function of real variable, which can be transformed into a linear form. For example, for a gradient descent algorithm with step size $\alpha $ and $\xi _{k+1} - \xi _s = \bmat{x_k - \alpha * \nabla f(x_k) - x_s \\ x_k - x_s}$, we can define $o = \bmat{||x_k||^2 \\ <x_k, x_s> \\ ||x_s|| \\ ||\nabla f(x_k)||^2 \\ <\nabla f(x_k), x_k> \\ <\nabla f(x_k), x_s>}$ and $\mathbf{X}$ and $\mathbf{X^+}$as:
 % \begin{subequations}  \label{eqn:X}
