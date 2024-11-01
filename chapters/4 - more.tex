@@ -27,20 +27,21 @@ end
 
 @show rate(performance)
 \end{lstlisting}
-\caption{Analysis Example}
+\caption{Analysis Example \comment{(this kind of simple example should appear in the introduction to provide a high-level overview of what the package does)}}
 \label{ex_analysis}
 \end{figure}
 
+
 In the example code, the user:
 \begin{itemize}
-	\item Define the class of function f and its gradient f' by calling one of the provided functions. In this example, the class of function is 1 - 10 sector bounded functions.
-	\item Set the global minimum goal as a stationary point $ x_s $
-	\item Define an initial state $ x_0 $ and the algorithm with which its next state $ x_1$ is updated. In this example, the algorithm being analyzed is gradient descent with a step size $ \alpha $= 2/11.
+	\item Define the class of function f \comment{(use $f$ for mathematical symbols, or \texttt{f} for programming symbols)} and its gradient f' by calling one of the provided functions. In this example, the class of function is 1 - 10 sector bounded functions. \comment{Need to define what this means.}
+	\item Set the global minimum goal as a stationary point $ x_s $\comment{.}
+	\item Define an initial state $ x_0 $ and the algorithm with which its next state $ x_1$ is updated. In this example, the algorithm being analyzed is gradient descent with a step size $ \alpha $= 2/11 \comment{(include all math, such as $=2/11$, in dollar signs)}.
 	\item Set the performance measure as the norm distance between the initial state and the goal $ (x_0 - x_s)^2 $. The returned convergence rate guarantee is the rate at which the performance measure is decreasing after each iteration of the algorithm.
-	\item Call the rate function perform automated algorithm analysis.
+	\item Call the rate function \comment{to} perform automated algorithm analysis.
 \end{itemize}
 
-With the calling of the rate function, JuPE derives every necessary input from the performance measure and performs analysis to return a rate of 0.6687164306640625. This means for the provided algorithm and every function in the class, the convergence rate of the performance measure is guaranteed to match or exceed the result worst-case guarantee rate.
+With the calling of the rate function, JuPE derives every necessary input from the performance measure and performs analysis to return a rate of 0.6687164306640625. This means for the provided algorithm and every function in the class, the convergence rate of the performance measure is guaranteed to match or exceed the result worst-case guarantee rate. \comment{Need to describe what exactly is meant by the convergence rate. In particular, the analysis returns the scalar $\rho$ such that, for some constant $c>0$, the performance measure is upper bounded by $c \rho^k$ at each iteration $k$. If you would like to use ``big-oh'' notation, this means that the performance measure converges with rate $O(\rho^k)$.}
  
 \begin{figure}[hbtp]
 \begin{lstlisting}
@@ -50,15 +51,15 @@ rate(performance) = 0.6687164306640625
 \label{ex_result}
 \end{figure}
 
-JuPE performs algorithm analysis by following the set of instructions presented in section 3 to create and solve an optimization problem and derive a performance certification. Implenmenting a mathematical procedure as code presents a list of challenges which includes being able to understand and differentiate between variables, represent concepts such as gradients or states, or formulating and solving a convex optimization problem, while keeping the users' interaction with the program simple. This chapter goes into the code that constitutes JuPE and enables these functionalities.
+JuPE performs algorithm analysis by following the set of instructions presented in section 3 to create and solve an optimization problem and derive a performance certification. Implenmenting a mathematical procedure as code presents a list of challenges which includes being able to understand and differentiate between variables, represent concepts such as gradients or states, \sout{or} \comment{and} formulating and solving a convex optimization problem, while keeping the users' interaction with the program simple. This chapter goes into the code that constitutes JuPE and enables these functionalities.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Expressions}
 
-Expressions are data structures used to represent mathematic variables and enable the implementation of the steps in chapter 3 into a computer program. Expressions can either be vectors or scalar in an inner product space, making them the smallest building block with which concepts such as gradient, constraints or states are built.
+Expressions are data structures used to represent mathematic\comment{al} variables and enable the implementation of the steps in chapter 3 \comment{(capitalize Chapter, and always use references like~\ref{chapter:lyapunov} in case chapters get rearranged, plus it makes hyperlinks)} into a computer program. Expressions can either be vectors or scalar in an inner product space, making them the smallest building block with which concepts such as gradient, constraints\comment{,} or states are built.
 
 \subsection*{Variable and Decomposition}
-Expressions can either be a variable expression or a decomposition expression representing some combination of variable expressions. An expression's decomposition is stored in its value field.
+Expressions can either be a variable expression or a decomposition expression representing some combination of variable expressions. An expression's decomposition is stored in its value \comment{(use \texttt{value} since this is referring to code)} field.
 \begin{description}
 	\item[Variable expression] is defined to be in a field and represents either a vector or scalar. Its decomposition is itself.
 \begin{figure}[h]
@@ -97,7 +98,7 @@ Vector in R
 	Decomposition: x0 + 2 xs
 	Associations: Dual => LinearFunctional{R$^n$}
 		\end{lstlisting}
-	\caption{Example of a decomposition expression}
+	\caption{Example of a decomposition expression \comment{(could simplify this code to just: @show x0 + 2xs)}}
 	\label{ex_decomposition}
 \end{figure}
 \end{description}
@@ -105,7 +106,7 @@ Vector in R
 \section{Algebra}
 Expressions in JuPE belong in an inner product space, which is a set of elements that can be vectors or scalar and which supports certain operations such as norm and inner product in addition to algebraic operations. In example \ref{ex_variable}, expressions are defined to be in R$^n$, an inner product space pre-defined in JuPE which encompasses n-dimensional real numbers.
 
-JuPE supports operations that characterize inner product spaces between expressions. The examples that demonstrate these operations use vector expressions x0 and y0 in \ref{ex_variable}
+JuPE supports operations that characterize inner product spaces between expressions. The examples that demonstrate these operations use vector expressions \sout{x0 and y0} \comment{(\texttt{x0} and \texttt{y0})} in \comment{Figure~}\ref{ex_variable}\comment{.}
 
 \subsection*{Addition or subtraction between expressions}
 
@@ -144,7 +145,7 @@ Vector in R$^n$
 \end{figure}
 
 \subsection*{Transpose of a vector}
-In JuPE, the transpose of a vector expression can be taken to create a new expression. When a vector expression is created, a data structure that maps it to its transpose is stored in the "Associations" field, allowing JuPE to keep track of whether an expression is the tranpose of another.
+In JuPE, the transpose of a vector expression can be taken to create a new expression. When a vector expression is created, a data structure that maps it to its transpose is stored in the \sout{"Associations"} \comment{\texttt{associations}} field, allowing JuPE to keep track of whether an expression is the tranpose of another.
 
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
@@ -168,7 +169,7 @@ Vector in R$^n$
 \end{figure}
 
 \subsection*{Inner product operation between two vectors}
-In an inner product space, the inner product operation of two vectors is possible and result in a scalar. For example, the inner product of vectors y0 and x0 <y0, x0> can be found as $y0^T * x0$. JuPE finds the inner product by creating a new vector variable expression with the appropriate label indicating the new expression as an inner product between two other vectors.
+In an inner product space, the inner product operation of two vectors is possible and result in a scalar. For example, the inner product of vectors y0 and x0\comment{, denoted} <y0, x0>, \comment{(use $x_0$ for mathematical symbols, or \texttt{x0} for code symbols)} can be found as $y0^T * x0$ \comment{(use $x^\tp$ for transpose)}. JuPE finds the inner product by creating a new vector variable expression with the appropriate label indicating the new expression as an inner product between two other vectors.
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
 inner = x0'*y0
@@ -201,7 +202,7 @@ Scalar in R
 \end{figure}
 
 \section{Oracles}
-As mentioned in section 3.2, algorithm analysis relies on interpolation conditions - constraints on the input y and output u of block \( \nabla (f) \). Therefore this block can be treated as a blackbox,  represented in JuPE by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
+As mentioned in section 3.2, algorithm analysis relies on interpolation conditions - constraints on the input y and output u \comment{($y$ and $u$)} of block \( \nabla (f) \) \comment{(avoid extra parentheses)}. Therefore this block can be treated as a blackbox,  represented in JuPE by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
 
 Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions.  In \ref{ex_analysis}, by calling the SectorBounded function, an oracle containing the interpolation conditions for 1 strong 10 smooth convex functions is created and labeled f'. The oracle is then sampled at points xs and x0 by defining f'(xs) and f'(x0) inside the labeling macro to create expressions $\nabla $f(x0) and $\nabla $f(xs)
 
@@ -230,24 +231,35 @@ Set of constraints with 3 elements:
 	0 $<=$ R[|x0|$^2$ <xs,x0>; <x0,xs> |xs|$^2$]
 	0 $<=$ R[|x0|$^2$ <$\nabla $f(x0),x0> <xs,x0>; <x0,$\nabla $f(x0)> |$\nabla $f(x0)|$^2$ <xs,$\nabla $f(x0)>; <x0,xs> <$\nabla $f(x0),xs> |xs|$^2$]
 	\end{lstlisting}
-	\caption{Example of constraints created by sampling an oracle}
+	\caption{Example of constraints created by sampling an oracle \comment{(it would be helpful to write out mathematically what these constraints are, see below)}}
 	\label{ex_orc_constraints}
 \end{figure}
 
+\comment{The first constraint is the interpolation condition for the gradient to be sector bounded,
+\begin{multline*}
+	0 \leq 1.1\langle \nabla f(x_0),x_0\rangle + 2 \langle x_s,x_0\rangle - 2 \|x_0\|^2 + 1.1\langle x_0,\nabla f(x_0)\rangle - 2\|x_s\|^2 \\
+	- 1.1\langle x_s,\nabla f(x_0)\rangle + 2 \langle x_0,x_s\rangle - 0.2 \|\nabla f(x_0)\|^2 - 1.1\langle \nabla f(x_0),x_s\rangle,
+\end{multline*}
+and the third constraint is the condition that the Gram matrix associated with the vectors $x_0$, $\nabla f(x_0)$, and $x_s$ is positive semidefinite,
+\[
+	0 \preceq \bmat{\|x_0\|^2 & \langle \nabla f(x_0),x_0\rangle & \langle x_s,x_0\rangle \\ \langle x_0,\nabla f(x_0)\rangle & \|\nabla f(x_0)\|^2 & \langle x_s,\nabla f(x_0)\rangle \\ \langle x_0,x_s\rangle & \langle\nabla f(x_0),x_s\rangle & \|x_s\|^2}.
+\]
+(the second constraint is redundant, and we should fix the code so that it is not constructed, as this is one of the main reasons the code is currently very slow\ldots)}
+
 \subsection*{Transpose oracle}
 
-The transpose of a vector is coded in Julia to be an oracle, whic is created when a vector expression is defined and is stored inside a wrapper data structure. During the inner product operation or norm operation, an oracle representing the transpose of a vector is sampled at another expression to create an scalar inner product expression. In this case, the oracle is not based on any class of function and create the constraint on the Gram matrix detailed in seciton 3.2. 
+The transpose of a vector is coded in Julia to be an oracle, whic\comment{h} is created when a vector expression is defined and is stored inside a wrapper data structure. During the inner product operation or norm operation, an oracle representing the transpose of a vector is sampled at another expression to create a\sout{n} scalar inner product expression. In this case, the oracle is not based on any class of function and create the constraint on the Gram matrix detailed in seciton 3.2 \comment{(typo, capitalize Section, and use \texttt{ref})}.
 
 \section{States}
-JuPE represents the states of an algorithm using expressions. As the user inputs the algorithm being analyzed, an initial state is created and an updated state is defined as some algebraic combination of the initial state and the gradient. The relationship between a state and its next state can be defined using the "=>" operation inside the labeling macro, as can be seen in \ref{ex_analysis}, and the next state is stored in the "next" field of a state expression.
+JuPE represents the states of an algorithm using expressions. As the user inputs the algorithm being analyzed, an initial state is created and an updated state is defined as some algebraic combination of the initial state and the gradient. The relationship between a state and its next state can be defined using the "=>" \comment{(make quotes ``like this'', and use \texttt{=>} since this is refering to code)} operation inside the labeling macro, as can be seen in \comment{Figure~}\ref{ex_analysis}, and the next state is stored in the "next" \comment{(``next'')} field of a state expression.
 
 \section{Label macro}
 JuPE uses a macro to keep the process of providing inputs to the program simple as some of the  rules of programming might be difficult to navigate. While JuPE stills works without the label macrom, it makes JuPE as accessible as possible both in terms of entering input and interpreting results with these functionalities:
 \begin{description}
-	\item[Define] During the inputing process, users can define a new expression or oracle with only one line specifying its trait, instead of the usual steps of declaring a new object and filling in its fields that typically exist in programming. The macro will calls the necessary functions to create the object, assign every relevant field as well as updating every object associated with the one being created.
-	\item[Describe] When an expression is referenced, JuPE will describe the expression and any relevant field without the user having to access it.
+	\item[Define] During the inputing process, users can define a new expression or oracle with only one line specifying its trait, instead of the usual steps of declaring a new object and filling in its fields that typically exist in programming \comment{(not sure what you mean here, because when you construct a variable, the constructor can fill in any fields, which is what the code does)}. The macro \sout{will} calls the necessary functions to create the object, assign every relevant field as well as updating every object associated with the one being created.
+	\item[Describe] When an expression is referenced, JuPE will describe the expression and any relevant field without the user having to access it. \comment{I'm also not sure what this means\ldots}
 	\item[Label] When an expression is defined inside the labeling macro, the expression object created is given the label based on the variable name used.	While x0 and y0 in \ref{ex_analysis} were labeled with its variable name, an expression defined outside of the labeling macro would not:
-	x3 = R$^n$()
+	x3 = R$^n$() \comment{Not sure why this is outside the code environment. Also, never reference figures with: (you should always use references as latex may move the figure).}
 	\begin{figure}[!h]
 		\begin{lstlisting}[mathescape]
 Vector in R$^n$
@@ -258,7 +270,7 @@ Vector in R$^n$
 \label{ex_unlabeled}
 \end{figure}
 
-	In the special case of an expression created from sampling an oracle representing the gradient of a function $f$ , the macro would assign the expression the label $\nabla f(x0)$ following common math notation.
+	In the special case of an expression created from sampling an oracle representing the gradient of a function $f$ , \comment{(avoid extra spaces)} the macro would assign the expression the label $\nabla f(x0)$ following common math notation.
 	\begin{figure}[!h]
 		\begin{lstlisting}[mathescape]
 @show(f'(x0))
@@ -274,24 +286,26 @@ Vector in R$^n$
 	\end{figure}
 \end{description}
 
+\comment{There is also special automatic labeling for the transpose (\texttt{x'} gets labeled as \texttt{x\textsuperscript{*}}) and for inner products (\texttt{x'*y} gets labeled as \texttt{$\langle$x,y$\rangle$}).}
+
 \section{Constraints}
-During the analysis process, constraints are created by interpolation conditions in section 3.2, as well as when the user wish to define constraints on the problem being optimized by iterative algorithm being analyzed. In order to keep track of these constraints while keeping the process of defining them simple, JuPE uses data structures that include the scalar expression being constrained, and the constraint which define the expression to be in a cone. The list of constraints JuPE supports include:
+During the analysis process, constraints are created by interpolation conditions in section 3.2, as well as when the user \sout{wish to} defines constraints on the \sout{problem being optimized by} iterative algorithm being analyzed. In order to keep track of these constraints while keeping the process of defining them simple, JuPE uses data structures that include the scalar expression being constrained, and the constraint which define the expression to be in a cone. The list of constraints JuPE supports include:
 
 \begin{description}
 	\item[Equal to zero] Scalar expressions can be constrained to be equal to zero with the == 0 operation, in which case the expression is constrained to exist in the zero set cone.
 	\item[Non-positivity or non-negativity] Scalar expressions can be constrained to be larger or equal to zero or less or equal to zero with the $\geq 0$ or $\leq 0$ operation, in which case the expression is constrained to exist in the positive orthant cone.
-	\item[Positive or negative semidefinite] Scalar expressions can be constrained to be positive semidefinite with the $\succeq 0$ or $\preceq 0$ operation, in which case the expression is constrained to exist in the positive semidefinite cone.
+	\item[Positive or negative semidefinite] \sout{Scalar} \comment{Symmetric matrices consisting of scalar} expressions can be constrained to be positive semidefinite with the $\succeq 0$ or $\preceq 0$ operation, in which case the expression is constrained to exist in the positive semidefinite cone.
 \end{description}
 
-Constraints upon being defined are added to the constraints field of each variable expression that form the decomposition of the expression being constrained. Figure~\ref{ex_orc_constraints} is an example showing 3 constraints. In addition to being created by sampling oracles, constraints can also be defined by users. When analyzing any algorithm, constraints can be added to the initial condition of the algorithm. Any constraints added by the user is included in the formation of the optimization problem used to derive the performance bound.
+Constraints upon being defined are added to the constraints \comment{(\texttt{constraints})} field of each variable expression that form the decomposition of the expression being constrained. Figure~\ref{ex_orc_constraints} is an example showing 3 constraints. In addition to being created by sampling oracles, constraints can also be defined by users. When analyzing any algorithm, constraints can be added to the initial condition of the algorithm. Any constraints added by the user is included in the formation of the optimization problem used to derive the performance bound.
 
 \begin{figure}[h]
 	\begin{lstlisting}[mathescape]
 	@algorithm begin
-		(x0-xs)^2 $<=$ 1
+		(x0-xs)^2 <= 1
 	end
 	\end{lstlisting}
-	\caption{Example of user added constraint}
+	\caption{Example of user added constraint \comment{(no need to use a begin end block here since the command is a single line)}}
 	\label{ex_user_constraints}
 \end{figure}
 
@@ -299,10 +313,12 @@ Constraints upon being defined are added to the constraints field of each variab
 Part of JuPE's required inputs is the performance measure, the convergence rate of which JuPE finds the worst-case guarantee through algorithm analysis. In \ref{ex_analysis}, the performance measure is set as $ (x_0 - x_s) ^2 $, which is the norm or distance between the initial point and the goal. This means the convergence rate guarantee returned is that of the distance between the point updated using gradient descent after each iteration $ x_k $ and the goal $ x_s $. Depending on which criteria the user wishes to analyze the algorithm by, the performance measure can be modified so long as it is a scalar expression.
 
 \section{JuMP modeling language}
-Analysis of an algorithm's performance optimizing a function is in itself an optimization as defined in section 1.1, with the function being minimized is the convergence rate while the constraints of the problem are the constraints created by the oracle and the user. Therefore, in order to formulate and solve optimization problems, JuPE uses JuMP, a modeling language specialized in mathematical optimization embedded in Julia as part of the analysis process. The tools and functionalities offered by JuMP enable and simplify the steps of creating and solving an optimization problem. These tools are:
+Analysis of an algorithm's performance optimizing a function is \sout{in} itself an optimization \comment{problem} as defined in section 1.1, \sout{with} \comment{in which} the function being minimized is the convergence rate while the constraints of the problem are the constraints created by the oracle and the user. Therefore, in order to formulate and solve optimization problems, JuPE uses JuMP \comment{(citation?)}, a modeling language specialized in mathematical optimization embedded in Julia as part of the analysis process. The tools and functionalities offered by JuMP enable and simplify the steps of creating and solving an optimization problem. These tools are:
 
 \begin{description}
 	\item[Modeling] An optimization problem created by JuMP would include variables and their constraints along with the problem to be optimized, all of which need to be passed on to the solver. JuMP works by creating a model in which every elements of a problem would be defined and categorized. Variables and their constraints can then be defined in the model to form the optimization problem.
 	\item[Solver] JuMP supports a large list of open source and commercial solver, which are packages containing algorithms to find solutions to the optmization problem being formulated. While JuPE uses the SCS \cite{SCS} solver, any JuMP supported solver capable of solving semidefinite problems can be used instead.
 	\item[Solution] After an optimization problem has been formed and solved, the solver returns whether the constraints on the Lyapunov function holds, indicating whether or not the convergence rate chosen can be guaranteed. 	 
 \end{description}
+
+\comment{To help the reader understand, it would be helpful to have a simple example of an optimization problem and the corresponding JuMP code used to solve it.}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.6.11)  30 OCT 2024 14:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.6.11)  1 NOV 2024 10:14
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -922,11 +922,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [4] (thesis.lof [5
 
-{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}])
+])
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
- (chapters/dedication.tex [6]) (chapters/acknowledgements.tex [7
+ (chapters/dedication.tex [6{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]) (chapters/acknowledgements.tex [7
 
 ]) (chapters/acronyms.tex [8
 
@@ -945,7 +945,7 @@ Chapter 1.
 
 
 ] [2]
-<graphics/crude1.pdf, id=329, 602.25pt x 401.5pt>
+<graphics/crude1.pdf, id=333, 602.25pt x 401.5pt>
 File: graphics/crude1.pdf Graphic file (type pdf)
 <use graphics/crude1.pdf>
 Package pdftex.def Info: graphics/crude1.pdf  used on input line 49.
@@ -956,12 +956,12 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 50.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 50.
-<graphics/crude2.pdf, id=330, 602.25pt x 401.5pt>
+<graphics/crude2.pdf, id=334, 602.25pt x 401.5pt>
 File: graphics/crude2.pdf Graphic file (type pdf)
 <use graphics/crude2.pdf>
 Package pdftex.def Info: graphics/crude2.pdf  used on input line 55.
 (pdftex.def)             Requested size: 199.64731pt x 133.09578pt.
-<graphics/crude3.pdf, id=331, 602.25pt x 401.5pt>
+<graphics/crude3.pdf, id=335, 602.25pt x 401.5pt>
 File: graphics/crude3.pdf Graphic file (type pdf)
 <use graphics/crude3.pdf>
 Package pdftex.def Info: graphics/crude3.pdf  used on input line 61.
@@ -974,9 +974,9 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Chapter 2.
 [7
 
-]) (chapters/3 - environments.tex [8]
+]) (chapters/3 - environments.tex [8] [9]
 Chapter 3.
-<graphics/text_figure1.pdf, id=389, 93.40495pt x 60.55122pt>
+<graphics/text_figure1.pdf, id=402, 93.40495pt x 60.55122pt>
 File: graphics/text_figure1.pdf Graphic file (type pdf)
 <use graphics/text_figure1.pdf>
 Package pdftex.def Info: graphics/text_figure1.pdf  used on input line 15.
@@ -984,26 +984,26 @@ Package pdftex.def Info: graphics/text_figure1.pdf  used on input line 15.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9
+[10
 
 ]
-<graphics/text_figure2.pdf, id=400, 146.3889pt x 80.46762pt>
+<graphics/text_figure2.pdf, id=412, 146.3889pt x 80.46762pt>
 File: graphics/text_figure2.pdf Graphic file (type pdf)
 <use graphics/text_figure2.pdf>
 Package pdftex.def Info: graphics/text_figure2.pdf  used on input line 52.
 (pdftex.def)             Requested size: 234.8775pt x 129.11914pt.
- [10{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./graphics/text_figure1.pdf>]
+ [11{C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./graphics/text_figure1.pdf>]
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 58.
- [11 <./graphics/text_figure2.pdf>] [12] [13]
+ [12 <./graphics/text_figure2.pdf>] [13] [14]
 
-LaTeX Warning: Reference `int_con2' on page 14 undefined on input line 148.
+LaTeX Warning: Reference `int_con2' on page 15 undefined on input line 148.
 
 
 Overfull \hbox (17.4986pt too wide) detected at line 154
 []
  []
 
-[14]) (chapters/4 - more.tex [15]
+[15]) (chapters/4 - more.tex [16]
 Chapter 4.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 11.
 (C:\Users\vanscob\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
@@ -1011,35 +1011,22 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 14.
- [16
+ [17
 
-] [17] [18]
+] [18]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[19]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[20]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[21] [22] [23] [24]) (chapters/5 - results.tex [25]
+[19] [20]
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 172.
+ (C:\Users\vanscob\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmss.fd
+File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [21] [22] [23] [24] [25] [26]) (chapters/5 - results.tex [27]
 Chapter 5.
 
-LaTeX Warning: Reference `Ly_ineq2' on page 26 undefined on input line 16.
+LaTeX Warning: Reference `Ly_ineq2' on page 28 undefined on input line 16.
 
-[26
+[28
 
 ]
 
@@ -1050,21 +1037,21 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 75.
-[27] [28]
+[29] [30]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29] [30] [31]
-<graphics/plot.pdf, id=777, 602.25pt x 401.5pt>
+[31] [32] [33]
+<graphics/plot.pdf, id=797, 602.25pt x 401.5pt>
 File: graphics/plot.pdf Graphic file (type pdf)
 <use graphics/plot.pdf>
 Package pdftex.def Info: graphics/plot.pdf  used on input line 179.
 (pdftex.def)             Requested size: 375.80544pt x 250.54478pt.
-)
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[32] [33 <./graphics/plot.pdf>] (thesis.bbl [34
+) [34] [35 <./graphics/plot.pdf>] (thesis.bbl [36
 
 
 ])
@@ -1072,7 +1059,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Package caption Warning: Unused \captionsetup[table] on input line 91.
 See the caption package documentation for explanation.
 
-[35] (thesis.aux)
+[37] (thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -1088,17 +1075,17 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 6E51A3146CE0F3C96F646607F093E59E;4496.
  ) 
 Here is how much of TeX's memory you used:
- 27492 strings out of 474485
- 531019 string characters out of 5742790
+ 27536 strings out of 474485
+ 531949 string characters out of 5742790
  2068542 words of memory out of 5000000
- 48936 multiletter control sequences out of 15000+600000
- 659979 words of font info for 102 fonts, out of 8000000 for 9000
+ 48971 multiletter control sequences out of 15000+600000
+ 671192 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,13n,93p,1344b,1462s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (45 pages, 714791 bytes).
+ 94i,13n,93p,1349b,1462s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt8.pfb><C:/Users/vanscob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (47 pages, 742287 bytes).
 PDF statistics:
- 958 PDF objects out of 1000 (max. 8388607)
- 339 named destinations out of 1000 (max. 500000)
+ 985 PDF objects out of 1000 (max. 8388607)
+ 341 named destinations out of 1000 (max. 500000)
  283 words of extra memory for PDF output out of 10000 (max. 10000000)
 
