@@ -265,6 +265,9 @@ INPUT c:/texlive/2024/texmf-dist/tex/latex/shadethm/shadethm.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/graphics/color.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/cleveref/cleveref.sty
 INPUT c:/texlive/2024/texmf-dist/tex/latex/cleveref/cleveref.sty
+INPUT c:/texlive/2024/texmf-dist/tex/generic/ulem/ulem.sty
+INPUT c:/texlive/2024/texmf-dist/tex/generic/ulem/ulem.sty
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
@@ -301,7 +304,6 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ts1-lmr12.tfm
 INPUT c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
 INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmss.fd
@@ -352,15 +354,19 @@ OUTPUT thesis.toc
 INPUT ./thesis.lof
 INPUT ./thesis.lof
 INPUT thesis.lof
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
-INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 OUTPUT thesis.lof
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT ./chapters/dedication.tex
 INPUT chapters/dedication.tex
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
 INPUT ./chapters/acknowledgements.tex
@@ -410,9 +416,17 @@ INPUT ./graphics/crude3.pdf
 INPUT ./graphics/crude3.pdf
 INPUT ./graphics/crude3.pdf
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmss.fd
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmss.fd
+INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmss.fd
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmss12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmss8.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmss8.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
 INPUT ./chapters/2 - math.tex
 INPUT ./chapters/2 - math.tex
 INPUT chapters/2 - math.tex
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT ./chapters/3 - environments.tex
 INPUT ./chapters/3 - environments.tex
 INPUT chapters/3 - environments.tex
@@ -420,25 +434,21 @@ INPUT ./graphics/text_figure1.pdf
 INPUT ./graphics/text_figure1.pdf
 INPUT ./graphics/text_figure1.pdf
 INPUT ./graphics/text_figure1.pdf
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT ./graphics/text_figure2.pdf
 INPUT ./graphics/text_figure2.pdf
 INPUT ./graphics/text_figure2.pdf
 INPUT ./graphics/text_figure2.pdf
 INPUT c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx6.tfm
 INPUT ./chapters/4 - more.tex
 INPUT ./chapters/4 - more.tex
 INPUT chapters/4 - more.tex
-INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
-INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
 INPUT ./chapters/5 - results.tex
 INPUT ./chapters/5 - results.tex
 INPUT chapters/5 - results.tex
@@ -446,8 +456,13 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmmi10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmss10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
+INPUT ./chapters/6 - conclusion.tex
+INPUT ./chapters/6 - conclusion.tex
+INPUT chapters/6 - conclusion.tex
 INPUT ./graphics/plot.pdf
 INPUT ./graphics/plot.pdf
 INPUT ./graphics/plot.pdf
@@ -472,9 +487,13 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmss8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt8.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

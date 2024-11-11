@@ -7,7 +7,7 @@
 %% BASIC INFORMATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \name{Lam Ngoc}{Ha}
-\title{JuPE: Julia\texttrademark  Package Implementation of Optimization Algorithm Analysis Using Lyapunov Function}
+\title{Algorithm Analysis: Julia\texttrademark Package Implementation of Optimization Algorithm Analysis Using Lyapunov Function}
 \school{Miami University}
 \college{Engineering and Computing}
 \department{Electrical and Computer Engineering}
@@ -141,9 +141,7 @@
 %% ABSTRACT (200 word max, one paragraph)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-  JuPE is a computer program written in the Julia language that seeks to provide an accessible way of finding the worst-case performance guarantee of any gradient-based optmization algorithm in a process called \textit{algorithm analysis}. As first-order optimization methods are used to optimize large-scale problems in fields such as machine learning or data science, savings in computational capacity can be made if algorithms can be compared on their performance. JuPE by implementing the Lyapunov-based approach to algorithm analysis and creating a domain-specific compiler simplifies and automate the process of analyzing algorithms.
-  
-  \comment{Instead of starting with the solution (JuPE), start with the goal and the problem: optimization problems appear throughout science and engineering, analyzing their performance is difficult, so you design a program to make the analysis accessible. Also, the last sentence is a little awkward (you at least need comma's after ``JuPE'' and ``compiler'', but it would be better to rearrange it).}
+  Many problems that appear in science and engineering can be considered optimization problems, and first-order iterative algorithms are used to solve large scale problems in fields such as machine learning or data science. This makes the case for the ability to compare the performance of any set of algorithms in any application to find the best performing one. Currently however, analyzing algorithms is difficult for anyone without existing knowledge of the subject, regardless of the chosen method. In this thesis paper, we demonstrate the Algorithm Analysis program, a Julia package that provides a simple and more accessible way to analyze any optimization algorithm by leveraging the Lyapunov-based analysis approach. Simultaneously, we show that by creating a language specific to the domain of optimization algorithms, the Algorithm Analysis package can serve as a platform on which different methods to perform algorithm analysis can be implemented.
 \end{abstract}
 
 % the title page is the first numbered page (not the abstract),
@@ -174,6 +172,7 @@
 \input{chapters/3 - environments.tex}
 \input{chapters/4 - more.tex}
 \input{chapters/5 - results.tex}
+\input{chapters/6 - conclusion.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

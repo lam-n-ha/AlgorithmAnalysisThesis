@@ -2,8 +2,7 @@
 
 \bibitem{pepit}
 Baptiste Goujaud, Céline Moucer, François Glineur, Julien Hendrickx, Adrien Taylor, and Aymeric Dieuleveut.
-\newblock Pepit: computer-assisted worst-case analyses of first-order optimization methods in python.
-\newblock 2024.
+\newblock Pepit: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
 
 \bibitem{adam}
 Diederik~P. Kingma and Jimmy Ba.
@@ -26,20 +25,29 @@ Laurent Lessard, Benjamin Recht, and Andrew Packard.
 Jeff Bezanson, Stefan Karpinski, Viral~B. Shah, and Alan Edelman.
 \newblock Julia: A fast dynamic language for technical computing, 2012.
 
+\bibitem{adam2}
+Sebastian Bock and Martin Weiß.
+\newblock {\em Non-convergence and Limit Cycles in the Adam Optimizer}, page 232–243.
+\newblock Springer International Publishing, 2019.
+
 \bibitem{iqc}
 A.~Megretski and A.~Rantzer.
 \newblock System analysis via integral quadratic constraints.
 \newblock {\em IEEE Transactions on Automatic Control}, 42(6):819--830, 1997.
+
+\bibitem{tutorial}
+Bryan Van~Scoy and Laurent Lessard.
+\newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
+\newblock In {\em IEEE Conference on Decision and Control}, 2023.
 
 \bibitem{pesto}
 Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
 \newblock Performance estimation toolbox (pesto): Automated worst-case analysis of first-order optimization methods.
 \newblock In {\em 2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, pages 1278--1283, 2017.
 
-\bibitem{tutorial}
-Bryan Van~Scoy and Laurent Lessard.
-\newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
-\newblock In {\em IEEE Conference on Decision and Control}, 2023.
+\bibitem{jump}
+Miles Lubin, Oscar Dowson, Joaquim {Dias Garcia}, Joey Huchette, Beno{\^i}t Legat, and Juan~Pablo Vielma.
+\newblock {JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical optimization, 2023.
 
 \bibitem{SCS}
 Brendan O'Donoghue, Eric Chu, Neal Parikh, and Stephen Boyd.
