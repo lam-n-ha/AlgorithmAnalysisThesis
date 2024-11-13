@@ -118,14 +118,15 @@ $ \alpha $ = 2/(L+m)
 
 	x0 => x1
 
-	performance = (x1-xs)^2
+	performance = (x0-xs)^2
 end
 
 @show rate(performance)
 \end{lstlisting}
-\caption{Analysis Example}
+\caption{Analysis example}
 \label{ex_analysis}
-\end{figure} In the example code, the user:
+\end{figure}
+In the example code, the user:
 \begin{itemize}
 	\item Define the class of function \texttt{f} and its $\nabla f$, coded as \texttt(f') by calling one of the provided functions.
 	\item Set the global minimum goal as a stationary point $ x_s $.

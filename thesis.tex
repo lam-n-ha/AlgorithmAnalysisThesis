@@ -33,32 +33,20 @@
 \usepackage{booktabs}                 % pretty tables
 \usepackage{multirow}
 \usepackage{siunitx}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{parskip}
 \usepackage{acronym}
 \usepackage{thmtools}
 \usepackage{listings}
 \usepackage{svg}
 \usepackage[capposition=bottom]{floatrow}
-
 \usepackage{subcaption}
 % \usepackage{minted}
+% \usepackage[outputdir=build]{minted}
 % \usepackage{textalpha}
 % \usepackage{tcolorbox}
 % \usepackage{geometry}
 % \usepackage[margin=0.25in]{geometry}
-
-% customized figure captions
-\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
-\captionsetup[figure]{name=Figure}
-\captionsetup[table]{aboveskip=3pt}
-
-% clever references (also for theorems and such)
-\usepackage[capitalise,nameinlink]{cleveref}
-
-\usepackage[normalem]{ulem}
-% \newcommand{\comment}[1]{\textcolor{blue}{#1}}
-% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
 
 \lstdefinelanguage{Julia}%
   {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
@@ -96,7 +84,7 @@
     %postbreak        = \mbox{\textcolor{red}{$\hookrightarrow$}\space},
     basicstyle       = \ttfamily,
     keywordstyle     = \bfseries\color{blue},
-    stringstyle      = \color{magenta},
+    stringstyle      = \color{black},
     commentstyle     = \color{ForestGreen},
     showstringspaces = false
 }
@@ -112,11 +100,25 @@
 \declaretheorem[name=Theorem, Refname={Theorem,Theorems}, sibling=theorem,
 	            shaded={rulecolor=black, bgcolor=white, rulewidth=1pt, margin=1ex, textwidth=\linewidth-2ex-2pt}]{theoremboxed}
 
+              % customized figure captions
+
 % more legible proof environment and QED symbol
 \def\qed{\rule[0pt]{5pt}{5pt}\par\medskip}
 \renewcommand{\qedhere}{\hfill ~\qed}
 \newcommand{\innerproduct}[2]{\langle #1, #2 \rangle}
 \renewenvironment{proof}{{\noindent\bf Proof.}}{\qedhere}
+
+% customized figure captions
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
+\captionsetup[figure]{name=Figure}
+\captionsetup[table]{aboveskip=3pt}
+
+% clever references (also for theorems and such)
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\usepackage[normalem]{ulem}
+\newcommand{\comment}[1]{\textcolor{blue}{#1}}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
 
 
 % automatically look for graphics in these folders
