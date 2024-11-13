@@ -51,14 +51,14 @@
 % \label{ex_result}
 % \end{figure}
 
-Algorithm Analysis derive a guaranteed worst-case convergence rate by following the set of instructions presented in section 3 to create and solve an optimization problem and derive a performance certification. Implenmenting a mathematical procedure as code presents a list of challenges which includes being able to understand and differentiate between variables, represent concepts such as gradients or states, and formulating and solving a convex optimization problem, while keeping the users' interaction with the program simple. This chapter goes into the code that constitutes Algorithm Analysis and enables these functionalities.
+Algorithm Analysis derive a guaranteed worst-case convergence rate by following the set of instructions presented in \Cref{eqn:Ly_ineq}to create and solve an optimization problem and derive a performance certification. Implenmenting a mathematical procedure as code presents a list of challenges which includes being able to understand and differentiate between variables, represent concepts such as gradients or states, and formulating and solving a convex optimization problem, while keeping the users' interaction with the program simple. This chapter goes into the code that constitutes Algorithm Analysis and enables these functionalities.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Expressions}
 
 Expressions are data structures used to represent mathematical variables and enable the implementation of the concepts presented in \Cref{chapter:lyapunov} into a computer program. Expressions can either be vectors or scalar in an inner product space, making them the smallest building block with which concepts such as gradient, constraints, or states are built.
 
-\subsection*{Variable and Decomposition}
+\subsection*{Variable and decomposition}
 Expressions can either be a variable expression or a decomposition expression representing some combination of variable expressions. An expression's decomposition is stored in its \texttt{value} field.
 \begin{description}
 	\item[Variable expression] is defined to be in a field and represents either a vector or scalar. Its decomposition is itself.
@@ -201,7 +201,7 @@ Scalar in R
 \end{figure}
 
 \section{Oracles} \label{oracles}
-As mentioned in section 3.2, algorithm analysis relies on interpolation conditions - constraints on the input $y$ and output $u$ of block \( \nabla f \) . Therefore this block can be treated as a blackbox,  represented in this package by oracles, data strucutres containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
+As mentioned in section 3.2, algorithm analysis relies on interpolation conditions --- constraints on the input $y$ and output $u$ of block \( \nabla f \) . Therefore this block can be treated as a blackbox, represented in this package by oracles, data structures containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
 
 Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions.  In Figure~\ref{ex_analysis}, by calling the SectorBounded function, an oracle containing the interpolation conditions for 1 strong 10 smooth convex functions is created and labeled f'. The oracle is then sampled at points xs and x0 by defining f'(xs) and f'(x0) inside the labeling macro to create expressions $\nabla $f(x0) and $\nabla $f(xs)
 
@@ -255,31 +255,32 @@ Algorithm Analysis represents the states of an algorithm using expressions. As t
 \section{Label macro}
 Algorithm Analysis uses a macro to keep the process of providing inputs to the program simple as some of the rules of programming might be difficult for novice users to navigate. While the package still works without the label macro, it is made more accessible both in terms of entering input and interpreting results.
 
-When an expression is defined inside the labeling macro, the expression object created is given the label based on the variable name used.	While x0 and y0 in Figure~\ref{ex_analysis} were labeled with its variable name, an expression defined outside of the labeling macro, as shown in Figure~\ref{ex_unlabeled} would not.
-	\begin{figure}[!h]
-		\begin{lstlisting}[mathescape]
+When an expression is defined inside the labeling macro, the expression object created is given the label based on the variable name used.	While x0 and y0 in Figure~\ref{ex_analysis} were labeled with its variable name, an expression defined outside of the labeling macro, as shown in Figure~\ref{ex_unlabeled} would not. In some special cases, expressions are automatically given labels that follow common math notation. For an expression created from sampling an oracle representing the gradient of a function $f$, Figure~\ref{ex_labeled} shows the macro would assign the expression the label $\nabla f(x0)$, a math symbol typically recognized as the gradient. Similarly, as shown in Figure~\ref{ex_transpose}, the transpose of a vector such as \texttt{x'} is automatically labeled as \texttt{x\textsuperscript{*}}), while Figure~\ref{ex_orc_constraints} shows that inner products such as \texttt{x'*y} gets labeled as \texttt{$\langle$x,y$\rangle$}.
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
 x3 = R$^n$()
 Vector in R$^n$
-  Label: Variable{R$^n$}
-  Associations: Dual => LinearFunctional{R$^n$}
+Label: Variable{R$^n$}
+Associations: Dual => LinearFunctional{R$^n$}
 \end{lstlisting}
 \caption{Example of an unlabeled expression}
 \label{ex_unlabeled}
 \end{figure}
-	In some special cases, expressions are automatically given labels that follow common math notation. For an expression created from sampling an oracle representing the gradient of a function $f$, Figure~\ref{ex_labeled} shows the macro would assign the expression the label $\nabla f(x0)$, a math symbol typically recognized as the gradient. Similarly, as shown in Figure~\ref{ex_transpose}, the transpose of a vector such as \texttt{x'} is automatically labeled as \texttt{x\textsuperscript{*}}), while Figure~\ref{ex_orc_constraints} shows that inner products such as \texttt{x'*y} gets labeled as \texttt{$\langle$x,y$\rangle$}.
-	\begin{figure}[!h]
-		\begin{lstlisting}[mathescape]
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
 @show(f'(x0))
 (f')(x0) = $\nabla $f(x0)
 
 Vector in R$^n$
-	Label: $\nabla $f(x0)
-	Oracles: $\nabla $f
-	Associations: Dual => $\nabla $f(x0)$^*$
-		\end{lstlisting}
-		\caption{Example of a labeled oracle}
-		\label{ex_labeled}
-	\end{figure}
+Label: $\nabla $f(x0)
+Oracles: $\nabla $f
+Associations: Dual => $\nabla $f(x0)$^*$
+	\end{lstlisting}
+	\caption{Example of a labeled oracle}
+	\label{ex_labeled}
+\end{figure}
 
 \section{Constraints}
 During the analysis process, constraints are created by interpolation conditions in section 3.2, as well as when the user defines constraints on the iterative algorithm being analyzed. In order to keep track of these constraints while keeping the process of defining them simple, the program uses data structures that include the scalar expression being constrained, and the constraint which define the expression to be in a cone. The list of constraints supported include:

@@ -1,6 +1,6 @@
 \chapter{Lyapunov-based approach}\label{chapter:lyapunov}
 
-Algorithm Analysis performs algorithm analysis by using the technique layed out by Van Scoy and Lessard in \cite{tutorial}. While Algorithm Analysis is a blackbox tool, understanding the mathematical approach on which it is based is requisite to understanding the package's code and functionalities.
+Algorithm Analysis performs algorithm analysis by using the technique layed out by Van Scoy and Lessard in \cite{tutorial}. While Algorithm Analysis is a blackbox tool, understanding the mathematical approach on which it is based is a prerequisite to understanding the package's code and functionalities.
 
 The technique is based on the idea that certifying whether a convergence rate of an algorithm optimizing a function can be guaranteed is itself an optimization problem. This approach, which will be discussed over the sections of this chapter, 1) represents the algorithm being analyzed in state-space form, 2) replaces the nonlinear gradient with constraints derived from interpolation conditions of a function class, 3) uses Lyapunov functions and constraints to form an optimization problem the solution to which certify whether a certain convergence rate can be guaranteed.
 % The steps of this technique, which will be discussed in detail over the sections of this chapter, consists of 
@@ -117,7 +117,7 @@ As an example, if we define $x_0$ as the initial iterate of an algorithm optimiz
 		- 20\innerproduct{\nabla f(x_k)}{x_s} - \|\nabla f(x_k)\|^2 &\geq 0
 	\end{split}
 \end{equation}
-when satisfied interpolates 1 strong 10 smooth convex functions. Using interpolation condition, the gradient of any function belonging to the associated function class is represented with an inequality, one of the two components of the convex semidefinite problem needed to analyze algorithms.
+when satisfied interpolates $1$ strong $10$ smooth convex functions. Using interpolation condition, the gradient of any function belonging to the associated function class is represented with an inequality, one of the two components of the convex semidefinite problem needed to analyze algorithms.
 % \begin{equation} \label{eqn:Gram}
 % 	\bmat{\|y_i\|^2 & \innerproduct{y_j}{y_i} & \innerproduct{u_i}{y_i} \\ \innerproduct{y_i}{y_j} & \|y_j\|^2 & \innerproduct{u_i}{y_j} \\ \innerproduct{y_i}{u_i} & \innerproduct{y_j}{u_i} & \|u_i\|^2}
 % \end{equation}
@@ -147,7 +147,7 @@ when satisfied interpolates 1 strong 10 smooth convex functions. Using interpola
 It can be seen that other than the function values $f_i$ and $f_j$, the left hand side of the interpolation condition consists of the norm and inner product of the interpolated points and gradients. These elements create a Gram matrix of real-valued elements with which the interpolation can be defined as a function of. Theorem \ref{thm:interpolation_condition} can be transformed into:
 \begin{equation} \label{eqn:condGram}
 	% \trace[]\bmat{-mL & mL & m \\ mL & -mL & -m\\m & -m & -1}\bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2}] + 2(L-m)(f_i - f_j) \geq 0.
-	\Pi = \sum_{i,j\in I} \trace(\bmat{-mL & mL & m \\ mL & -mL & -m\\m & -m & -1}\bmat{\|y_i\|^2 & \innerproduct{y_j}{y_i} & \innerproduct{u_i}{y_i} \\ \innerproduct{y_i}{y_j} & \|y_j\|^2 & \innerproduct{u_i}{y_j} \\ \innerproduct{y_i}{u_i} & \innerproduct{y_j}{u_i} & \|u_i\|^2}) + 2(L-m)(f_i - f_j) \geq 0.
+	\sum_{i,j\in I} \trace(\bmat{-mL & mL & m \\ mL & -mL & -m\\m & -m & -1}\bmat{\|y_i\|^2 & \innerproduct{y_j}{y_i} & \innerproduct{u_i}{y_i} \\ \innerproduct{y_i}{y_j} & \|y_j\|^2 & \innerproduct{u_i}{y_j} \\ \innerproduct{y_i}{u_i} & \innerproduct{y_j}{u_i} & \|u_i\|^2}) + 2(L-m)(f_i - f_j) \geq 0.
 \end{equation}
 for all $i,j\in I$. We can then define $[x; u]$ as the Gram matrix of a set of vectors representing every interpolated points, which is also every state and gradient an algorithm uses to update its iterate
 % The performance measure and the left hand side of the interpolation conditions are formulated from the norm and inner products of the state vector the end point vector, with the Lyapunov function detailed in the next section formulated using the same elements along with the gradient of the function used by the algorithm. These expressions are elements of the Gram-matrix of the vector containing every expressions the algorithm uses to update the iterates and goal vector expression. For the interpolation condition \ref{eqn:int_cond2} and a gradient descent algorithm which derive the first iterate $x_1$ using the gradient at the initial state $x_0$, the Gram matrix is:
@@ -158,7 +158,7 @@ for all $i,j\in I$. We can then define $[x; u]$ as the Gram matrix of a set of v
 
 The elements of the Gram matrix are interpolable --- meaning there exists vectors the norm and inner product of which are elements of a Gram matrix --- if and only if the Gram matrix is positive semidefinite and the dimension $n$ of the state vectors to be greater than or equal to the rank of the Gram matrix. Since the problem classes the algorithm being analyzed is abstract, the Lyapunov-based approach makes the assumption that each function in every class has sufficiently large dimension. The other condition on the Gram matrix is applied is similar to those created from interpolation conditions and will also be used to construct the semidefinite problem. The constraint for the Gram matrix associated with \eqref{eqn:int_cond} is:
 \begin{equation} \label{eqn:trans_cond}
-		\pi = \bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{\nabla f(x_k)}{x_s} \\ \innerproduct{x_k}{\nabla f(x_k)} & \innerproduct{xs}{\nabla f(x_k)} & \|\nabla f(x_k)\|^2} \succcurlyeq 0.
+		\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{\nabla f(x_k)}{x_s} \\ \innerproduct{x_k}{\nabla f(x_k)} & \innerproduct{xs}{\nabla f(x_k)} & \|\nabla f(x_k)\|^2} \succcurlyeq 0.
 	\end{equation}
 
 % which is why we need to assume that the dimension is sufficiently large)}. This constraint is similar to those created from interpolation conditions and will also be used to construct the semidefinite problem.
@@ -167,7 +167,7 @@ The elements of the Gram matrix are interpolable --- meaning there exists vector
 In the third and final step of the Lyapunov method, we:
 \begin{enumerate}
 	\item Use Lyapunov functions to represent the energy of the system.
-	\item Apply conditions on the Lyapunov functions, the satisfaction of which proves whether a performance rate can be guaranteed for the system.
+	\item Apply conditions on the Lyapunov functions, whose satisfaction proves whether a performance rate can be guaranteed for the system.
 	\item Formulate an optimization problem consisting of functions linear in the optimization variables, formed from the conditions on the Lyapunov functions and constraints created by the interpolation conditions. For any rate of performance, whether it can be guaranteed for the system depends on whether the optimization problem can be solved.
 \end{enumerate}
 
@@ -177,7 +177,7 @@ The main goal of the program and the Lyapunov method it implement is to certify 
 \end{equation}
 %  In \cite{tutorial}, it is proven that a convergence rate can be guaranteed if there exist a $\lambda \geq 0$ and $P$ which makes the Lyapunov function nonpositive. Therefore, a minimum convergence rate can be guaranteed by solving for $P$ and $\lambda$ so that the Lyapunov function would satisfy 2 linear matrix inequalities. The mathematical basis of JuPE follows this approach with some modification. 
 
-In the field of control, the Lyapunov function is a fundamental tool, defined as a nonnegative function that decreases in time along the orbit of a dynamical system and can be used to understand the behavior of a system. Under this definition, the dynamical system is the algorithm being analyzed, and 2 Lyapunov functions are used to certify whether or not a convergence rate can be guaranteed for a system. Consider the gradient descent algorithm and its representation in \eqref{eqn:GD}, define $\mathbf{x_k} = x_k - x_s$, the Lyapunov function takes the form:
+In the field of control, the Lyapunov function is a fundamental tool, defined as a nonnegative function that decreases in time along the orbit of a dynamical system and can be used to understand the behavior of a system. Under this definition, the dynamical system is the algorithm being analyzed, and two Lyapunov functions are used to certify whether or not a convergence rate can be guaranteed for a system. Consider the gradient descent algorithm and its representation in \eqref{eqn:GD}, define $\mathbf{x_k} = x_k - x_s$, the Lyapunov function takes the form:
 % = \bmat{x_{k} - x_s \\ x_{k-1} - x_s}$, the Lyapunov function would take the form of:
 \begin{equation}
 	V(\mathbf{x}) = \trace(\mathbf{x_k}^TP\mathbf{x_k}) \label{eqn:Lyapunov}
@@ -189,7 +189,7 @@ where $P$ is a symmetric matrix optimization variable. Note that the Lyapunov fu
 	  V(\mathbf{x_{k+1}}) - \rho V(\mathbf{x_k}) \leq 0
 	\end{align}
 \end{subequations}
-then the convergence rate of that algorithm is guaranteed to be faster than $\rho $ for every function in the function class. The first Lyapunov function inequality if satisfied guarantees for each iteration of an algorithm, the distance from the iterate to the minimizer $\|x_k - x_s\|^2$, which will be referred to in the rest of this thesis as the performance measure, is smaller or equal to the Lyapunov function. The second Lyapunov function inequality if satisfied guarantees after each iteration, the Lyapunov function decreases at a rate faster or equal to $\rho^2$ after each iteration. Together, if the optimization variable $P$ can be found so that the 2 inequalities are satisfied, a convergence rate of $\rho$ or faster can be guaranteed. This is proven in the proof of Lemma 5 of \cite{tutorial}, which can be modified to suit the gradient descent algorithm. For any $k \geq 0$:
+then the convergence rate of that algorithm is guaranteed to be faster than $\rho $ for every function in the function class. The first Lyapunov function inequality if satisfied guarantees for each iteration of an algorithm, the distance from the iterate to the minimizer $\|x_k - x_s\|^2$, which will be referred to in the rest of this thesis as the performance measure, is smaller or equal to the Lyapunov function. The second Lyapunov function inequality if satisfied guarantees after each iteration, the Lyapunov function decreases at a rate faster or equal to $\rho^2$ after each iteration. Together, if the optimization variable $P$ can be found so that the two inequalities are satisfied, a convergence rate of $\rho$ or faster can be guaranteed. This is proven in the proof of Lemma 5 of \cite{tutorial}, which can be modified to suit the gradient descent algorithm. For any $k \geq 0$:
 \begin{equation}
 	\|x_k - x_s\|^2 \leq V(\mathbf{x_{k}}) \leq \ldots \leq \rho^{k}V(\mathbf{x_{0}}) \leq \rho^k(C_0\|x_0 - x_s\|^2)
 \end{equation}
@@ -252,29 +252,36 @@ The linear form of conditions on the Lyapunov functions $L1$ and $L2$ can be def
 		V(\mathbf{x_{k+1}}) - \rho ^2V(\mathbf{x_k}) = L2\bmat{x\\ u}.
 	\end{align}
 \end{subequations}
-For the constraints associated with the interpolation condtions, each is derived and scaled by a nonnegative obtimization variable $\Lambda$ before being combined with $L1$ and $L2$. For each constraint created by the interpolation conditions, an optimization variable $\Lambda $ is created and constrained in the optimization problem to be nonnegative if it is a scalar, nonnegative element-wise if it is a vector, or positive semidefiinite if it is a matrix. The linear form of the constraints associated with the interpolation conditions \eqref{eqn:condGram} is:
-\begin{equation}
-	\Lambda \Pi + \Lambda \trace(\pi) = \sum_{i \in C}M_i(\Lambda_i)\bmat{x\\u}
+For the constraints associated with the interpolation condtions, each is derived and scaled by a nonnegative obtimization variable $\Lambda$ before being combined with $L1$ and $L2$. For each constraint created by the interpolation conditions, an optimization variable $\Lambda $ is created and scaled with. The linear form of the constraints associated with the interpolation conditions \eqref{eqn:condGram} is:
+\begin{equation} \label{eqn:constraints}
+	\sum_{i \in C}M_i(\Lambda_i)\bmat{x\\u}
 \end{equation}
-where $C$ is the set containing every constraints created in \eqref{eqn:condGram} and \eqref{eqn:trans_cond} and $M_i$ is the linear form of each constraint scaled by a corresponding parameter $\Lambda _i$. The scalling variables $\Lambda _i$ enable the solver to search for $\Lambda _i$ just as it does for $P$ so that the final linear function is satisfied. If the constraint is applied to a scalar variable in the case of those created by interpolation conditions associated with the function class, $M_i$ is the linear form of the scalar variable. On the other hand, if the constraint is applied to the Gram matrix, $M_i$ is the linear form of its trace. Here, $L1$, $L2$ and $M_i(\Lambda_i)$ are linear functions consisting of a vector or matrix of real-valued scalars and an optimization variable.
+where $C$ is the set containing every constraints created in \eqref{eqn:condGram} and \eqref{eqn:trans_cond} and $M_i$ is the linear form of each constraint scaled by a corresponding parameter $\Lambda _i$. The optimization parameters $\Lambda _i$ are constrained in the optimization problem to be nonnegative if it is a scalar, nonnegative element-wise if it is a vector, or positive semidefiinite if it is a matrix. When the constraints applied to these variables satisfied, equation \eqref{eqn:constraints} are nonnegative. At the same time, variables $\Lambda _i$ enable the solver to search for $\Lambda _i$ just as it does for $P$ so that the final linear function is satisfied. If the constraint is applied to a scalar variable in the case of those created by interpolation conditions associated with the function class, $M_i$ is the linear form of the scalar variable, or the left hand side of \eqref{eqn:int_cond} in the gradient descent example. On the other hand, if the constraint is applied to the Gram matrix, $M_i$ is the linear form of its trace. 
 
-Lastly, we create functions linear in the optimization variables using the conditions applied on the Lyapunov functions and the constraints, forming our optimization problem:
+Lastly, as $L_1$, $L_2$ and $M_i(\Lambda_i)$ are all functions consisting of a vector or matrix of real-valued scalars and an optimization variable, we can combine them to create functions linear in the optimization variables, forming our optimization problem:
 \begin{subequations} \label{eqn:LMI1}
-	\begin{align*} 
-		L1 + \sum_{i\in C} M_i(\Lambda_i^1) &= 0  \\
-		L2 + \sum_{i\in C} M_i(\Lambda_i^2) &= 0.
-	\end{align*}
+	\begin{align} 
+		L_1 + \sum_{i\in C} M_i(\Lambda_i^1) &= 0  \\
+		L_2 + \sum_{i\in C} M_i(\Lambda_i^2) &= 0.
+	\end{align}
 \end{subequations}
-For any convergence rate $\rho$, if some parameter $P$, $\Lambda_i^1$ and $\Lambda_i^2$ can be found which would solve the linear functions in \eqref{eqn:LMI1}, the Lyapunov function conditions specified in \eqref{eqn:Ly_ineq} is satisfied and that performance guarantee is feasible. However, if no such parameter can be found, the Lyapunov function conditions are not satisfied and the convergence rate cannot be guaranteed to be feasible. This can be proven as, for any $[x; u]$:
-\begin{subequations} \label{eqn:LMI1}
+For any convergence rate $\rho$, if some parameter $P$, $\Lambda_i^1$ and $\Lambda_i^2$ can be found which would solve the linear functions in \eqref{eqn:LMI1}, the Lyapunov function conditions specified in \eqref{eqn:Ly_ineq} is satisfied and that performance guarantee is feasible. However, if no such parameter can be found, the Lyapunov function conditions are not satisfied and the convergence rate cannot be guaranteed to be feasible. This can be proven as, for any $[x; u]$, \eqref{eqn:LMI1} can be multiplied with $[x; u]$. If the linear functions \eqref{eqn:LMI1} equal zero, and multiplying the linear form of the constraints by $[x; u]$ give us the interpolation conditions, which are constrained to be $\geq 0$, it must mean that $L1\bmat{x & u}^\tp$ is $\leq 0$:
+\begin{subequations} \label{eqn:LMI2}
+	\begin{align} 
+		(L1 + \sum_{i\in C} M_i(\Lambda_i^1))\bmat{x & u}^\tp &= 0  \\
+		\underbrace{L1\bmat{x & u}^\tp}_{\leq 0} + \underbrace{\sum_{i\in C} M_i(\Lambda_i^1)\bmat{x & u}^\tp}_{\geq 0} &= 0  \\
+	\end{align}
+\end{subequations}
+and similarly, $L2\bmat{x & u}^\tp$ is $\leq 0$.
+\begin{subequations} \label{eqn:LMI3}
 	\begin{align*} 
 		(L1 + \sum_{i\in C} M_i(\Lambda_i^1))\bmat{x & u}^\tp &= 0  \\
 		\underbrace{L1\bmat{x & u}^\tp}_{\leq 0} + \underbrace{\sum_{i\in C} M_i(\Lambda_i^1)\bmat{x & u}^\tp}_{\geq 0} &= 0  \\
 		(L2 + \sum_{i\in C} M_i(\Lambda_i^1))\bmat{x & u}^\tp &= 0  \\
-		\underbrace{L2\bmat{x & u}^\tp}_{\leq 0} + \underbrace{\sum_{i\in C} M_i(\Lambda_i^1)\bmat{x & u}^\tp}_{\geq 0} &= 0  \\
+		\underbrace{L2\bmat{x & u}^\tp}_{\leq 0} + \underbrace{\sum_{i\in C} M_i(\Lambda_i^1)\bmat{x & u}^\tp}_{\geq 0} &= 0  \\.
 	\end{align*}
 \end{subequations}
-if the linear functions equal zero, and multiplying the linear form of the constraints by $[x; u]$ give us the interpolation conditions, which are constrained to be $\geq 0$, must mean that $L1\bmat{x & u}^\tp$ and $L2\bmat{x & u}^\tp$ which are the Lyapunov function conditions are $\leq 0$ and the convergence rate can be guaranteed.
+Together, $L1\bmat{x & u}^\tp \leq 0$ and $L2\bmat{x & u}^\tp \leq 0$ form the conditions on the Lyapunov functions, and if \eqref{eqn:LMI1} is solved, it means that the convergence rate is feasible.
 
 Since we know how to certify whether a convergence rate guarantee is feasible, the worst-case performance of the system or fastest convergence rate that can be guaranteed for said system can be found by performing bisection search for the smallest value $\rho$ between 0 and 1 with which the optimization problem is feasible within some margin of error.
 % Both components of the LMIs, the Lyapunov functions and the left hand side of the interpolation conditions constraints, are formulated from the norm and inner products of the state vector the end point vector. These expressions are elements of the Gram-matrix of the vector containing every expressions the algorithm uses to update the iterates and goal vector expression. For any algorithm which updates the first iterate $x_1$ using the gradient at the initial state $x_0$, the Gram matrix is:

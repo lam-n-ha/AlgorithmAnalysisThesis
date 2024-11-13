@@ -1,8 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{Wright_Recht_2022}
+Stephen~J. Wright and Benjamin Recht.
+\newblock {\em Optimization for Data Analysis}.
+\newblock Cambridge University Press, 2022.
+
 \bibitem{pepit}
 Baptiste Goujaud, Céline Moucer, François Glineur, Julien Hendrickx, Adrien Taylor, and Aymeric Dieuleveut.
-\newblock Pepit: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
+\newblock {PEPit}: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
 
 \bibitem{adam}
 Diederik~P. Kingma and Jimmy Ba.
@@ -42,7 +47,7 @@ Bryan Van~Scoy and Laurent Lessard.
 
 \bibitem{pesto}
 Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
-\newblock Performance estimation toolbox (pesto): Automated worst-case analysis of first-order optimization methods.
+\newblock Performance estimation toolbox ({PESTO}): Automated worst-case analysis of first-order optimization methods.
 \newblock In {\em 2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, pages 1278--1283, 2017.
 
 \bibitem{jump}

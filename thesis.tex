@@ -34,15 +34,31 @@
 \usepackage{multirow}
 \usepackage{siunitx}
 \usepackage{xcolor}
-\usepackage{graphicx}
 \usepackage{parskip}
 \usepackage{acronym}
 \usepackage{thmtools}
 \usepackage{listings}
 \usepackage{svg}
 \usepackage[capposition=bottom]{floatrow}
+
 \usepackage{subcaption}
+% \usepackage{minted}
+% \usepackage{textalpha}
+% \usepackage{tcolorbox}
+% \usepackage{geometry}
 % \usepackage[margin=0.25in]{geometry}
+
+% customized figure captions
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
+\captionsetup[figure]{name=Figure}
+\captionsetup[table]{aboveskip=3pt}
+
+% clever references (also for theorems and such)
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\usepackage[normalem]{ulem}
+% \newcommand{\comment}[1]{\textcolor{blue}{#1}}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
 
 \lstdefinelanguage{Julia}%
   {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
@@ -56,6 +72,23 @@
    morestring=[s]{"}{"},%
    morestring=[m]{'}{'},%
 }[keywords,comments,strings]%
+
+% \DeclareUnicodeCharacter{207F}{\textsuperscript{n}}
+% \DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+
+% \newenvironment{code}[4][]
+%  {\VerbatimEnvironment
+%   \begin{listing}
+%   \caption{#3}\label{#4}
+%   \begin{tcolorbox}
+%     \begin{minted}[
+%     linenos,
+%     fontsize=\footnotesize,
+%     xleftmargin=21pt,
+%     baselinestretch=1,
+%     tabsize=4,
+%     #1]{#2}}
+%  {\end{minted}\end{tcolorbox}\end{listing}}
 
 \lstset{%
     language         = Julia,
@@ -85,13 +118,6 @@
 \newcommand{\innerproduct}[2]{\langle #1, #2 \rangle}
 \renewenvironment{proof}{{\noindent\bf Proof.}}{\qedhere}
 
-% customized figure captions
-\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
-\captionsetup[figure]{name=Figure}
-\captionsetup[table]{aboveskip=3pt}
-
-% clever references (also for theorems and such)
-\usepackage[capitalise,nameinlink]{cleveref}
 
 % automatically look for graphics in these folders
 \graphicspath{{graphics/}}
@@ -121,8 +147,6 @@
 \newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
 
-\usepackage[normalem]{ulem}
-\newcommand{\comment}[1]{\textcolor{blue}{#1}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
