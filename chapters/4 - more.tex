@@ -102,14 +102,29 @@ Vector in R
 \end{figure}
 \end{description}
 
-\section{Algebra}
+\subsection*{Gram matrix}
+The analysis process include creating and applying constraints on Gram matrices containing expressions. To save memory and improve computational efficiency, a Gram expression struct is used to represent Gram matrices. It contains the vector of vector expressions the outer product of which forms the Gram matrix. The function \texttt{evaluate(g::Gram)} takes a Gram matrix expression as argument and return the Gram matrix.
+
+\begin{figure}[h]
+	\begin{lstlisting}[mathescape]
+@show Gram([x0, x1])
+Gram([x0, x1]) = Gram matrix of vector R$^n$[x0, x1]
+
+Gram matrix in Gram
+	Value: R$^n$[x0, x1] $\otimes$ R$^n$[x0, x1]
+	\end{lstlisting}
+\caption{Example of a Gram matrix expression}
+\label{ex_Gram}
+\end{figure}
+
+\section{Algebra} \label{sec:algebra}
 Expressions in the package belong in an inner product space, which is a set of elements that can be vectors or scalar and which supports certain operations such as norm and inner product in addition to algebraic operations. In Figure~\ref{ex_variable}, expressions are defined to be in R$^n$, an inner product space pre-defined in the package which encompasses n-dimensional real numbers.
 
 Algorithm Analysis supports operations that characterize inner product spaces between expressions. The examples that demonstrate these operations use vector expressions \texttt{x0} and \texttt{y0} in Figure~\ref{ex_variable}.
 
 \subsection*{Addition or subtraction between expressions}
 
-Vectors and numbers can be added together in an inner product space. In an addition operation, if both expressions of the operation posess a 'value', they are added to create the value of a new resulting expression. Otherwise, the result is a new expression whose decomposition is the merging of the decompositions of the expressions in the operation.
+Vectors and numbers can be added together in an inner product space. In an addition operation, if both expressions of the operation posess a 'value', they are added to create the value of a new resulting expression. Otherwise, the result is a new expression whose decomposition is the merging of the decomposition dictionaries of the expressions in the operation.
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
 a = x0+y0-x0-x0
@@ -126,7 +141,8 @@ Vector in R$^n$
 \end{figure}
 
 \subsection*{Multiplication or division between an expression and a scalar} 
-Vectors and scalars can be scaled in an inner product space. Tbe Algorithm Analysis package performs the multiplication or division of an expression by scaling the value or decomposition of an expression.
+Vectors and scalars can be scaled in an inner product space. The Algorithm Analysis package performs the multiplication or division of an expression by scaling its value if is a variable expression and scale the value of its decomposition dictionary if it is a decomposition expression.
+
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
 c = x0*-3 + y0*2
@@ -144,12 +160,11 @@ Vector in R$^n$
 \end{figure}
 
 \subsection*{Transpose of a vector}
-In the Algorithm Analysis program, the transpose of a vector expression can be taken to create a new expression. When a vector expression is created, a data structure that maps it to its transpose is stored in the \texttt{associations} field, allowing the program to keep track of whether an expression is the tranpose of another.
+When a vector expression is created, its transpose is also created and stored in the \texttt{associations} field, allowing the program to keep track of whether an expression is the tranpose of another. In the AlgorithmAnalysis.jl package, the transpose of a transpose expression returns the original expression.
 
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
 @show(x0')
-x0' = x0$^*$
 
 Oracle
 	Description: Linear functional on R$^n$
@@ -157,7 +172,6 @@ Oracle
 	Properties: Linear()
 
 @show(x0'')
-(x0')' = x0
 
 Vector in R$^n$
 	Label: x0
@@ -168,12 +182,12 @@ Vector in R$^n$
 \end{figure}
 
 \subsection*{Inner product operation between two vectors}
-In an inner product space, the inner product operation of two vectors is possible and result in a scalar. For example, the inner product of vectors y0 and x0, denoted $\innerproduct{y0}{x0}$, is calculated as $x0^\tp * y0$. The Algorithm Analysis package finds the inner product by creating a new vector variable expression with the appropriate label indicating the new expression as an inner product between two other vectors.
+In an inner product space, the inner product operation of two vectors is possible and result in a scalar. For example, the inner product of vectors y0 and x0, denoted $\innerproduct{y0}{x0}$, is calculated as $x0^\tp * y0$.
+
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
 inner = x0'*y0
 @show(inner)
-inner = <y0,x0>
 
 Scalar in R
 	Label: <y0,x0>
@@ -200,64 +214,247 @@ Scalar in R
 \label{ex_norm}
 \end{figure}
 
-\section{Oracles} \label{oracles}
-As mentioned in section 3.2, algorithm analysis relies on interpolation conditions --- constraints on the input $y$ and output $u$ of block \( \nabla f \) . Therefore this block can be treated as a blackbox, represented in this package by oracles, data structures containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
-
-Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions.  In Figure~\ref{ex_analysis}, by calling the SectorBounded function, an oracle containing the interpolation conditions for 1 strong 10 smooth convex functions is created and labeled f'. The oracle is then sampled at points xs and x0 by defining f'(xs) and f'(x0) inside the labeling macro to create expressions $\nabla $f(x0) and $\nabla $f(xs)
+\subsection*{Outer product}
+% In the AlgorithmAnalysis.jl package, the outer product operation is used to construct Gram matrices from vectors of expressions. This functionality plays a crucial role in formulating the interpolation conditions and Lyapunov inequalities described in Chapter 3.
+The outer product of two vectors of expression in the same inner product space can be found using the $\otimes$ function. It is used to construct Gram matrices from vectors of expressions, playing a crucial role in formulating the interpolation conditions and Lyapunov inequalities described in \Cref{chapter:lyapunov}.
 
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
-@show(f'(x0))
-(f')(x0) = $\nabla $f(x0)
+op = [x0, x1] $\otimes$ [x0, x1]
 
-Vector in R$^n$
-  Label: $\nabla $f(x0)
-  Oracles: $\nabla $f
-  Associations: Dual => $\nabla $f(x0)$^*$
+@show op
+op = R[|x0|$^2$ <x1, x0>; <x1, x0> |x1|$^2$]
+
+2x2 Matrix{R}:
+ |x0|$^2$    <x1, x0>
+ <x1, x0>  |x1|$^2$
 
 \end{lstlisting}
-\caption{Example of an expression created by sampling an oracle}
+\caption{Example of outer product}
+\label{ex_outerproduct}
+\end{figure}
+
+\section{Oracles} \label{sec:oracles}
+As mentioned in section 3.2, algorithm analysis of first-order systems relies on interpolation conditions --- for every state at which the gradient of the system is taken, constraints are applied to the state vector, the function value at said vector, and the gradient at that vector. To implement these interpolation condition, the package uses oracles, data structures containing the relation and constraint information between expressions. Each oracle represent a class of function and can only exist if there exist interpolation conditions for said class.
+
+Oracles can be sampled at an expression to return another expression, establishing the relation information between the two expressions.
+
+Its corresponding gradient oracle \texttt{f'} is also created and given the property of being the gradient of \texttt{f}. The oracle can be sampled at different expressions. For example, \ref*{ex_sampling} shows how the oracle \texttt{f'} is sampled by defining \texttt{f'(x0)} and \texttt{f'(xs)} inside the labeling macro to create expressions \texttt{$\nabla $f(x0)} and \texttt{$\nabla $f(xs)}. This sampling can also be seen in Figure \ref*{ex_analysis}
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
+@algorithm begin
+	f = DifferentiableFunctional{R$^n$}()
+	f $\in$ SmoothStronglyConvex(m, L)
+	x0 = R$^n$()
+	xs = first_order_stationary_point(f)
+	f'(x0)
+	f'(xs)
+end
+\end{lstlisting}
+\caption{Example of sampling an oracle}
 \label{ex_sampling}
 \end{figure}
 
-As an oracle is sampled, Algorithm Analysis uses the oracle's set of interpolation conditions to create constraints on the expression the oracle is being sampled at and the result expression, which are x0 and xs in Figure~\ref{ex_analysis}.
+An oracle stores information about every expression at which it has been sampled along with their corresponding output. Figure \ref*{ex_inputs_outputs} shows the the input and output information of the oracle \texttt{f'} defined in \ref*{ex_sampling}.
 
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
-constraints(x0^2)
-Set of constraints with 3 elements:
-	0 $<=$ 1.1 <$\nabla $f(x0),x0> + 2.0 <xs,x0> - 2.0 |x0|$^2$ + 1.1 <x0,$\nabla $f(x0)> - 2.0 |xs|$^2$ - 1.1 <xs,$\nabla $f(x0)> + 2.0 <x0,xs> - 0.2 |$\nabla $f(x0)|$^2$ - 1.1 <$\nabla $f(x0),xs>
-	0 $<=$ R[|x0|$^2$ <xs,x0>; <x0,xs> |xs|$^2$]
-	0 $<=$ R[|x0|$^2$ <$\nabla $f(x0),x0> <xs,x0>; <x0,$\nabla $f(x0)> |$\nabla $f(x0)|$^2$ <xs,$\nabla $f(x0)>; <x0,xs> <$\nabla $f(x0),xs> |xs|$^2$]
+inputs_outputs(f')
+
+(R$^n$[xs, x0], R$^n$[0, $\nabla$f(x0)])
+\end{lstlisting}
+\caption{Example of the inputs outputs information of an oracle}
+\label{ex_inputs_outputs}
+\end{figure}
+
+In Figure~\ref{ex_sampling}, by defining the DifferentiableFunctional oracle \texttt{f} as belonging to the 1 smooth 10 strongly convex class of functions, the convex property is assigned to \texttt{f}. This information is also stored in the oracle.
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
+f
+
+Oracle
+	Description: Differentiable functional on R$^n$
+	Label: f
+	Properties: 10-smooth, 1-strongly convex
+	Associations: Gradient => $\nabla$f
+
+f'
+
+Oracle
+	Description: Map from R$^n$ to R$^n$
+	Label: $\nabla$f
+	Properties: Empty set of properties
+	Associations: GradientOf => f
+\end{lstlisting}
+\caption{Example of the properties of an oracle}
+\label{ex_properties}
+\end{figure}
+
+During the analysis process, the package can derive the necessary information to create interpolation conditions from the oracles: the property of the oracles and the interpolated points, or at which expression the oracle has been sampled. Figure~\ref{ex_orc_constraints} shows constraints created by sampling an oracle representing the 1 smooth 10 strongly convex function class at the interpolated points \texttt{x0} and \texttt{xs}. This matches the interpolation condition equation in \ref*{eqn:int_cond}.
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
+constraints(f')
+Set of constraints with 2 elements:
+  0 $\leq$ 0.9 f(x0) + 0.1 <x0,$\nabla$f(x0)> - 0.5 |xs|$^2$ - 0.1 <xs,$\nabla$f(x0)> - 0.9 f(xs) - 0.05 |$\nabla$f(x0)|$^2$ + <xs,x0> - 0.5 |x0|$^2$
+  0 $\leq$ -0.9 f(x0) - 0.5 |xs|$^2$ + <x0,$\nabla$f(x0)> - <xs,$\nabla$f(x0)> + 0.9 f(xs) - 0.05 |$\nabla$f(x0)|$^2$ + <xs,x0> - 0.5 |x0|$^2$
 	\end{lstlisting}
 	\caption{Example of constraints created by sampling an oracle}
 	\label{ex_orc_constraints}
 \end{figure}
 
-Figure~\ref{ex_orc_constraints} is created by creating an oracle in the \texttt{SectorBounded} function class. The first constraint is the interpolation condition for the gradient to be sector bounded, given the interpolated points $x_0$ and $x_s$:
-\begin{multline*}
-	0 \leq 1.1\langle \nabla f(x_0),x_0\rangle + 2 \langle x_s,x_0\rangle - 2 \|x_0\|^2 + 1.1\langle x_0,\nabla f(x_0)\rangle - 2\|x_s\|^2 \\
-	- 1.1\langle x_s,\nabla f(x_0)\rangle + 2 \langle x_0,x_s\rangle - 0.2 \|\nabla f(x_0)\|^2 - 1.1\langle \nabla f(x_0),x_s\rangle,
-\end{multline*}
-while the third constraint applied on the Gram matrix associated with the vectors $x_0$, $\nabla f(x_0)$, and $x_s$, constraining it to be positive semidefinite:
-\[
-	0 \preceq \bmat{\|x_0\|^2 & \langle \nabla f(x_0),x_0\rangle & \langle x_s,x_0\rangle \\ \langle x_0,\nabla f(x_0)\rangle & \|\nabla f(x_0)\|^2 & \langle x_s,\nabla f(x_0)\rangle \\ \langle x_0,x_s\rangle & \langle\nabla f(x_0),x_s\rangle & \|x_s\|^2}.
-\]
-The second constraint, while does not effect the mathematical derivation of a convergence rate guarantee for this class of function, is redundant and represent a part of the code that will need to be fixed before the Algorithm Analysis package can be completed.
+While this section focuses primarily on \texttt{DifferentiableFunctional} oracles and their associated gradients, which are most relevant to analyzing smooth strongly convex functions, the package also supports other types of oracles. These include general \texttt{Map}, \texttt{LinearMap}, and \texttt{SymmetricLinearMap} types, which are especially useful in the analysis of primal-dual algorithms and other composite optimization frameworks. Each oracle can also be associated with a wide variety of mathematical properties. Oracles not just limited to representing smooth strongly convex function class, support properties such as being sector-bounded or slope-restricted, as commonly encountered in robust control or nonlinear system analysis.
+
+The framework is extensible: any function property can be encoded into an oracle as long as its interpolation conditions are formally defined and provable. This generality allows AlgorithmAnalysis.jl to support a broader class of algorithms and problem formulations beyond first-order methods for smooth convex functions.
+
+% \begin{multline*}
+% 	0 \leq 1.1\langle \nabla f(x_0),x_0\rangle + 2 \langle x_s,x_0\rangle - 2 \|x_0\|^2 + 1.1\langle x_0,\nabla f(x_0)\rangle - 2\|x_s\|^2 \\
+% 	- 1.1\langle x_s,\nabla f(x_0)\rangle + 2 \langle x_0,x_s\rangle - 0.2 \|\nabla f(x_0)\|^2 - 1.1\langle \nabla f(x_0),x_s\rangle,
+% \end{multline*}
+% while the third constraint applied on the Gram matrix associated with the vectors $x_0$, $\nabla f(x_0)$, and $x_s$, constraining it to be positive semidefinite:
+% \[
+% 	0 \preceq \bmat{\|x_0\|^2 & \langle \nabla f(x_0),x_0\rangle & \langle x_s,x_0\rangle \\ \langle x_0,\nabla f(x_0)\rangle & \|\nabla f(x_0)\|^2 & \langle x_s,\nabla f(x_0)\rangle \\ \langle x_0,x_s\rangle & \langle\nabla f(x_0),x_s\rangle & \|x_s\|^2}.
+% \]
+% The second constraint, while does not effect the mathematical derivation of a convergence rate guarantee for this class of function, is redundant and represent a part of the code that will need to be fixed before the Algorithm Analysis package can be completed.
 
 \subsection*{Transpose oracle}
 
-The transpose of a vector is coded in Julia to be an oracle, which is created when a vector expression is defined and is stored inside a wrapper data structure. During the inner product operation or norm operation, an oracle representing the transpose of a vector is sampled at another expression to create a scalar inner product expression. In this case, the oracle is not based on any class of function and create the constraint on the Gram matrix detailed in \texttt{\Cref{constraint}}.
+The transpose of an expression is coded in Julia to be an oracle and is primarily used to support the inner product and square norm operations. In this case, an oracle representing the transpose of a vector is sampled at another expression to create a scalar inner product expression. The oracle representing the transposed expression have the Linear property and is used to create constraints on the Gram matrix detailed in \Cref{constraint}.
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+x0 = R$^n$()
+
+@show x0'
+
+Oracle
+  Description: Linear functional on R$^n$
+  Label: x0*
+  Properties: Linear()
+\end{lstlisting}
+\caption{Example of a transpose oracle}
+\label{ex_transposeoracle}
+\end{figure}
 
 \section{States} \label{states}
-Algorithm Analysis represents the states of an algorithm using expressions. As the user inputs the algorithm being analyzed, an initial state is created and an updated state is defined as some algebraic combination of the initial state and the gradient. The relationship between a state and its next state can be defined using the \texttt{=>} operation inside the labeling macro, as can be seen in Figure~\ref{ex_analysis}, and the next state is stored in the \texttt{next} field of a state expression.
+Algorithm Analysis represents the states of an algorithm using expressions. The user inputs the algorithm be defining intial states, and how the algorithm updates is defined by creating an updated state as an algebraic combination of the initial state and the gradient. The algorithm can only be defined if the relationship between a state and its next state is established. This is done in the AlgorithmAnalysis.jl package using the \texttt{=>} operation inside the labeling macro, and the next state is stored in the \texttt{next} field of a state expression.
 
-\section{Label macro}
-Algorithm Analysis uses a macro to keep the process of providing inputs to the program simple as some of the rules of programming might be difficult for novice users to navigate. While the package still works without the label macro, it is made more accessible both in terms of entering input and interpreting results.
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+x0 = R$^n$()
+x1 = x0 - $\alpha$*f'(x0)
+x0 => x1
+@show x0
 
-When an expression is defined inside the labeling macro, the expression object created is given the label based on the variable name used.	While x0 and y0 in Figure~\ref{ex_analysis} were labeled with its variable name, an expression defined outside of the labeling macro, as shown in Figure~\ref{ex_unlabeled} would not. In some special cases, expressions are automatically given labels that follow common math notation. For an expression created from sampling an oracle representing the gradient of a function $f$, Figure~\ref{ex_labeled} shows the macro would assign the expression the label $\nabla f(x0)$, a math symbol typically recognized as the gradient. Similarly, as shown in Figure~\ref{ex_transpose}, the transpose of a vector such as \texttt{x'} is automatically labeled as \texttt{x\textsuperscript{*}}), while Figure~\ref{ex_orc_constraints} shows that inner products such as \texttt{x'*y} gets labeled as \texttt{$\langle$x,y$\rangle$}.
+Vector in R$^n$
+  Label: x0
+  Next: x1
+  Associations: Dual => x0*
+	\end{lstlisting}
+	\caption{Example of the \texttt{=>} operation}
+	\label{ex_next!}
+\end{figure}
 
-\begin{figure}[!h]
+When using the package, the user only have to define the next state relationship for the state expressions of the algorithm. For other expressions in the analysis, the package automatically assign the relationship if it exists. For example, if a decomposition expression \texttt{y1} is defined as the sum of expressions \texttt{x0} and \texttt{x1}, and the next state of \texttt{x0} is \texttt{x1} and the next state of \texttt{x1} is \texttt{x2} while \texttt{y1}'s next state is not defined by the user, the package automatically define that next state it as an expression with decomposition \texttt{x1+x2}.
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+@algorithm begin
+	x0 = R$^n$()
+	x1 = R$^n$()
+	x2 = R$^n$()
+	y0 = x0 + x1
+	x0 => x1
+	x1 => x2
+end
+
+next(y0)
+
+Vector in R$^n$
+  Decomposition: x1 + x2
+  Associations: Dual => LinearFunctional{R$^n$}
+\end{lstlisting}
+\caption{Example of automatic next state assignment for decomposition expressions}
+\label{ex_nextdecomp}
+\end{figure}
+
+Automatic next state assignment is also performed on the output of sampled oracles. For example, if an oracle \texttt{f} is sampled at \texttt{x0} and its next state \texttt{x1}, the output expression \texttt{f(x1)} is automatically assigned as the next state of \texttt{f(x0)}.
+
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+@algorithm begin
+	x0 = R$^n$()
+	x1 = R$^n$()
+	f'(x0)
+	f'(x1)
+	x0 => x1
+end
+
+next(f'(x0))
+
+Label: $\nabla$f(x1)
+  Oracles: $\nabla$f
+  Associations: Dual => $\nabla$f(x1)
+\end{lstlisting}
+\caption{Example of automatic next state assignment for oracle output expressions}
+\label{ex_nextsample}
+\end{figure}
+
+\section{Special syntax operations}
+
+The AlgorithmAnalysis.jl package contains functions that are named using math notation symbols and overloads Julia base functions to create a simplified user experience. These functions include:
+\begin{itemize}
+    \item \textbf{Algebraic}: As shown in \ref{sec:algebra}, Julia base functions \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, and \texttt{\textasciicircum} are overloaded to support algebraic operations. Therefore, the package execute the function \texttt{x0+y0-x0-x0} in \ref*{ex_addsub} using its addition and subtraction functions meant for expression variables instead of Julia's base functions.
+    
+	\item \textbf{Transpose and Gradient}: The AlgorithmAnalysis.jl package follow math notation in that both the transpose of a function and the gradient of a function is denoted using the operation \texttt{'} in the package. With the \texttt{adjoint} function, the package allow the user to refer to the gradient of a function when using it with a supported DifferentiableFunctional or TwiceDifferentiableFunctional oracle. When used on a vector expression however, the \texttt{'} operation is used to denote the transpose of a vector expression.
+
+    \item \textbf{Sampling functions and gradients}: By sampling an oracle at input an expression, we get an output expression that together with the input expression is constrained according to the interpolation condition. The package overloads the \texttt{()} operation to samples an oracle. For example, we sample a DifferentiableFunctional oracle \texttt{f} at expression \texttt{x0} simply by calling \texttt{f(x0)}.
+
+    \item \textbf{Oracle property}: The interpolation conditions on which the analysis depends is defined according to which function class we are analyzing the algorithm over. Therefore, the package uses the operation \texttt{$\in$} to denotes an oracle representing the function or gradient belongs to one of the package's supported classes. In figure \ref*{ex_in}, the function \texttt{f} is defined to be in the class of m smooth L strongly convex functions which informs the analysis process on which set of interpolation conditions to apply.
+    % \item \textbf{Sampling maps}:
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+f = DifferentiableFunctional{R$^n$}()
+f $\in$ SmoothStronglyConvex(m, L)
+	\end{lstlisting}
+	\caption{Example of the $\in$ operation}
+	\label{ex_in}
+\end{figure}
+
+\section{Labeling expressions}
+
+Algorithm Analysis uses a macro to keep the process of providing inputs to the program simple as some of the rules of programming might be difficult for novice users to navigate. While the package still works without the label functionalities, it is made more accessible both in terms of entering inputs and interpreting results produced by the package.
+
+\subsection*{@algorithm label macro}
+
+When using the AlgorithmAnalysis.jl package, the user define the algorithm, function class, and the performance measure inside of the \texttt{@algorithm} macro. It is the main way through which the process of providing input for the analysis is simplified.
+
+When an expression is defined inside the labeling macro \texttt{@algorithm}, the expression object created is given the label based on the variable name used.
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+@algorithm begin
+	x0 = R$^n$()
+end
+
+@show x0
+
+Vector in R$^n$
+  Label: x0
+  Associations: Dual => x0*
+	\end{lstlisting}
+	\caption{Example of a labeled expression}
+	\label{ex_labeled}
+\end{figure}
+
+However, an expression defined outside of the labeling macro, as shown in Figure~\ref{ex_unlabeled}, would be given a default label.
+
+\begin{figure}[h!]
 	\begin{lstlisting}[mathescape]
 x3 = R$^n$()
 Vector in R$^n$
@@ -268,21 +465,74 @@ Associations: Dual => LinearFunctional{R$^n$}
 \label{ex_unlabeled}
 \end{figure}
 
+The \texttt{@algorithm} macro is also responsible for simplying the process of assigning an expression as the `next' of another. While in regular Julia syntax, the code \texttt{x0 => x1} simply creates a pair between the 2 variables, when executed inside the macro automatically assigns the expression \texttt{x1} as the next state of \texttt{x0}.
+
+\subsection*{Default labels}
+In special cases, expressions are automatically given default labels that follow common math notation. This list include:
+
+\begin{itemize}
+    \item \textbf{Transpose}: A transposed variable is labeled by appending an asterisk.
+    For example, given a vector expression \texttt{x}, its transpose \texttt{x'} is labeled \texttt{x\textsuperscript{*}}.
+
+    \item \textbf{Gradient}: A gradient is labeled using the nabla symbol. For example, given a DifferentiableFunctional Oracle \texttt{f}, its gradient \texttt{f'}  is labeled \texttt{$\nabla$ f}
+
+    % \item \textbf{Hessian}: A second-order derivative (Hessian) is labeled with a squared nabla. A gradient is labeled using the nabla symbol. For example, given a TwiceDifferentiableFunctional Oracle \texttt{f}, its Hessian \texttt{f''} is labeled \texttt{$\nabla^2$ f}
+
+    \item \textbf{Abstract Operator Application}: An abstract operator applied to an expression is labeled with parenthesis similar to mathematical notation of a function. For example, if a DifferentiableFunctional Oracle \texttt{f} is sampled at vector expression \texttt{x0}, the resulting expression is labeled \texttt{f(x0)}
+
+    % \item \textbf{Constant Map}: A Constant Map operator which maps any expression of a field to a unique element simply uses the Constant Map's label for any result we get from sampling it. For example, given a Constant Map \texttt{$\Sigma$} is sampled at vector expression \texttt{x0}, the resulting expression is labeled \texttt{$\Sigma$}.
+
+    \item \textbf{Inner Product}: An inner product between a 2 expressions is displayed using angled brackets. For example, the inner product of vector expressions \texttt{x0} and \texttt{x1} is labeled \texttt{<x0, x1>}
+    
+	\item \textbf{Squared norm}: An inner product between an expression and itself is displayed following squared norm math notation. For example, the square norm of vector expression \texttt{x0} is labeled \texttt{|x0|$^2$}
+	
+	\item \textbf{Oracle description}: Any created oracle is given a description based on its type, which is displayed when the oracle is accessed in the terminal.
+	
 \begin{figure}[!h]
 	\begin{lstlisting}[mathescape]
-@show(f'(x0))
-(f')(x0) = $\nabla $f(x0)
+f = DifferentiableFunctional{R$^n$}()
+f $\in$ SmoothStronglyConvex(1, 10)
+end
 
-Vector in R$^n$
-Label: $\nabla $f(x0)
-Oracles: $\nabla $f
-Associations: Dual => $\nabla $f(x0)$^*$
-	\end{lstlisting}
-	\caption{Example of a labeled oracle}
-	\label{ex_labeled}
+@show f
+
+Oracle
+	Description: Differentiable functional on R$^n$
+	Label: f
+	Properties: 10-smooth, 1-strongly convex
+	Associations: Gradient => $\nabla$f
+\end{lstlisting}
+\caption{Example of an oracle's description}
+\label{ex_description}
 \end{figure}
 
-\section{Constraints}
+\end{itemize}
+
+\subsection*{Hash-based ordering}
+The ordering of vector inner products can result in variables with different labels that represent the same objects. For example, expressions labeled \texttt{<y0, x0>} and \texttt{<x0, y0>} are both created by taking the inner product of \texttt{x0} and \texttt{y0} but is not understood by the package as the same expression. Since this affects the robustness and accuracy of the analysis, a function is used to enforce a standard ordering based on hashing: it determines the order of the inner product operation by comparing each expression's hash, ensuring the inner products between any two vector expressions are consistently ordered.
+
+\begin{figure}[!h]
+	\begin{lstlisting}[mathescape]
+inner0 = x0'*y0
+inner1 = y0'*x0
+@show(inner0)
+
+Scalar in R
+	Label: <y0,x0>
+	Oracles: x0$^*$
+
+@show(inner1)
+
+Scalar in R
+	Label: <y0,x0>
+	Oracles: x0$^*$
+
+	\end{lstlisting}
+	\caption{Example of consistent inner product labelling order}
+	\label{ex_hashorder}
+\end{figure}
+
+\section{Constraints} \label{sec_constraints}
 During the analysis process, constraints are created by interpolation conditions in section 3.2, as well as when the user defines constraints on the iterative algorithm being analyzed. In order to keep track of these constraints while keeping the process of defining them simple, the program uses data structures that include the scalar expression being constrained, and the constraint which define the expression to be in a cone. The list of constraints supported include:
 
 \begin{description}
@@ -295,7 +545,8 @@ Constraints upon being defined are added to the \texttt{constraints} field of ea
 
 \begin{figure}[h]
 	\begin{lstlisting}[mathescape]
-	@algorithm (x0-xs)^2 <= 1
+@algorithm (x0-xs)^2 <= 1
+0 $\leq$ 1 - |xs|$^2$ + 2 <x0,xs> - |x0|$^2$
 	\end{lstlisting}
 	\caption{Example of user added constraint}
 	\label{ex_user_constraints}
@@ -314,24 +565,27 @@ Analysis of an algorithm's performance optimizing a function is itself an optimi
 \end{description}
 
 Suppose we have a trivial optimization problem: minimize $x + y$, subject to $x \geq 3$ and $y \geq 4$. It can easily be found the minimum value of $x + y$ is $7$. Figure~\ref{ex_jump1} shows how JuMP can optimize the problem.
+
 \begin{figure}[ht]
 	\begin{lstlisting}[mathescape]
-	model = JuMP.Model(SCS.Optimizer)
-	JuMP.set_silent(model)
-	JuMP.@variable(model, x)
-	JuMP.@variable(model, y)
-	JuMP.@constraint(model, x $\geq$ 3)
-	JuMP.@constraint(model, y $\geq$ 4)
-	JuMP.@objective(model, Min, x + y)
-	JuMP.optimize!(model)
+model = JuMP.Model(SCS.Optimizer)
+JuMP.set_silent(model)
+JuMP.@variable(model, x)
+JuMP.@variable(model, y)
+JuMP.@constraint(model, x $\geq$ 3)
+JuMP.@constraint(model, y $\geq$ 4)
+JuMP.@objective(model, Min, x + y)
+JuMP.optimize!(model)
 
-	JuMP.objective_value(model)
-	7.000038313789448
+JuMP.objective_value(model)
+7.000038313789448
 	\end{lstlisting}
 	\caption{Example of JuMP minimizing an optimization problem}
 	\label{ex_jump1}
 \end{figure}
+
 However, as discussed in Section~\ref{Lyapunov}, Algorithm Analysis find the performance guarantee by finding whether there exists an optimization varible with which the constraints of the problem are satisfied. To demonstrate this functionality, we can use the model used in Figure~\ref{ex_jump1} with the same constraints on $x$ and $y$, but instead of setting an objective to minimize $x + y$, set a constraint that $x + y = 6$. As there exist no $x$ and $y$ given the constraints applied on them which would satisfy the constraint $x + y = 6$, the optimization problem cannot be solved. Given this problem, JuMP optimizes the problem and return the termination code \texttt{INFEASABLE} to indicate that no solution can be found in Figure~\ref{ex_jump2}.
+
 \begin{figure}[ht]
 	\begin{lstlisting}[mathescape]
 	JuMP.@constraint(model, x + y == 6)

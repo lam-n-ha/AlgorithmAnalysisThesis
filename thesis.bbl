@@ -35,6 +35,11 @@ Sebastian Bock and Martin Weiß.
 \newblock {\em Non-convergence and Limit Cycles in the Adam Optimizer}, page 232–243.
 \newblock Springer International Publishing, 2019.
 
+\bibitem{pesto}
+Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
+\newblock Performance estimation toolbox ({PESTO}): Automated worst-case analysis of first-order optimization methods.
+\newblock In {\em 2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, pages 1278--1283, 2017.
+
 \bibitem{iqc}
 A.~Megretski and A.~Rantzer.
 \newblock System analysis via integral quadratic constraints.
@@ -45,10 +50,10 @@ Bryan Van~Scoy and Laurent Lessard.
 \newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
 \newblock In {\em IEEE Conference on Decision and Control}, 2023.
 
-\bibitem{pesto}
-Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
-\newblock Performance estimation toolbox ({PESTO}): Automated worst-case analysis of first-order optimization methods.
-\newblock In {\em 2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, pages 1278--1283, 2017.
+\bibitem{primaldual}
+Bryan Van~Scoy, John~W. Simpson-Porco, and Laurent Lessard.
+\newblock Automated {L}yapunov analysis of primal-dual optimization algorithms: {A}n interpolation approach.
+\newblock In {\em IEEE Conference on Decision and Control}, 2023.
 
 \bibitem{jump}
 Miles Lubin, Oscar Dowson, Joaquim {Dias Garcia}, Joey Huchette, Beno{\^i}t Legat, and Juan~Pablo Vielma.
@@ -57,5 +62,10 @@ Miles Lubin, Oscar Dowson, Joaquim {Dias Garcia}, Joey Huchette, Beno{\^i}t Lega
 \bibitem{SCS}
 Brendan O'Donoghue, Eric Chu, Neal Parikh, and Stephen Boyd.
 \newblock Conic optimization via operator splitting and homogeneous self-dual embedding, June 2016.
+
+\bibitem{TMM}
+Bryan Van~Scoy, Randy~A. Freeman, and Kevin~M. Lynch.
+\newblock The fastest known globally convergent first-order method for minimizing strongly convex functions.
+\newblock {\em IEEE Control Systems Letters}, 2(1):49--54, 2018.
 
 \end{thebibliography}

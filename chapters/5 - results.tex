@@ -1,20 +1,76 @@
 \chapter{Analysis Process and Result}\label{chapter:result}
 
-The Lyapunov function approach require 2 components which forms the semidefinite problem described in \Cref{chapter:lyapunov} to produce a worst-case performance convergence rate: the state update matrices and the constraints formed by the interpolation conditions. These components are derived from the input provided to the program which undergo transformations before they can be used to create an optimization problem in the JuMP modelling language, the process of which can be described in 3 steps:
+As descriped in \Cref{chapter:lyapunov} The Lyapunov function approach certifies whether a given convergence rate can hold given the input by finding a Lyapunov function that both bounds the performance measure and converging to a minimum at a given rate, while taking into account the constraints created by the interpolation conditions or the user. This problem is turned into an optimization problem, the feasibility of which proves that a convergence rate can be guaranteed. The analysis process takes place in 4 steps:
+
 \begin{enumerate}
-    \item The Algorithm Analysis program automatically uses the input provided to form a systematic charaterization the analysis problem using data structures described in \Cref{chapter:code}, including how the algorithm being analyzed updates, the constraints created by the interpolation conditions of the class of function and the performance measure.
-    \item These data structures are converted to real number vectors and matrices that represent the updated state of the algorithm and each algorithm in the form of the a linear function of the initial states and inputs.
-    \item An optimization problem is created inside a JuMP model using these representations and solved to verify whether a certain convergence rate is feasible for a given problem. This process is repeated with different convergence rates as the program search for the lowest feasible convergence rate.
+    \item The user's input necessary for to certify a convergence rate --- the algorithm, the constraints and the performance measure --- is collected automatically to form a systematic charaterization the analysis problem, using the code structures described in \Cref{chapter:code}. This characterization includes using the state information to determine how the algorithm being analyzed updates, creating constraints on interpolated points based on the interpolation conditions of the oracles' properties.
+    \item These data structures are converted to real number vectors and matrices in the form of the a linear function of the initial states and inputs. These variables represents the algorithm's initial and updated states as well as the constraints created.
+    \item An optimization problem is created using the representations created in the last step inside a JuMP model. The problem of finding a Lyapunov function is transformed into finding the optimial with which the problem is feasible, which proves whether a certain convergence rate is feasible for a given problem.
+    \item The above 3 steps are repeated with different convergence rates as the program search for the smallest feasible convergence rate using bisection search.
 \end{enumerate}
 
 This chapter details the analysis process of analyzing gradient descent's performance at optimizing any $1$-$10$ sector bounded function as shown in Figure~\ref{ex_analysis}, including how these steps presented in \Cref{chapter:lyapunov} are performed and how the optmization problem is formed and solved to derive worst-case performancce convergence rate.
 
-\subsection*{Real scalars and linear form}
+\section{Analysis problem formulation} \label{sec_collect}
+
+Once the user has given the package the necessary input to perform analysis, they can call the \texttt{rate} function on the performance measure to begin analysis. The package begins the analysis automatically finding every variables that is part of the analysis problem using a recursive function.
+
+This process start with the system creating a set of expressions present in the performace measure, a set of their associated oracles, and a list of constraints associated with found expressions and oracles. The original set of expression is then appended with expressions present in the constraints or sampled with the oracles, and the process is repeated until no new variable is found. Figure \ref*{ex_collect} shows how every expression, constraint, and oracle are collected 
+
+\begin{figure}[h!]
+    \begin{lstlisting}[mathescape]
+vars, cons, orcs = variables_constraints_oracles(performance)
+
+@show vars
+Set{Expression} with 11 elements:
+  <$\nabla$f(x0),xs>
+  f(x0)
+  |$\nabla$f(x0)|$^2$
+  |xs|$^2$
+  <x0,xs>
+  |x0|$^2$
+  f(xs)
+  $\nabla$f(x0)
+  <$\nabla$f(x0),x0>
+  xs
+  x0
+\end{lstlisting}
+\caption{Collected expressions, oracles, and constraints (part 1)}
+\label{ex_collect}
+\end{figure}
+
+\begin{figure}[H]
+\ContinuedFloat
+\begin{lstlisting}[mathescape]
+@show cons
+Set of constraints with 3 elements:
+  0 $\preceq$ Gram matrix of vector R$^n$[$\nabla$f(x0), xs, x0]
+  0 $\leq$ -0.1 <$\nabla$f(x0),xs> - 0.9 f(xs) + 0.9 f(x0) - 0.05 |$\nabla$f(x0)|$^2$ + <x0,xs> + 0.1 <$\nabla$f(x0),x0> - 0.5 |xs|$^2$ - 0.5 |x0|$^2$
+  0 $\leq$ -<$\nabla$f(x0),xs> + 0.9 f(xs) - 0.9 f(x0) - 0.05 |$\nabla$f(x0)|$^2$ - 0.5 |xs|$^2$ + <x0,xs> + <$\nabla$f(x0),x0> - 0.5 |x0|$^2$
+
+@show orcs
+Set{Oracle} with 5 elements:
+  x0*
+  $\nabla$f(x0)*
+  $\nabla$f
+  f
+  xs*
+\end{lstlisting}    
+\caption{Collected expressions, oracles, and constraints (part 2)}
+\label{ex_collect}
+\end{figure}
+
+\subsection*{Pruning Gram matrix constraints}
+Due to how the package uses a recursive function to create the Gram matrix constraints which interpolate the inner product expressions present in the analysis problem, it in some cases creates more Gram matrix constraints than intended. These constraints are applied on Gram matrices that are the outer product of vectors of expressions which are a subset of or equal to the the vector of expressions whose outer product we wish to apply a constraint on. This makes the additional constraints redundant as they are automatically satisfied as long as the constraint on the Gram matrix containing every interpolated inner product expressions is satisfied.
+
+But while they do not affect accuracy of the result, the redundant constraints introduce more complexity to the analysis process and slowing it down. To prevent this therefore the package prune the list of constraints to remove any redundant constraints on Gram matrix.
+
+\section{Linear form transformation} \label{sec_linearform}
 
 % In JuPE, when variable expressions are defined in an inner product space, they are vector. These expressions include states of an algorithm, the starting and end points, and the gradient of a function at a point. This is because a function class is multidimensional, which means each point or iterate is a vector whose size is identical to the dimension of the function. 
 
 % All three components needed to form the linear matrix inequality - the Lyapunov functions $V(x_k)$ and $V(x_{k+1})$ and the left hand side of each constraint - from equations \ref{eqn:int_cond2}, \ref{eqn:Ly_ineq} and \ref{eqn:Ly_ineq2} are functions linear in the elements of the Gram matrix and optimization variables. On the other hand, the JuMP modeling language does not support the expression and constraint data structures presented in chapter 4, and the LMIs of \ref{Ly_ineq2} must be transformed into a function linear in the optimization variables and real numbers before it can be formed inside the JuMP model. 
-As specified in \ref{Lyapunov}, the linear matrix inequalities are constructed from the linear form of the Lyapunov functions and the constraints as a function of the vector $[x; u]$. This process is done in three steps, which are:
+As specified in \cref{Lyapunov}, the linear matrix inequalities are constructed from the linear form of the Lyapunov functions and the constraints as a function of the vector $[x; u]$ that represents initial states and inputs. This process is done in three steps, which are:
 \begin{enumerate}
     \item Of every expressions that has been created during the input process, define the initial state vector \texttt{x} as every real expressions which contain another expression in its next field.
 \begin{figure}[h!]
@@ -24,81 +80,107 @@ x  = collect(v for v $\in $ vars if !ismissing(next(v)) && v isa R)
     |x0|$^2$
     |xs|$^2$
     <x0,xs>
-    <xs,x0>
+    f(xs)
 \end{lstlisting}
-\caption{Initial state real scalar expressions from example \ref{ex_analysis}}
+\caption{Initial state real scalar expressions}
 \label{ex_initstate}
 \end{figure}
 
-    \item Define an update state vector x$^+$ consisting of the next expression of every expression in the initial state. The input vector u is then defined as every real expression that exist in the decomposition of the updated state expressions but not in the initial state expressions.
+    \item The input vector u is then defined as every real expression that does not have a next state.
     \begin{figure}[h!]
         \begin{lstlisting}[mathescape]    
+u  = collect(v for v $\in$ vars if ismissing(next(v)) && v isa R)
+4-element Vector{Expression}:
+    <$\nabla $f(x0),xs>
+    <$\nabla $f(x0),x0>
+    |$\nabla $f(x0)|$^2$
+    f(x0)
+        \end{lstlisting}    
+    \caption{Updated state and input real scalar expressions}
+    \label{ex_updatedstate_input}
+    \end{figure}
+    \item The initial state and input vector \texttt{[x; u]} is the code equivalent of $\bmat{x & u}^\tp$ and can be multiplied with a matrix of real number to create every expressions required to form the linear matrix inequality. The transformation of a decomposition expression of Gram matrix expression into such real number matrix will be refered to as the linear form of an expression and is crucial to creating the semidefiinite problem in JuMP.
+\end{enumerate}
+
+\begin{figure}[h!]
+    \begin{lstlisting}[mathescape] 
+linear_form = (linearform([x; u] => x0^2 - 3*(x0'*xs)))
+
+@show linear_form
+
+1x8 Matrix{Int64}:
+ 0  -3  1  0  0  0  0  0
+
+@show linear_form*[x; u]
+
+Scalar in R
+  Decomposition: -3 <x0,xs> + |x0|$^2$
+\end{lstlisting}    
+\caption{Example of linear form of a scalar expression}
+\label{ex_linearform}
+\end{figure}
+
+The package now transform the necessary input into its linear form in preparation for the final step of formulating an optimization problem in JuMP
+
+\section{Formulating optimization problem}
+
+\subsection*{Performance measure}
+The linear form matrix of the performance measure is the first of the three components needed to form the Lyapunov function in \eqref{eqn:Ly_ineq}, we used $\|x_k - x_s\|^2$. For example, the performance measure in \cref{ex_analysis}, which is defined as \texttt{(x0-xs)$^2$} and which evaluates into \texttt{|x0|$^2$ - <xs, x0> - <x0, xs> + |xs|$^2$}, has the linear form presented in \cref{ex_linearform2}.
+
+\begin{figure}[h!]
+\begin{lstlisting}[mathescape]
+$\mathcal{P} $ = vec(linearform( [x; u] => performance ))
+print($\mathcal{P}$)
+[-1, -2, 1, 0, 0, 0, 0, 0, 0]
+\end{lstlisting}
+\caption{Linear form matrix of expression \texttt{(x0-xs)$^2$}}
+\label{ex_linearform2}
+\end{figure}
+
+\subsection*{Lyapunov function formulation}
+
+The user when defining the algorithm to be analyzed start by first defining an initial state, and it is updated using the gradient of the function taken at some point. In Figure \ref*{ex_analysis} the initial and updated states are \texttt{x0} and \texttt{x1} respectively.
+
+The Lyapunov functions can then be formed according to equations \eqref{eqn:Vx}. This is done by the package by first separating every real scalar expressions, which mean inner product and function value expressions and exclude state vector expressions, into an initial state and an updated state by making the distinction between real expressions that have a next state and those that do not.
+
+In order to perform linear form transformations in \cref{sec_linearform}, we have already defined \texttt{x} as the initial state: every real scalar expressions with a next expression. We can then define the updated state \texttt{x$^+$} consisting of the next expression of every expression in the initial state. 
+
+\begin{figure}[h!]
+    \begin{lstlisting}[mathescape]
 x$^+$ = next(x)
 4-element Vector{R}:
     <x0,xs> - 0.18181818181818182 <$\nabla $f(x0),xs>
     -0.18181818181818182 <$\nabla $f(x0),x0> + 0.03305785123966942 |$\nabla $f(x0)|$^2$ - 0.18181818181818182 <x0,$\nabla $f(x0)> + |x0|$^2$
     -0.18181818181818182 <xs,$\nabla $f(x0)> + <xs,x0>
     |xs|$^2$
-
-u  = collect(setdiff(variables(x$^+$), variables(x)))
-5-element Vector{Expression}:
-    <xs,$\nabla $f(x0)>
-    <x0,$\nabla $f(x0)>
-    <$\nabla $f(x0),xs>
-    <$\nabla $f(x0),x0>
-    |$\nabla $f(x0)|$^2$
-        \end{lstlisting}    
-    \caption{Updated state and input real scalar expressions from example \ref{ex_analysis}}
-    \label{ex_updatedstate_input}
-    \end{figure}
-    \item The initial state and input vector \texttt{[x; u]} is the code equivalent of $\bmat{x & u}^\tp$ and can form every expressions required to form the linear matrix inequality. This transformation, which will be refered to as the linear form of an expression, can be derived by finding the values of each expression in the vector \texttt{[x; u]} present in the expression's decomposition dictionary.
-\end{enumerate}
-
-\begin{figure}[h!]
-    \begin{lstlisting}[mathescape] 
-linear_form = vec(linearform([x; u] => x0^2 - 3*(x0'*xs)))
-linear_form'*[x; u]
-Scalar in R
-  Decomposition: -3 <xs,x0> + |x0|$^2$
-\end{lstlisting}    
-\caption{Example of linear form of a scalar expression \ref{ex_analysis}}
-\label{ex_linearform}
-\end{figure}
-
-\section{Performance measure}
-The linear form matrix of the performance measure is the first of the three components needed to form the Lyapunov function ($\|x_k - x_s\|^2$ in \eqref{eqn:Ly_ineq}). For example, the performance measure in \ref{ex_analysis}, which is defined as $(x0-xs)^2$ and which evaluates into $|x0|^2 - <xs, x0> - <x0, xs> + |xs|^2$, has the linear form presented in Figure~\ref{ex_linearform2}.
-\begin{figure}[h!]
-\begin{lstlisting}[mathescape]
-$\mathcal{P} $ = vec(linearform( [x; u] => performance ))
-print($\mathcal{P}$)
-[-1, -1, 1, 1, 0, 0, 0, 0, 0]
 \end{lstlisting}
-\caption{Linear form matrix of expression $(x0-xs)^2$}
-\label{ex_linearform2}
+\caption{Updated state \texttt{x$^+$} real scalar expression}
+\label{ex_nextstate}
 \end{figure}
 
-\section{Algorithm, state update and Lyapunov function formulation}
+It is worth noting that while the gradient descent algorithm updates using only one state and evaluate the gradient at that state, if an algorithm updates using multiple state vectors or the gradient at an interpolated point consisting of multiple state vectors, such is the case in the Fast-gradient and Heavy-ball algorithms, these vectors will also have to be defined. The resulting additional expressions will still be collected in the step detailed in \cref{sec_collect} and successfully separated due to the automatic next state assignment detailed in section \cref{states}.
+
 % \subsection*{State space matrix and their linear form formulation}
-As shown in Figure~\ref{ex_analysis} and in section \ref{states}, the algorithm to be analyzed is provided as input first by defining an initial state and how the next state is updated from the initial state. The initial state is defined to be a vector in an inner product space, and the updated state is a linear function of one or multiple initial state and the gradient of the function evaluated at some point. While the gradient descent algorithm updates using only one state and evaluate the gradient at the previous state, if an algorithm updates using multiple past states or the gradient at an interpolated point, these vectors will also have to be defined. The forming of the algorithm can then be completed by defining the relationship between states and their next states using the \texttt{=>} operation, which updates the next field of every expression in the decomposition of which there is the state on the left hand side of the operation. For example, in Figure~\ref{ex_analysis}, the state vector \texttt{x1} is defined as a function of the state vector \texttt{x0} and as the next state of \texttt{x0}, while the next state of the stationary point \texttt{xs} is itself. This not only means the \texttt{next} field of \texttt{x0} and \texttt{xs} are \texttt{x1} and \texttt{xs} respectively, but also next state of any every expression derived from the norm, inner product, or algebraic calculation of which \texttt{x0} is a part is that calculation done with \texttt{x1} instead. In this example, as shown in Figure~\ref{ex_next}, the next state of the inner product of $x_0$ and $x_s$ denoted as \texttt{next(x0'*xs)} is the inner product of $x_1$ and $x_s$ \texttt{x1'*xs}. This enables the operation in Figure~\ref{ex_linearform_next_state} and allow any updated iterate to be automatically expressed a linear function of the intial states and inputs.
-\begin{figure}[h!]
-	\begin{lstlisting}[mathescape]
-next(x0)
+% When using the package, the algorithm to be analyzed is provided as input first by defining an initial state and how the next state is updated using the initial state and the gradient. The initial state is defined to be a vector in an inner product space, and the updated state is a linear function of one or multiple initial state and the gradient of the function evaluated at some point. While the gradient descent algorithm updates using only one state and evaluate the gradient at the previous state, if an algorithm updates using multiple past states or the gradient at an interpolated point, these vectors will also have to be defined. The forming of the algorithm can then be completed by defining the relationship between states and their next states using the \texttt{=>} operation, which updates the next field of every expression in the decomposition of which there is the state on the left hand side of the operation. For example, in Figure~\ref{ex_analysis}, the state vector \texttt{x1} is defined as a function of the state vector \texttt{x0} and as the next state of \texttt{x0}, while the next state of the stationary point \texttt{xs} is itself. This not only means the \texttt{next} field of \texttt{x0} and \texttt{xs} are \texttt{x1} and \texttt{xs} respectively, but also next state of any every expression derived from the norm, inner product, or algebraic calculation of which \texttt{x0} is a part is that calculation done with \texttt{x1} instead. In this example, as shown in Figure~\ref{ex_next}, the next state of the inner product of $x_0$ and $x_s$ denoted as \texttt{next(x0'*xs)} is the inner product of $x_1$ and $x_s$ \texttt{x1'*xs}. This enables the operation in Figure~\ref{ex_linearform_next_state} and allow any updated iterate to be automatically expressed a linear function of the intial states and inputs.
+% \begin{figure}[h!]
+% 	\begin{lstlisting}[mathescape]
+% next(x0)
 
-Vector in R$^n$
-  Label: x1
-  Decomposition: -0.18181818181818182 $\nabla $f(x0) + x0
-  Associations: Dual => x1*
+% Vector in R$^n$
+%   Label: x1
+%   Decomposition: -0.18181818181818182 $\nabla $f(x0) + x0
+%   Associations: Dual => x1*
 
-next(x0'*xs)
+% next(x0'*xs)
 
-  Scalar in R
-    Decomposition: -0.18181818181818182 <xs,$ \nabla $f(x0)> + <xs,x0>
-\end{lstlisting}
-\caption{\texttt{next} field of state a vector expression and a scalar formed from a state expression}
-\label{ex_next}
-\end{figure}
+%   Scalar in R
+%     Decomposition: -0.18181818181818182 <xs,$ \nabla $f(x0)> + <xs,x0>
+% \end{lstlisting}
+% \caption{\texttt{next} field of state a vector expression and a scalar formed from a state expression}
+% \label{ex_next}
+% \end{figure}
 
-As the initial state vector is defined in Figure~\ref{ex_initstate} and the updated state vectors in Figure~\ref{ex_updatedstate_input}, their linear form matrices is the second of the three components needed to formulate the Lyapunov function and can be formed as shown in Figure~\ref{ex_linearform_state} and Figure~\ref{ex_linearform_next_state}.
+The initial state real expressions \texttt{x} defined in \cref{ex_initstate} and the updated state real expressions \texttt{x$^+$} defined in \cref{ex_nextstate}, is then transformed into their linear form matrices. This is the second of the three components needed to formulate the Lyapunov function and is shown in \cref{ex_linearform_initstate} and \cref{ex_linearform_nextstate}.
 
 \begin{figure}[h!]
     \begin{lstlisting}[mathescape]
@@ -110,7 +192,7 @@ X  = linearform([x; u] => x)
     0  0  0  1  0  0  0  0  0    
     \end{lstlisting}
     \caption{Linear form state matrix x}
-    \label{ex_linearform_state}
+    \label{ex_linearform_initstate}
 \end{figure}
 \begin{figure}[h!]
     \begin{lstlisting}[mathescape]
@@ -122,22 +204,33 @@ X$^+$ = linearform([x; u] => x$^+$)
 0  0  0  1   0        0        0        0         0
 \end{lstlisting}
 \caption{Linear form state matrix x$^+$}
-\label{ex_linearform_next_state}
+\label{ex_linearform_nextstate}
 \end{figure}
 % \subsection*{State space in Lyapunov function}
-Following the steps presented in chapter 3, the Lyapunov function can begin to be formed by first defining an optimization variable $P$ in the JuMP model as a JuMP variable. Once JuMP and the solver start optimizing the problem, P is one of the variable that will be optimized to produce a solution. The Lyapunov functions are then created following \eqref{eqn:Ly_ineq} but with code variables as:
+Following the steps presented in \eqref{eqn:Ly_ineq} and \eqref{eqn:Vx} of \cref{chapter:lyapunov}, the Lyapunov function can be formed by first defining an optimization variable $P$ in the JuMP model as a JuMP variable. Once JuMP and the solver start optimizing the problem, P is one of the variable that will be optimized to produce a solution. The code that create the JuMP model and the formulation of the Lyapunov functions is presented in Figure \ref*{ex_lycode}.
 
-\begin{subequations} \label{eqn:Ly_ineq3}
-	\begin{align}
-	    L1 = \mathcal{P} - X^\tp P     \\
-        L2 = X^{+\tp} P - \rho X^\tp P
-	\end{align}
-\end{subequations}
+\begin{figure}[h!]
+    \begin{lstlisting}[mathescape]
+# Create the JuMP model
+model = JuMP.Model(SCS.Optimizer) 
+JuMP.set_silent(model)
+# Create Optimization variables
+JuMP.@variable(model, P[1:length(x)]) 
+# Create Lyapunov functions
+V = X'*P
+V$^+$ = X$^+$'*P
+L1 = $\mathcal{P}$ - V
+L2 = V$^+$ - $\rho$$^2$*V
+\end{lstlisting}
+\caption{Linear form state matrix x}
+\label{ex_lycode}
+\end{figure}
 
 \section{Constraints}
-As presented in \ref{oracles}, the oracle created from the class of function and the transpose of each expression automatically forms the interpolation condition and Gram matrix constraints. These constraints are linearized and added to the optimization in 2 steps:
+
+As presented in \ref{sec_constraints}, constraints are created from sampled oracles' interpolation condition are expressions constrained to be in a cone. These constraints are linearized and added to the optimization in 2 steps:
 \begin{description}
-    \item [Optimization variable multipliers] For each constraint $i \in$, two optimization variables $\lambda_i$ and $\mu_i$, which represent $\Lambda^1_i$ and $\Lambda^2_i$ in \Cref{chapter:lyapunov} are defined as JuMP variables. If the constraint is applied to the Gram matrix, the optimization variable will be a matrix sharing the same size with the matrix constrained. Otherwise, if the constraint is created from the interpolation conditions of the class of function and is applied to a single real scalar expression, the optimization problem created will have a size of 1.
+    \item [Optimization variable multipliers] For each constraint $i$, two optimization variables $\lambda_i$ and $\mu_i$, which represent $\Lambda^1_i$ and $\Lambda^2_i$ in \Cref{chapter:lyapunov} are defined as JuMP variables. If the constraint is applied to the Gram matrix, the optimization variable will be a matrix sharing the same size with the matrix constrained. Otherwise, if the constraint is created from the interpolation conditions of the class of function and is applied to a single real scalar expression, the optimization problem created will have a size of 1.
     \item [Constraint on multiplier] The JuMP variables multipliers are constrained in the JuMP model depending on the constraint expression they were created for: The multiplier is not constrained if the expression is constrained to be zero, constrained to be non-negative if the expression is constrained to be non-negative, and constrained to be symmetrical and in the JuMP supported positive semidefinite cone if the expression is constrained to be positive semidefinite.
     \item [Linear form of constraints] The linear form of each constraint scaled by the multiplier is created and added to the Lyapunov functions.
 \end{description}
@@ -163,12 +256,12 @@ If the expression constrained and its corresponding multiplier are vectors of ex
 And if the expression constrained and its corresponding multiplier are matrices, the linear form of the constraint is the linear form of the trace of the matrix multiplication between the multiplier and the constraint expression. For the Gram matrix in \eqref{eqn:trans_cond} which is constrained to be positive semidefinite, its linear form would be:
 
 \begin{equation} \label{eqn:trans_cond}
-	tr(\lambda \bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2]}) \geq 0	
+	tr(\lambda \bmat{||x0||^2 & \innerproduct{xs}{x0} & \innerproduct{\nabla f(x0)}{x0} \\ \innerproduct{x0}{xs} & ||xs||^2 & \innerproduct{\nabla f(x0)}{xs} \\ \innerproduct{x0}{\nabla f(x0)} & \innerproduct{xs}{\nabla f(x0)} & ||\nabla f(x0)||^2}) \geq 0	
 \end{equation}
 
 Where $\lambda $ is a 3x3 JuMP variable. In all three cases, for each constraints, 2 identical linear form matrices are created, one scaled by \texttt{$\lambda$} and added to the first Lyapunov function and the other by \texttt{$\mu$} and added to the second Lyapunov function. This completes the final linear matrix inequalities as defined in \eqref{eqn:LMI1}.
 
 \section{Derived feasibility and bisection search}
-Upon the completion of the linear matrix inequalities, the solver of the JuMP model is called to optimize the problem and find the variables \texttt{$P$}, \texttt{$\lambda$}s and \texttt{$\mu$}s for which the linear matrix inequality is satisfied and a convergence rate $\rho$ can be guaranteed.
+Upon the completion of the linear matrix inequalities, the solver of the JuMP model is called to optimize the problem and find the variables \texttt{$P$}, \texttt{$\lambda$}-s and \texttt{$\mu$}-s for which the linear matrix inequality is satisfied and a convergence rate $\rho$ can be guaranteed.
 
-Using the definition of the convergence rate in \eqref{eqn:convergence_rate}, a \texttt{$\rho$} value of 1 means the algorithm cannot be guaranteed to converge and a convergence rate of 0 means the algorithm is guaranteed to converge after a single iterate. In order to find the worst-case performance rate, the program performs bisection search, also known as binary search, for the smallest value $\rho$ between 0 and 1 that makes the optimization problem feasible, calling a function to perform the steps presented in this chapter for each value \texttt{$\rho$} and checking feasibility at each iterate of the search. The smallest value \texttt{$\rho$} found within a tolerance of $10^{-5}$ is returned as the guaranteed convergence rate, and the analysis process is complete.
+Using the definition of the convergence rate in \eqref{eqn:convergence_rate}, a \texttt{$\rho$} value of 1 means the algorithm cannot be guaranteed to converge and a convergence rate of 0 means the algorithm is guaranteed to converge after a finite number of iterations. In order to find the worst-case performance rate, the program performs bisection search, also known as binary search, for the smallest value $\rho$ between 0 and 1 that makes the optimization problem feasible, calling a function to perform the steps presented in this chapter for each value \texttt{$\rho$} and checking feasibility at each iterate of the search. The smallest value \texttt{$\rho$} found within a tolerance of $10^{-5}$ is returned as the guaranteed convergence rate, and the analysis process is complete.

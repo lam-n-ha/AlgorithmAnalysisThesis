@@ -1,62 +1,181 @@
 \chapter{Results and Future Work}\label{chapter:Conclusion}
-\section{Result}
-In the case of the gradient descent algorithm, the interpolation conditons for $m$-$L$ sector bounded functions and $m$-strong $L$-smooth convex functions are the same. Therefore, to see if the \texttt{AlgorithmAnalysis.jl} package is able to analyze the gradient descent algorithm over the $m$-$L$ sector bounded function class, we can plot the rate bound of this case and compare it with the analysis results of the same algorithm and step size but for $m$-strong $L$-smooth convex functions presented in Figure 2 of \cite{tutorial}. In order to produce comparable results, we run the analysis 19 $m$-$L$ value pairs where the condition number $L/m$ varies between 1 and 100. The code used to produce this analysis result is presented in Figure~\ref{ex_tested_result}. The convergence rate guarantee found for each condition number is shown in Figure~\ref{plot_result}.
-\begin{figure}[h!]
-	\begin{lstlisting}[mathescape]
-m, condnum, = 1, [range(1,10,10); range(20,100,9)]
-# condition numbers tested
-GDresults = []
-for L in condnum
-    # Stop if the algorithm doesn't converge
-    if length(GD) > 0 && last(GD) == 1
-        append!(GD, 1)
-    else
-        $\alpha$ = 2/(L+m)
-        @algorithm begin
-            f = DifferentiableFunctional{R$^n$}()
-            xs = first_order_stationary_point(f)
-            f' $\in$ SectorBounded(m, L, xs, f'(xs))
-            x0 = R$^n$()
-            x1 = x0 - $\alpha$*f'(x0)
-            x0 => x1
-            performance = (x0-xs)^2
-        end
-        append!(GD, rate(performance))
-    end
-end
-plot(condnum, [GD], title="", label="GD", xaxis=:log)
-xlabel!("Condition number L/m")
-ylabel!("Convergence rate bound")
-\end{lstlisting}
-\caption{Analysis results for GD and $m$-$L$ sector bounded functions over 19 $L/m$ condition numbers}
-\label{ex_tested_result}
-\end{figure}
-% \begin{code}{julia}{A sample code listing. The method \texttt{rate} performs the automated algorithm analysis by searching for a Lyapunov function that bounds the rate of convergence of the performance measure.}{code:label}
-%     m,L = 1,10                                   # parameters
-%     α = 2/(L+m)                                  # stepsize
-    
-%     @algorithm begin
-%       f = DifferentiableFunctional{Rⁿ}()       # objective function
-%       xs = first_order_stationary_point(f)     # first-order stationary point
-%       f' ∈ SectorBounded(m, L, xs, f'(xs))     # function class
-%       x0 = Rⁿ()                                # initial point
-%       x1 = x0 - α*f'(x0)                       # gradient descent
-%       x0 => x1                                 # state update
-%       performance = (x1-xs)^2                  # performance measure
-%     end
-    
-%     rate(performance)                            # automated algorithm analysis
-%     \end{code}
+
+\section{Numerical result validation}
+
+The \texttt{AlgorithmAnalysis.jl} package has been tested across a range of first-order optimization algorithms over the $m$-strong $L$-smooth convex function class to verify its ability to automatically generate accurate worst-case performance guarantees. In the test cases presented in this section, performance guarantees produced by the package matches to the mathematically produced results in \cite{tutorial}, proving that the package successfully implement Lyapunov-based algorithm analysis.
+
+For every plots in this section, we set the value of $m$ to 1 and sample 12 values of $L$ that are logarithmically spaced between 1 and 100, using a base-10 scale. This ensures uniform coverage across orders of magnitude, capturing both small and large condition numbers with equal density in log space. The convergence rate produced by the package is plotted it on the y-axis, while the x-axis plots the condition number $L/m$ of the tested $(m,L)$ values.
+
+\subsection*{Gradient descent}
+
+Continuing the example in Figure \ref*{ex_analysis}, we plot the package's derived worst-case convergence rate guarantee of the gradient descent algorithm with step size $\alpha = 2/(L+m)$ at optimizing 12 different $m$-strong $L$-smooth convex function classes, using the 12 sampled $L$ values. The plot of the result produced is presented in Figure \ref*{gd_results}.
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width = .8 \textwidth]{plot.pdf}
-    \caption{Convergence rate guarantee of gradient descent at optimizing $1-10$ sector bounded functions}
-    \label{plot_result}
+    \includegraphics[width = .9 \textwidth]{gd_results.pdf}
+    \caption{Convergence rate guarantee of gradient descent over sector smooth strongly convex classes}
+    \label{gd_results}
+\end{figure}
+
+We have also tested the same gradient descent algorithm over 12 $(m, L)$ sector-bounded function classes. The code used to find the worst-case convergence rate guarantees of the fast gradient algorithm at optimizing $(m, L)$ sector-bounded function classes is presented in Figure \ref*{gd_sectorbounded_code} and the plot of the result produced is presented in Figure \ref*{gd_sectorbounded_results}. We expect the analysis result to be identical to that of gradient descent over $m$-strong $L$-smooth convex function classes.
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+$\alpha$ = 2/(L+m)
+@algorithm begin
+    f = DifferentiableFunctional{R$^n$}()
+    xs = first_order_stationary_point(f)
+    f' $\in$ SectorBounded(m, L, xs, f'(xs))
+    x0 = R$^n$()
+    x1 = x0 - $\alpha$*f'(x0)
+    x0 => x1
+    performance = (x0-xs)^2
+end
+@show rate(performance)
+\end{lstlisting}
+\caption{Analysis of GD and $m$-$L$ sector bounded functions}
+\label{gd_sectorbounded_code}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = .9 \textwidth]{gd_sectorbounded_results.pdf}
+    \caption{Convergence rate guarantee of gradient descent over sector bounded function classes}
+    \label{gd_sectorbounded_results}
+\end{figure}
+\subsection*{Fast gradient}
+
+We tested the fast gradient algorithm with step sizes $\alpha = 4/(3L + m)$ and $\beta = (\sqrt{3L + 1} - 2)/(\sqrt{3L + 1} + 2)$. The code used to find the worst-case convergence rate guarantees of the fast gradient algorithm at optimizing $m$-strong $L$-smooth convex function classes is presented in Figure \ref*{fg_code} and the produced plot is presented in Figure \ref*{fg_results}.
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+$\alpha$ = 4/(3*L+m); $\beta$=(sqrt(3*L+1)-2)/(sqrt(3*L+1)+2)
+@algorithm begin
+    f = DifferentiableFunctional{R$^n$}()
+    xs = first_order_stationary_point(f)
+    f $\in$ SmoothStronglyConvex(m, L)
+    x0 = R$^n$()
+    x1 = R$^n$()
+    y1 = x1 + $\beta$*(x1 - x0)
+    x2 = y1 - $\alpha$*f'(y1)
+    y2 = x2 + $\beta$*(x2 - x1)
+    x3 = y2 - $\alpha$*f'(y2)
+    x0 => x1
+    x1 => x2
+    x2 => x3
+    performance = (y1-xs)^2
+end
+@show rate(performance)
+\end{lstlisting}
+\caption{Analysis of FG and $m$-smooth $L$-strongly convex functions}
+\label{fg_code}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = .9 \textwidth]{fg_results.pdf}
+    \caption{Convergence rate guarantee of fast gradient over smooth strongly convex function classes}
+    \label{fg_results}
+\end{figure}
+
+\subsection*{Heavy ball}
+
+We tested the heavy ball algorithm with the following step sizes:
+\[
+\alpha = \frac{4}{\left( \sqrt{L} + \sqrt{m} \right)^2}, \quad
+\beta = \left( \frac{\sqrt{L/m} - 1}{\sqrt{L/m} + 1} \right)^2.
+\]
+The code used to find the worst-case convergence rate guarantees of the heavy ball algorithm for optimizing $m$-strongly convex and $L$-smooth function classes is presented in Figure~\ref{hb_code}, and the resulting plot is shown in Figure~\ref{hb_results}.
+
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+$\alpha$ = 4/((sqrt(L)+sqrt(m))^2); $\beta$=((sqrt(L/m)-1)/(sqrt(L/m)+1))^2
+@algorithm begin
+    f = DifferentiableFunctional{R$^n$}()
+    xs = first_order_stationary_point(f)
+    f $\in$ SmoothStronglyConvex(m, L)
+    x0 = R$^n$()
+    x1 = R$^n$()
+    x2 = x1 - $\alpha$*f'(x1) + $\beta$*(x1-x0)
+    x3 = x2 - $\alpha$*f'(x2) + $\beta$*(x2-x1)
+    x0 => x1
+    x1 => x2
+    x2 => x3
+    performance = (x0-xs)^2
+end
+@show rate(performance)
+\end{lstlisting}
+\caption{Analysis of HB and $m$-smooth $L$-strongly convex functions}
+\label{hb_code}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = .9 \textwidth]{hb_results.pdf}
+    \caption{Convergence rate guarantee of heavy ball over smooth strongly convex function classes}
+    \label{hb_results}
+\end{figure}
+
+\subsection*{Triple momentum}
+
+We tested the triple momentum algorithm, which was developed by Van Scoy, Freeman, and Lynch in \cite{TMM} to be the fastest known globally convergent first-order algorithm at optimizing strongly convex functions. The algorithm is defined as:
+\begin{equation}\label{eqn:GD}
+    x_{k+1}= (1+\beta)x_{k} - \beta x_{k-1} - \alpha \nabla f((1+\gamma)x_k - \gamma x_{k-1})
+  \end{equation}
+
+The triple momentum algorithm's optimal parameters is determined by the condition number \( k = L/m \) when optimizing $m$-smooth $L$-strongly convex functions. The algorithm's parameters are defined as:
+
+\[
+\begin{aligned}
+\rho &= 1 - \frac{1}{\sqrt{k}}, \\
+\alpha &= \frac{1 + \rho}{L}, \\
+\beta &= \frac{\rho^2}{2 - \rho}, \\
+\gamma &= \frac{\rho^2}{(1 + \rho)(2 - \rho)}, \\
+% \delta &= \frac{\rho^2}{1 - \rho^2}.
+\end{aligned}
+\]
+Under these parameters, it was proven in \cite{TMM} that the performance guarantee matches the function $1-\sqrt{m/L}$, which is also plotted in along side the rates produced by the package in Figure~\ref{tmm_results}. The code used to find the worst-case convergence rate guarantees of the triple momentum algorithm is presented in Figure~\ref{tmm_code}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = .8 \textwidth]{tmm_results.pdf}
+    \caption{Convergence rate guarantee of triple momentum over smooth strongly convex function classes}
+    \label{hb_results}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{lstlisting}[mathescape]
+k = L/m
+rho = 1 - 1/(sqrt(k))
+$\alpha$ = (1 + rho)/L
+$\beta$ = (rho^2)/(2-rho)
+gamma = (rho^2)/((1+rho)*(2-rho))
+delta = (rho^2)/(1-rho^2)
+@algorithm begin
+    f = DifferentiableFunctional{R$^n$}()
+    xs = first_order_stationary_point(f)
+    f $\in$ SmoothStronglyConvex(m, L)
+    x0 = R$^n$()
+    x1 = R$^n$()
+    y1 = (1+gamma)*x1 - gamma*x0
+    x2 = (1+$\beta$)*x1 - $\beta$*x0 - $\alpha$*f'(y1)
+    y2 = (1+gamma)*x2 - gamma*x1
+    x3 = (1+$\beta$)*x2 - $\beta$*x1 - $\alpha$*f'(y2)
+    x0 => x1
+    x1 => x2
+    x2 => x3
+    performance = ((1+delta)*x2 - delta*x1 -xs)^2
+    
+@show rate(performance)
+\end{lstlisting}
+\caption{Analysis of HB and $m$-smooth $L$-strongly convex functions}
+\label{tmm_code}
 \end{figure}
 
 \section{Future work}
-Following this thesis proposal, the future work include finish coding the program. While most to all of the package have been coded, the program is only able to produce result correctly matching the analysis result produced in \cite{tutorial} for the gradient descent algorithm. As a result, the program need to be debugged and tested to ensure it is able to correctly implement the mathematical approach to algorithm analysis and produce accurate results.
 
-Additionally, the program currently does not support ''lifting dimension'', an optional step of the Lyapunov method to algorithm analysis in \cite{tutorial}. Part of the future work of this research work is to implement this step and measure its effect on the tightness of the convergence rate guarantee.
+While the current experimental validations demonstrate that the \texttt{AlgorithmAnalysis.jl} package accurately generates worst-case performance guarantees for several prominent first-order optimization methods, we can explore other other methods to test compatibility. Future work should focus on systematically testing and verifying the package against a wider range of first-order unconstrained optimization algorithms. This extended analysis will further confirm the robustness of the package's implementation of the Lyapunov fucntion-based approach and highlight any potential limitations to be remedied and improved.
 
-A crucial step before the package can be completed and delivered as end-user software and part of the future work of this thesis is the documentation of Algorithm Analysis, which includes writing operating instructions, providinig analysis examples, detailing the package's components, and the steps the program takes to perform algorithm analysis.
+Additionally, the program currently does not support automatic ''lifting dimension'', a step of the Lyapunov method to algorithm analysis in \cite{tutorial}. While the user can manually add a lifting dimension by defining the analyze algorithm using more updates than the required 2. A function which can create these extra updated states, label them, and add them to the analysis process can allow the user to implement lifting dimension having only to enter how many extra updated states they wish to use. The lifting dimension will increase the size of the Lyapunov functions and introduce additional interpolated points and therefore additional constraints. As a result, the optimization problem we are solving to certify a convergence rate will becore more complexto the optimization problem while this research work is to implement this step and measure its effect on the tightness of the convergence rate guarantee.
+

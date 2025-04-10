@@ -2,7 +2,6 @@
 \contentsline {chapter}{List of Figures}{iv}{Doc-Start}%
 \contentsline {chapter}{Dedication}{vii}{chapter*.1}%
 \contentsline {chapter}{Acknowledgements}{viii}{chapter*.2}%
-\contentsline {chapter}{Acronyms}{ix}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introduction to Algorithm Analysis}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Optimization problems and algorithms}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Algorithm analysis}{3}{section.1.2}%
@@ -10,25 +9,27 @@
 \contentsline {section}{\numberline {1.4}Analysis example}{5}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Overview}{7}{section.1.5}%
 \contentsline {chapter}{\numberline {2}Literature Review}{8}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Lyapunov-based approach}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Iterative algorithms as Lur'e problems}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Interpolation condition}{12}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Lyapunov function derivation}{15}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Code Components}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Expressions}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Algebra}{22}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Oracles}{25}{section.4.3}%
-\contentsline {section}{\numberline {4.4}States}{27}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Label macro}{27}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Constraints}{27}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Performance measure}{29}{section.4.7}%
-\contentsline {section}{\numberline {4.8}JuMP modeling language}{29}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Analysis Process and Result}{31}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Performance measure}{33}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Algorithm, state update and Lyapunov function formulation}{33}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Constraints}{35}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Derived feasibility and bisection search}{37}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Results and Future Work}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Result}{38}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future work}{38}{section.6.2}%
-\contentsline {chapter}{References}{41}{section.6.2}%
+\contentsline {chapter}{\numberline {3}Lyapunov-based approach}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Iterative algorithms as Lur'e problems}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Interpolation condition}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Lyapunov function derivation}{16}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Code Components}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Expressions}{22}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Algebra}{24}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Oracles}{27}{section.4.3}%
+\contentsline {section}{\numberline {4.4}States}{30}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Special syntax operations}{30}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Labeling expressions}{32}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Constraints}{34}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Performance measure}{36}{section.4.8}%
+\contentsline {section}{\numberline {4.9}JuMP modeling language}{36}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Analysis Process and Result}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Analysis problem formulation}{39}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Linear form transformation}{41}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Formulating optimization problem}{42}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Constraints}{44}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Derived feasibility and bisection search}{46}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Results and Future Work}{47}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Numerical result validation}{47}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future work}{53}{section.6.2}%
+\contentsline {chapter}{References}{55}{section.6.2}%

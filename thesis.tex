@@ -41,6 +41,9 @@
 \usepackage{svg}
 \usepackage[capposition=bottom]{floatrow}
 \usepackage{subcaption}
+\usepackage{float}
+\usepackage{caption}
+
 % \usepackage{minted}
 % \usepackage[outputdir=build]{minted}
 % \usepackage{textalpha}
@@ -86,7 +89,10 @@
     keywordstyle     = \bfseries\color{blue},
     stringstyle      = \color{black},
     commentstyle     = \color{ForestGreen},
-    showstringspaces = false
+    showstringspaces = false,
+    breaklines       = true,
+    breakatwhitespace=true,
+    postbreak        =\mbox{{$\hookrightarrow$}\space},
 }
 
 \theoremstyle{definition}
@@ -187,7 +193,7 @@
 \input{chapters/acknowledgements}
 
 % acronyms (optional)
-\input{chapters/acronyms}
+% \input{chapters/acronyms}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CHAPTERS

@@ -11,10 +11,10 @@ Algorithm analysis is a field which seeks to mathematically prove the worst-case
 
 In this thesis, the optimization problem considered is in the form of finding the minimum point of a differentiable function:
 \begin{subequations}\label{opt prob}
-  \begin{align}
+  \begin{align*}
     \textrm{minimize} &\quad f(x) \\
     \textrm{subject to} &\quad x \in X
-  \end{align}
+  \end{align*}
 \end{subequations}
 where \(f(x)\) is the optimization function and \(X\) is a constraint set. Here, \(x\) is the input or decision/optimization variable and \(f(x)\) is a measure of how close a solution is to being optimal. Well-known examples of this problem are present in the training large language models (LLMs) such as ChatGPT or the machine learning models that enable self-driving features in automotives. An inegral part of the training process of these models, through which they are created and continuously improved, is the minimizing of loss functions. In this process, a function is used to quantify the dissimilarity between a model's output and the desired values, and the model's parameters are modified iteratively using some algorithm in order to minimize the function and improve the model's performance.
 

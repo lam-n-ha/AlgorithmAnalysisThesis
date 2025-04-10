@@ -157,9 +157,13 @@ for all $i,j\in I$. We can then define $[x; u]$ as the Gram matrix of a set of v
 % \end{equation}
 
 The elements of the Gram matrix are interpolable --- meaning there exists vectors the norm and inner product of which are elements of a Gram matrix --- if and only if the Gram matrix is positive semidefinite and the dimension $n$ of the state vectors to be greater than or equal to the rank of the Gram matrix. Since the problem classes the algorithm being analyzed is abstract, the Lyapunov-based approach makes the assumption that each function in every class has sufficiently large dimension. The other condition on the Gram matrix is applied is similar to those created from interpolation conditions and will also be used to construct the semidefinite problem. The constraint for the Gram matrix associated with \eqref{eqn:int_cond} is:
+% \begin{equation} \label{eqn:trans_cond}
+% 		\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{\nabla f(x_k)}{x_s} \\ \innerproduct{x_k}{\nabla f(x_k)} & \innerproduct{xs}{\nabla f(x_k)} & \|\nabla f(x_k)\|^2} \succcurlyeq 0.
+% 	\end{equation}
+
 \begin{equation} \label{eqn:trans_cond}
-		\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{\nabla f(x_k)}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{\nabla f(x_k)}{x_s} \\ \innerproduct{x_k}{\nabla f(x_k)} & \innerproduct{xs}{\nabla f(x_k)} & \|\nabla f(x_k)\|^2} \succcurlyeq 0.
-	\end{equation}
+	\bmat{\|x_i\|^2 & \innerproduct{x_j}{x_i} & \innerproduct{\nabla f(x_i)}{x_i} & \innerproduct{\nabla f(x_j)}{x_i}\\ \innerproduct{x_i}{x_j} & \|x_j\|^2 & \innerproduct{\nabla f(x_i)}{x_j} & \innerproduct{\nabla f(x_j)}{x_j} \\ \innerproduct{x_i}{\nabla f(x_i)} & \innerproduct{x_j}{\nabla f(x_i)} & \|\nabla f(x_i)\|^2 & \innerproduct{\nabla f(x_j)}{\nabla f(x_i)} \\ \innerproduct{x_i}{\nabla f(x_j)} & \innerproduct{x_j}{\nabla f(x_j)} & \innerproduct{\nabla f(x_i)}{\nabla f(x_j)} & \|\nabla f(x_j)\|^2} \succcurlyeq 0.
+\end{equation}
 
 % which is why we need to assume that the dimension is sufficiently large)}. This constraint is similar to those created from interpolation conditions and will also be used to construct the semidefinite problem.
 
@@ -200,14 +204,14 @@ The Lyapunov functions conditions in their current form cannot be proven, as the
 Here, it can be seen that while these Lyapunov functions that are quadratic in $\mathbf{x_k}$, they are linear in the Gram matrix of the state and input vectors $[x_k, x_s, u_k]$. Define $I_n \in \mathbb{R}^{n \times n}$, the identity matrix with dimension $n$, the same as the dimension of the state vectors, the Lyapunov function can be transformed into:
 % Define $\mathbf{e} = \bmat{1 & 1 & \ldots & 1}^\tp \in \mathbb{R}^n$ where $n$ is the dimension of $x_k$ and $x_s$, then the Lyapunov function inequalities can be transformed into:
 \begin{subequations}  \label{eqn:Vx}
-	\begin{align*}
+	\begin{align}
 		V(\mathbf{x_k}) &= \trace[P(x_k - x_s)(x_k - x_s)^\tp]\\
-					  &= \trace[\bmat{P &-P &0\\-P & P & 0\\0 & 0 & 0}\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{u_k}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{u_k}{x_s} \\ \innerproduct{x_k}{u_k} & \innerproduct{x_s}{u_k} & \|u_k\|^2}]\\
+					  &= \trace[\bmat{P &-P &0\\-P & P & 0\\0 & 0 & 0}\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{u_k}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{u_k}{x_s} \\ \innerproduct{x_k}{u_k} & \innerproduct{x_s}{u_k} & \|u_k\|^2}] \notag \\
 		V(\mathbf{x_{k+1}}) &= \trace[P(x_{k+1} - x_s)(x_{k+1} - x_s)^\tp]\\
-		&= \trace[P(Ax_k + Bu_k - x_s)(Ax_k + Bu_k - x_s)^\tp] \\
-		&= \trace[P\bmat{A & B & -I_n}\bmat{x_k \\ u_k \\ x_s}\bmat{x_k \\ u_k \\ x_s}^\tp\bmat{A & B & -I_n}^\tp]\\
-		&= \trace[\bmat{A & B & -I_n}P\bmat{A & B & -I_n}^\tp\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{u_k}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{u_k}{x_s} \\ \innerproduct{x_k}{u_k} & \innerproduct{x_s}{u_k} & \|u_k\|^2}]
-	\end{align*}
+		&= \trace[P(Ax_k + Bu_k - x_s)(Ax_k + Bu_k - x_s)^\tp]\notag  \\
+		&= \trace[P\bmat{A & B & -I_n}\bmat{x_k \\ u_k \\ x_s}\bmat{x_k \\ u_k \\ x_s}^\tp\bmat{A & B & -I_n}^\tp]\notag \\
+		&= \trace[\bmat{A & B & -I_n}P\bmat{A & B & -I_n}^\tp\bmat{\|x_k\|^2 & \innerproduct{x_s}{x_k} & \innerproduct{u_k}{x_k} \\ \innerproduct{x_k}{x_s} & \|x_s\|^2 & \innerproduct{u_k}{x_s} \\ \innerproduct{x_k}{u_k} & \innerproduct{x_s}{u_k} & \|u_k\|^2}] \notag 
+	\end{align}
 \end{subequations}
 while the performance measure $\|x_k - x_s\|^2$ can be transformed into:
 \begin{equation}
