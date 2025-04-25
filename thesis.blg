@@ -3,44 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: references.bib
-You've used 15 entries,
+Warning--I didn't find a database entry for "PD"
+Warning--empty journal in julia
+Warning--empty journal in primaldualalgo
+You've used 18 entries,
             1791 wiz_defined-function locations,
-            523 strings with 6202 characters,
-and the built_in function-call counts, 3159 in all, are:
-= -- 242
-> -- 171
+            561 strings with 6758 characters,
+and the built_in function-call counts, 4008 in all, are:
+= -- 329
+> -- 197
 < -- 2
-+ -- 62
-- -- 47
-* -- 166
-:= -- 473
-add.period$ -- 38
-call.type$ -- 15
++ -- 72
+- -- 54
+* -- 258
+:= -- 630
+add.period$ -- 52
+call.type$ -- 18
 change.case$ -- 13
 chr.to.int$ -- 0
-cite$ -- 15
-duplicate$ -- 149
-empty$ -- 339
-format.name$ -- 47
-if$ -- 736
+cite$ -- 20
+duplicate$ -- 188
+empty$ -- 404
+format.name$ -- 54
+if$ -- 904
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 10
-newline$ -- 71
-num.names$ -- 15
-pop$ -- 87
+int.to.str$ -- 18
+missing$ -- 19
+newline$ -- 91
+num.names$ -- 20
+pop$ -- 72
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 98
+skip$ -- 96
 stack$ -- 0
-substring$ -- 115
-swap$ -- 48
+substring$ -- 206
+swap$ -- 45
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 22
-width$ -- 17
-write$ -- 143
+warning$ -- 2
+while$ -- 32
+width$ -- 20
+write$ -- 189
+(There were 3 warnings)

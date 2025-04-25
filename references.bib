@@ -1,6 +1,58 @@
-@book{Wright_Recht_2022, place={Cambridge}, title={Optimization for Data Analysis}, publisher={Cambridge University Press}, author={Wright, Stephen J. and Recht, Benjamin}, year={2022}} <div></div>
+@book{Wright_Recht_2022,
+  author    = {Stephen J. Wright and Benjamin Recht},
+  title     = {Optimization for Data Analysis},
+  year      = {2022},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge}
+}
 
-@inproceedings{tutorial,
+@manual{mosek,
+   author = "MOSEK ApS",
+   title = "MOSEK Optimizer API for Julia 11.0.17",
+   year = 2025,
+   url = "https://docs.mosek.com/latest/juliaapi/index.html"
+ }
+
+@article{primaldualalgo,
+author = {Boyd, Stephen and Parikh, Neal and Chu, Eric and Peleato, Borja and Eckstein, Jonathan},
+title = {Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers},
+year = {2011},
+issue_date = {January 2011},
+publisher = {Now Publishers Inc.},
+address = {Hanover, MA, USA},
+volume = {3},
+number = {1},
+issn = {1935-8237},
+url = {https://doi.org/10.1561/2200000016},
+doi = {10.1561/2200000016},
+month = jan,
+pages = {1–122},
+numpages = {122}
+}
+
+@Inbook{FG,
+author="Nesterov, Yurii",
+title="Smooth Convex Optimization",
+bookTitle="Lectures on Convex Optimization",
+year="2018",
+publisher="Springer International Publishing",
+address="Cham",
+pages="59--137",
+isbn="978-3-319-91578-4",
+doi="10.1007/978-3-319-91578-4_2",
+url="https://doi.org/10.1007/978-3-319-91578-4_2"
+}
+
+@book{HB,
+  author    = {Boris T. Polyak},
+  title     = {Introduction to Optimization},
+  publisher = {Optimization Software, Inc.},
+  year      = {1987},
+  address   = {New York},
+  note      = {Chapter 3, Section 3.2: The Heavy Ball Method}
+}
+
+@misc{tutorial,
     author    = {Van Scoy, Bryan and Lessard, Laurent},
     title     = {A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms},
     booktitle = {IEEE Conference on Decision and Control},
@@ -40,16 +92,18 @@
   number={6},
   pages={819-830},
   keywords={Robustness;Stability analysis;Power system modeling;Feedback;Control theory;Robust stability;Design engineering;Control system synthesis;Computational modeling;Parameter estimation},
-  doi={10.1109/9.587335}}
+  doi={10.1109/9.587335}
+}
 
-@misc{drori2012,
-      title={Performance of first-order methods for smooth convex minimization: a novel approach}, 
-      author={Yoel Drori and Marc Teboulle},
-      year={2012},
-      eprint={1206.3209},
-      archivePrefix={arXiv},
-      primaryClass={math.OC},
-      url={https://arxiv.org/abs/1206.3209}, 
+@article{drori2012,
+author = {Drori, Yoel and Teboulle, Marc},
+year = {2012},
+month = {06},
+pages = {},
+title = {Performance of first-order methods for smooth convex minimization: A novel approach},
+volume = {145},
+journal = {Mathematical Programming},
+doi = {10.1007/s10107-013-0653-0}
 }
 
 @article{lessard2016,
@@ -65,39 +119,56 @@
    year={2016},
    month=jan, pages={57–95} }
 
-@misc{taylor2016,
-    title={Smooth Strongly Convex Interpolation and Exact Worst-case Performance of First-order Methods}, 
-    author={Adrien B. Taylor and Julien M. Hendrickx and François Glineur},
-    year={2016},
-    eprint={1502.05666},
-    archivePrefix={arXiv},
-    primaryClass={math.OC},
-    url={https://arxiv.org/abs/1502.05666}, 
+@article{taylor2016,
+author = {Taylor, Adrien B. and Hendrickx, Julien M. and Glineur, Fran\c{c}ois},
+title = {Smooth strongly convex interpolation and exact worst-case performance of first-order methods},
+year = {2017},
+issue_date = {Jan 2017},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {161},
+number = {1–2},
+issn = {0025-5610},
+url = {https://doi.org/10.1007/s10107-016-1009-3},
+doi = {10.1007/s10107-016-1009-3},
+journal = {Math. Program.},
+month = jan,
+pages = {307–345},
+numpages = {39},
+keywords = {68Q25, 90C22, 90C25, 90C30, 90C60, First-order methods, Rates of convergence, Semidefinite programming, Smooth convex interpolation, Smooth convex minimization, Worst-case analysis}
 }
 
-
-@misc{adam,
-      title={Adam: A Method for Stochastic Optimization}, 
-      author={Diederik P. Kingma and Jimmy Ba},
-      year={2017},
-      eprint={1412.6980},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1412.6980}, 
+@inproceedings{adam,
+  author       = {Diederik P. Kingma and
+                  Jimmy Ba},
+  editor       = {Yoshua Bengio and
+                  Yann LeCun},
+  title        = {Adam: {A} Method for Stochastic Optimization},
+  booktitle    = {3rd International Conference on Learning Representations, {ICLR} 2015,
+                  San Diego, CA, USA, May 7-9, 2015, Conference Track Proceedings},
+  year         = {2015},
+  url          = {http://arxiv.org/abs/1412.6980},
+  timestamp    = {Thu, 25 Jul 2019 14:25:37 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/KingmaB14.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
 }
 
-@INPROCEEDINGS{pesto,
-  author={Taylor, Adrien B. and Hendrickx, Julien M. and Glineur, François},
-  booktitle={2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, 
-  title={Performance estimation toolbox ({PESTO}): Automated worst-case analysis of first-order optimization methods}, 
-  year={2017},
-  volume={},
-  number={},
-  pages={1278-1283},
-  keywords={Estimation;Convex functions;Algorithm design and analysis;Minimization;Gradient methods;Computational modeling},
-  doi={10.1109/CDC.2017.8263832}}
+@article{pesto,
+    author = {Stapor, Paul and Weindl, Daniel and Ballnus, Benjamin and Hug, Sabine and Loos, Carolin and Fiedler, Anna and Krause, Sabrina and Hroß, Sabrina and Fröhlich, Fabian and Hasenauer, Jan},
+    title = {PESTO: Parameter EStimation TOolbox},
+    journal = {Bioinformatics},
+    volume = {34},
+    number = {4},
+    pages = {705-707},
+    year = {2017},
+    month = {10},
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/btx676},
+    url = {https://doi.org/10.1093/bioinformatics/btx676},
+    eprint = {https://academic.oup.com/bioinformatics/article-pdf/34/4/705/48913262/bioinformatics\_34\_4\_705.pdf},
+}
 
-@misc{julia,
+@article{julia,
       title={Julia: A Fast Dynamic Language for Technical Computing}, 
       author={Jeff Bezanson and Stefan Karpinski and Viral B. Shah and Alan Edelman},
       year={2012},
@@ -107,12 +178,17 @@
       url={https://arxiv.org/abs/1209.5145}, 
 }
 
-@misc{jump,
-    author = {Miles Lubin and Oscar Dowson and Joaquim {Dias Garcia} and Joey Huchette and Beno{\^i}t Legat and Juan Pablo Vielma},
-    title = {{JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical optimization},
-    journal = {Mathematical Programming Computation},
-    year = {2023},
-    doi = {10.1007/s12532-023-00239-3}
+@article{jump,
+  author    = {Miles Lubin and Oscar Dowson and Joaquim Dias Garcia and Joey Huchette and Beno{\^i}t Legat and Juan Pablo Vielma},
+  title     = {JuMP 1.0: recent improvements to a modeling language for mathematical optimization},
+  journal   = {Mathematical Programming Computation},
+  volume    = {15},
+  number    = {3},
+  pages     = {581--589},
+  year      = {2023},
+  doi       = {10.1007/s12532-023-00239-3},
+  url       = {https://doi.org/10.1007/s12532-023-00239-3},
+  issn      = {1867-2957}
 }
 
 @article{SCS,
@@ -146,4 +222,14 @@
   year      = {2023},
   url       = {https://arxiv.org/abs/2309.11365},
   doi       = {10.1109/CDC49753.2023.10384285}
+}
+
+@misc{pdintcond,
+      title={Interpolation Conditions for Linear Operators and Applications to Performance Estimation Problems}, 
+      author={Nizar Bousselmi and Julien M. Hendrickx and François Glineur},
+      year={2024},
+      eprint={2302.08781},
+      archivePrefix={arXiv},
+      primaryClass={math.OC},
+      url={https://arxiv.org/abs/2302.08781}, 
 }

@@ -3,65 +3,85 @@
 \bibitem{Wright_Recht_2022}
 Stephen~J. Wright and Benjamin Recht.
 \newblock {\em Optimization for Data Analysis}.
-\newblock Cambridge University Press, 2022.
+\newblock Cambridge University Press, Cambridge, 2022.
 
-\bibitem{pepit}
-Baptiste Goujaud, Céline Moucer, François Glineur, Julien Hendrickx, Adrien Taylor, and Aymeric Dieuleveut.
-\newblock {PEPit}: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
+\bibitem{HB}
+Boris~T. Polyak.
+\newblock {\em Introduction to Optimization}.
+\newblock Optimization Software, Inc., New York, 1987.
+\newblock Chapter 3, Section 3.2: The Heavy Ball Method.
+
+\bibitem{FG}
+Yurii Nesterov.
+\newblock {\em Smooth Convex Optimization}, pages 59--137.
+\newblock Springer International Publishing, Cham, 2018.
 
 \bibitem{adam}
 Diederik~P. Kingma and Jimmy Ba.
-\newblock Adam: A method for stochastic optimization, 2017.
-
-\bibitem{drori2012}
-Yoel Drori and Marc Teboulle.
-\newblock Performance of first-order methods for smooth convex minimization: a novel approach, 2012.
-
-\bibitem{taylor2016}
-Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
-\newblock Smooth strongly convex interpolation and exact worst-case performance of first-order methods, 2016.
-
-\bibitem{lessard2016}
-Laurent Lessard, Benjamin Recht, and Andrew Packard.
-\newblock Analysis and design of optimization algorithms via integral quadratic constraints.
-\newblock {\em SIAM Journal on Optimization}, 26(1):57–95, January 2016.
+\newblock Adam: {A} method for stochastic optimization.
+\newblock In Yoshua Bengio and Yann LeCun, editors, {\em 3rd International Conference on Learning Representations, {ICLR} 2015, San Diego, CA, USA, May 7-9, 2015, Conference Track Proceedings}, 2015.
 
 \bibitem{julia}
 Jeff Bezanson, Stefan Karpinski, Viral~B. Shah, and Alan Edelman.
-\newblock Julia: A fast dynamic language for technical computing, 2012.
+\newblock Julia: A fast dynamic language for technical computing.
+\newblock 2012.
+
+\bibitem{tutorial}
+Bryan Van~Scoy and Laurent Lessard.
+\newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms, 2023.
 
 \bibitem{adam2}
 Sebastian Bock and Martin Weiß.
 \newblock {\em Non-convergence and Limit Cycles in the Adam Optimizer}, page 232–243.
 \newblock Springer International Publishing, 2019.
 
-\bibitem{pesto}
-Adrien~B. Taylor, Julien~M. Hendrickx, and François Glineur.
-\newblock Performance estimation toolbox ({PESTO}): Automated worst-case analysis of first-order optimization methods.
-\newblock In {\em 2017 IEEE 56th Annual Conference on Decision and Control (CDC)}, pages 1278--1283, 2017.
+\bibitem{drori2012}
+Yoel Drori and Marc Teboulle.
+\newblock Performance of first-order methods for smooth convex minimization: A novel approach.
+\newblock {\em Mathematical Programming}, 145, 06 2012.
+
+\bibitem{pepit}
+Baptiste Goujaud, Céline Moucer, François Glineur, Julien Hendrickx, Adrien Taylor, and Aymeric Dieuleveut.
+\newblock {PEPit}: computer-assisted worst-case analyses of first-order optimization methods in python, 2024.
 
 \bibitem{iqc}
 A.~Megretski and A.~Rantzer.
 \newblock System analysis via integral quadratic constraints.
 \newblock {\em IEEE Transactions on Automatic Control}, 42(6):819--830, 1997.
 
-\bibitem{tutorial}
-Bryan Van~Scoy and Laurent Lessard.
-\newblock A tutorial on a {L}yapunov-based approach to the analysis of iterative optimization algorithms.
-\newblock In {\em IEEE Conference on Decision and Control}, 2023.
+\bibitem{lessard2016}
+Laurent Lessard, Benjamin Recht, and Andrew Packard.
+\newblock Analysis and design of optimization algorithms via integral quadratic constraints.
+\newblock {\em SIAM Journal on Optimization}, 26(1):57–95, January 2016.
 
 \bibitem{primaldual}
 Bryan Van~Scoy, John~W. Simpson-Porco, and Laurent Lessard.
 \newblock Automated {L}yapunov analysis of primal-dual optimization algorithms: {A}n interpolation approach.
 \newblock In {\em IEEE Conference on Decision and Control}, 2023.
 
+\bibitem{primaldualalgo}
+Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein.
+\newblock Distributed optimization and statistical learning via the alternating direction method of multipliers.
+\newblock 3(1):1–122, January 2011.
+
+\bibitem{taylor2016}
+Adrien~B. Taylor, Julien~M. Hendrickx, and Fran\c{c}ois Glineur.
+\newblock Smooth strongly convex interpolation and exact worst-case performance of first-order methods.
+\newblock {\em Math. Program.}, 161(1–2):307–345, January 2017.
+
 \bibitem{jump}
-Miles Lubin, Oscar Dowson, Joaquim {Dias Garcia}, Joey Huchette, Beno{\^i}t Legat, and Juan~Pablo Vielma.
-\newblock {JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical optimization, 2023.
+Miles Lubin, Oscar Dowson, Joaquim~Dias Garcia, Joey Huchette, Beno{\^i}t Legat, and Juan~Pablo Vielma.
+\newblock Jump 1.0: recent improvements to a modeling language for mathematical optimization.
+\newblock {\em Mathematical Programming Computation}, 15(3):581--589, 2023.
+
+\bibitem{mosek}
+MOSEK ApS.
+\newblock {\em MOSEK Optimizer API for Julia 11.0.17}, 2025.
 
 \bibitem{SCS}
 Brendan O'Donoghue, Eric Chu, Neal Parikh, and Stephen Boyd.
-\newblock Conic optimization via operator splitting and homogeneous self-dual embedding, June 2016.
+\newblock Conic optimization via operator splitting and homogeneous self-dual embedding.
+\newblock {\em Journal of Optimization Theory and Applications}, 169(3):1042--1068, June 2016.
 
 \bibitem{TMM}
 Bryan Van~Scoy, Randy~A. Freeman, and Kevin~M. Lynch.

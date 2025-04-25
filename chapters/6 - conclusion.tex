@@ -1,51 +1,72 @@
-\chapter{Results and Future Work}\label{chapter:Conclusion}
+\chapter{Results}\label{chapter:results}
 
-\section{Numerical result validation}
-
-The \texttt{AlgorithmAnalysis.jl} package has been tested across a range of first-order optimization algorithms over the $m$-strong $L$-smooth convex function class to verify its ability to automatically generate accurate worst-case performance guarantees. In the test cases presented in this section, performance guarantees produced by the package matches to the mathematically produced results in \cite{tutorial}, proving that the package successfully implement Lyapunov-based algorithm analysis.
-
-For every plots in this section, we set the value of $m$ to 1 and sample 12 values of $L$ that are logarithmically spaced between 1 and 100, using a base-10 scale. This ensures uniform coverage across orders of magnitude, capturing both small and large condition numbers with equal density in log space. The convergence rate produced by the package is plotted it on the y-axis, while the x-axis plots the condition number $L/m$ of the tested $(m,L)$ values.
-
-\subsection*{Gradient descent}
-
-Continuing the example in Figure \ref*{ex_analysis}, we plot the package's derived worst-case convergence rate guarantee of the gradient descent algorithm with step size $\alpha = 2/(L+m)$ at optimizing 12 different $m$-strong $L$-smooth convex function classes, using the 12 sampled $L$ values. The plot of the result produced is presented in Figure \ref*{gd_results}.
+The \texttt{AlgorithmAnalysis.jl} package's ability to perform automatic algorithm analysis have been tested on GD, FG, HB. We have also tested on Triple-momentum (TMM), which was proven to be the fastest known globally convergent algorithm for minimizing smooth strongly convex functions in \cite{TMM}. In \cite{tutorial}, these four algorithms were tested with $m$-strong $L$-smooth convex function class over a range of $m/L$ condition numbers between one and 100. To show the package's ability to accurately analyze algorithms for worst-case performance guarantees, we seek to replicate the analysis results presented in Fig.~2 of \cite{tutorial} with results derived from running \texttt{AlgorithmAnalysis.jl} over the same range of condition numbers. The analysis results are presented in \cref{4_results}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width = .9 \textwidth]{gd_results.pdf}
-    \caption{Convergence rate guarantee of gradient descent over sector smooth strongly convex classes}
-    \label{gd_results}
+    \includegraphics[width = .8 \textwidth]{results.pdf}
+    \caption{Convergence rate guarantee of four algorithms over smooth strongly convex function class}
+    \label{4_results}
 \end{figure}
 
-We have also tested the same gradient descent algorithm over 12 $(m, L)$ sector-bounded function classes. The code used to find the worst-case convergence rate guarantees of the fast gradient algorithm at optimizing $(m, L)$ sector-bounded function classes is presented in Figure \ref*{gd_sectorbounded_code} and the plot of the result produced is presented in Figure \ref*{gd_sectorbounded_results}. We expect the analysis result to be identical to that of gradient descent over $m$-strong $L$-smooth convex function classes.
+To create \cref{4_results}, we set the value of $m$ to 1 and sample 12 values of $L$ that are logarithmically spaced between 1 and 100, using a base-10 scale. The convergence rate produced by the package is plotted on the y-axis, while the x-axis plots the condition number $L/m$ of the tested $(m,L)$ values. Also included in \cref{4_results} is the theoretical performance limit of the TMM algorithm at optimizing smooth strongly convex function presented in \cite{TMM}. Every algorithm analyzed were lifted using a lifting dimension of one.
+
+Comparing \cref{4_results} with Fig. 2 of \cite{tutorial} and Fig. 1 of \cite{TMM}, we find the analysis result produced by \texttt{AlgorithmAnalysis.jl} matches that in \cite{tutorial} for all four algorithms GD, FG, HB, and TMM. This proves the package's ability to accurately analyze these algorithms for smooth strongly convex functions.
+
+\subsection*{Gradient descent}
+
+To analyze GD, we use stepsize $\alpha = 2/(L+m)$ similar to \cref{ex_analysis} and that used in \cite{tutorial}. The code used to generate GD(m, L) in \cref{4_results} is presented in \cref{gd_code} with \texttt{m} set to one, \texttt{L} set to the sampled $L$ values, and \texttt{lifting\_dimension} set to one.
 
 \begin{figure}[h!]
 	\begin{lstlisting}[mathescape]
 $\alpha$ = 2/(L+m)
-@algorithm begin
+@algorithm begin    
     f = DifferentiableFunctional{R$^n$}()
+    f $\in$ SmoothStronglyConvex(m, L)
     xs = first_order_stationary_point(f)
-    f' $\in$ SectorBounded(m, L, xs, f'(xs))
     x0 = R$^n$()
     x1 = x0 - $\alpha$*f'(x0)
     x0 => x1
+    lift(x1, lifting_dimension)
     performance = (x0-xs)^2
 end
-@show rate(performance)
+@show rate(performance, prev_rate)
 \end{lstlisting}
-\caption{Analysis of GD and $m$-$L$ sector bounded functions}
-\label{gd_sectorbounded_code}
+\caption{Analysis of gradient descent and $m$-$L$ sector bounded functions}
+\label{gd_code}
 \end{figure}
+
+We have also tested the same gradient descent algorithm over a function class where the gradient is $(m, L)$ sector-bounded. The code used to find the worst-case convergence rate guarantees of the fast gradient algorithm at optimizing $(m, L)$ sector-bounded function classes is identical to the code used for GD on smooth strongly convex function, but with command
+\begin{lstlisting}[mathescape]
+    f' $\in$ SectorBounded(m, L, xs, f'(xs))
+\end{lstlisting}
+replacing the command \texttt{f $\in$ SmoothStronglyConvex(m, L)}. The plot of the result produced is presented in Figure \ref*{gd_sectorbounded_results}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width = .9 \textwidth]{gd_sectorbounded_results.pdf}
-    \caption{Convergence rate guarantee of gradient descent over sector bounded function classes}
+    \includegraphics[width = .8 \textwidth]{gd_sectorbounded_results.pdf}
+    \caption{Convergence rate guarantee of gradient descent over sector bounded function class}
     \label{gd_sectorbounded_results}
 \end{figure}
+
+In order to measure the effect of creating additional state iterates on the convergence rate guarantee found, we plot the results of analyzing GD with the same parameters as those used to create \cref{4_results} but with \texttt{lifting\_dimension} values zero and one. The analysis result is presented in \cref{GDresults}, from which we can see that additional lifting does not affect the performance guarantee found for GD.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = .8 \textwidth]{GDresults.pdf}
+    \caption{Convergence rate guarantee of gradient descent lifting dimensions zero and one, over smooth strongly convex function class}
+    \label{GDresults}
+\end{figure}
+
 \subsection*{Fast gradient}
 
-We tested the fast gradient algorithm with step sizes $\alpha = 4/(3L + m)$ and $\beta = (\sqrt{3L + 1} - 2)/(\sqrt{3L + 1} + 2)$. The code used to find the worst-case convergence rate guarantees of the fast gradient algorithm at optimizing $m$-strong $L$-smooth convex function classes is presented in Figure \ref*{fg_code} and the produced plot is presented in Figure \ref*{fg_results}.
+We tested the fast gradient algorithm with step sizes similar to that used in \cite{tutorial}:
+\[
+\alpha = \frac{4}{3L + m}, \quad
+\beta = \frac{\sqrt{3L + 1} - 2}{\sqrt{3L + 1} + 2}
+\]
+
+The code used to find the worst-case convergence rate guarantees of the FG algorithm in \cref{4_results} is presented in \cref{fg_code}, with \texttt{m} set to one, \texttt{L} set to the sampled $L$ values, and \texttt{lifting\_dimension} set to one.
 
 \begin{figure}[h!]
 	\begin{lstlisting}[mathescape]
@@ -58,35 +79,35 @@ $\alpha$ = 4/(3*L+m); $\beta$=(sqrt(3*L+1)-2)/(sqrt(3*L+1)+2)
     x1 = R$^n$()
     y1 = x1 + $\beta$*(x1 - x0)
     x2 = y1 - $\alpha$*f'(y1)
-    y2 = x2 + $\beta$*(x2 - x1)
-    x3 = y2 - $\alpha$*f'(y2)
     x0 => x1
     x1 => x2
-    x2 => x3
+    lift(x2, lifting_dimension)
     performance = (y1-xs)^2
 end
 @show rate(performance)
 \end{lstlisting}
-\caption{Analysis of FG and $m$-smooth $L$-strongly convex functions}
+\caption{Analysis of fast gradient and $L$-smooth $m$-strongly convex functions}
 \label{fg_code}
 \end{figure}
 
+In order to see the effect of lifting on the convergence rate guarantee found, we plot the results of analyzing FG with \texttt{lifting\_dimension} values of zero, one, and two. The analysis result is presented in \cref{FGresults}. We can see that while there is no difference in the analysis result between a creating one or two more iterates than the minimum, a lifting dimension of zero gives the incorrect result compared to Fig.2 of \cite{tutorial}.
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width = .9 \textwidth]{fg_results.pdf}
-    \caption{Convergence rate guarantee of fast gradient over smooth strongly convex function classes}
-    \label{fg_results}
+    \includegraphics[width = .8 \textwidth]{FGresults.pdf}
+    \caption{Convergence rate guarantee of fast gradient with lifting dimensions zero, one, and two, over smooth strongly convex function class}
+    \label{FGresults}
 \end{figure}
 
 \subsection*{Heavy ball}
 
-We tested the heavy ball algorithm with the following step sizes:
+We tested the heavy ball algorithm with step sizes similar to that used in \cite{tutorial}:
 \[
 \alpha = \frac{4}{\left( \sqrt{L} + \sqrt{m} \right)^2}, \quad
-\beta = \left( \frac{\sqrt{L/m} - 1}{\sqrt{L/m} + 1} \right)^2.
+\beta = \left( \frac{\sqrt{L/m} - 1}{\sqrt{L/m} + 1} \right)^2
 \]
-The code used to find the worst-case convergence rate guarantees of the heavy ball algorithm for optimizing $m$-strongly convex and $L$-smooth function classes is presented in Figure~\ref{hb_code}, and the resulting plot is shown in Figure~\ref{hb_results}.
 
+The code used to find the worst-case convergence rate guarantees of the heavy ball algorithm for optimizing $m$-strongly convex and $L$-smooth function classes are presented in \cref{hb_code}, with \texttt{m} set to one, \texttt{L} set to the sampled $L$ values, and \texttt{lifting\_dimension} set to one.
 
 \begin{figure}[h!]
 	\begin{lstlisting}[mathescape]
@@ -98,33 +119,34 @@ $\alpha$ = 4/((sqrt(L)+sqrt(m))^2); $\beta$=((sqrt(L/m)-1)/(sqrt(L/m)+1))^2
     x0 = R$^n$()
     x1 = R$^n$()
     x2 = x1 - $\alpha$*f'(x1) + $\beta$*(x1-x0)
-    x3 = x2 - $\alpha$*f'(x2) + $\beta$*(x2-x1)
     x0 => x1
     x1 => x2
-    x2 => x3
-    performance = (x0-xs)^2
+    lift(x2, lifting_dimension)
+    performance = (x1-xs)^2
 end
 @show rate(performance)
 \end{lstlisting}
-\caption{Analysis of HB and $m$-smooth $L$-strongly convex functions}
+\caption{Analysis of heavy ball and $L$-smooth $m$-strongly convex functions}
 \label{hb_code}
 \end{figure}
 
+We also plot the results of analyzing HB with \texttt{lifting\_dimension} values zero, one, and two. The analysis result is presented in \cref{HBresults}, which shows similar characteristic with \cref{FGresults} where a lift of zero produces inaccurate results while lifting values of one and two result in accurate and similar convergence rate guarantees.
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width = .9 \textwidth]{hb_results.pdf}
-    \caption{Convergence rate guarantee of heavy ball over smooth strongly convex function classes}
-    \label{hb_results}
+    \includegraphics[width = .8 \textwidth]{HBresults.pdf}
+    \caption{Convergence rate guarantee of heavy ball with lifting dimensions zero, one, and two, over smooth strongly convex function class}
+    \label{HBresults}
 \end{figure}
 
 \subsection*{Triple momentum}
 
 We tested the triple momentum algorithm, which was developed by Van Scoy, Freeman, and Lynch in \cite{TMM} to be the fastest known globally convergent first-order algorithm at optimizing strongly convex functions. The algorithm is defined as:
-\begin{equation}\label{eqn:GD}
-    x_{k+1}= (1+\beta)x_{k} - \beta x_{k-1} - \alpha \nabla f((1+\gamma)x_k - \gamma x_{k-1})
-  \end{equation}
+\begin{equation}\label{eqn:TMM}
+ x_{k+1}= (1+\beta)x_{k} - \beta x_{k-1} - \alpha \nabla f((1+\gamma)x_k - \gamma x_{k-1})
+  \end{equation}
 
-The triple momentum algorithm's optimal parameters is determined by the condition number \( k = L/m \) when optimizing $m$-smooth $L$-strongly convex functions. The algorithm's parameters are defined as:
+The triple momentum algorithm's optimal parameters are determined by the condition number \( k = L/m \) when optimizing $L$-smooth $m$-strongly convex functions. The algorithm's parameters are defined as:
 
 \[
 \begin{aligned}
@@ -135,19 +157,11 @@ The triple momentum algorithm's optimal parameters is determined by the conditio
 % \delta &= \frac{\rho^2}{1 - \rho^2}.
 \end{aligned}
 \]
-Under these parameters, it was proven in \cite{TMM} that the performance guarantee matches the function $1-\sqrt{m/L}$, which is also plotted in along side the rates produced by the package in Figure~\ref{tmm_results}. The code used to find the worst-case convergence rate guarantees of the triple momentum algorithm is presented in Figure~\ref{tmm_code}.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width = .8 \textwidth]{tmm_results.pdf}
-    \caption{Convergence rate guarantee of triple momentum over smooth strongly convex function classes}
-    \label{hb_results}
-\end{figure}
+Under these parameters, it was proven in \cite{TMM} that the performance guarantee that can be guaranteed the function $1-\sqrt{m/L}$, which is plotted alongside the rates produced by the package in \cref{4_results} as TMM theoretical. The code used to find the worst-case convergence rate guarantees of the triple momentum algorithm is presented in \cref{tmm_code}, with \texttt{m} set to one, \texttt{L} set to the sampled $L$ values, and \texttt{lifting\_dimension} set to one. Note that in \cref{tmm_code}, the performance measure is set to \texttt{((1+delta)*x2 - delta*x1 - xs)\textasciicircum2} in order to get the result in \cref{4_results}. This value is taken from Theorem 1 of \cite{TMM} and adapted to fit the automated analysis in \texttt{AlgorithmAnalysis.jl}, and selecting a different performance measure might not result in analysis figures that match that in Fig.1 of \cite{TMM}.
 
 \begin{figure}[h!]
 	\begin{lstlisting}[mathescape]
-k = L/m
-rho = 1 - 1/(sqrt(k))
+k = L/m; rho = 1 - 1/(sqrt(k))
 $\alpha$ = (1 + rho)/L
 $\beta$ = (rho^2)/(2-rho)
 gamma = (rho^2)/((1+rho)*(2-rho))
@@ -160,22 +174,22 @@ delta = (rho^2)/(1-rho^2)
     x1 = R$^n$()
     y1 = (1+gamma)*x1 - gamma*x0
     x2 = (1+$\beta$)*x1 - $\beta$*x0 - $\alpha$*f'(y1)
-    y2 = (1+gamma)*x2 - gamma*x1
-    x3 = (1+$\beta$)*x2 - $\beta$*x1 - $\alpha$*f'(y2)
     x0 => x1
     x1 => x2
-    x2 => x3
+    lift(x2, lifting_dimension)
     performance = ((1+delta)*x2 - delta*x1 -xs)^2
-    
+end
 @show rate(performance)
 \end{lstlisting}
-\caption{Analysis of HB and $m$-smooth $L$-strongly convex functions}
+\caption{Analysis of triple-momentum and $L$-smooth $m$-strongly convex function class}
 \label{tmm_code}
 \end{figure}
 
-\section{Future work}
+When we plot the result of analyzing TMM with \texttt{lifting\_dimension} values zero, one, and two, we see the same impact lifting has on the convergence rate guarantee as did FG and HB: not lifting the algorithm produces inaccurate results while creating one or two additional iterates does not affect the result. This can be seen in \cref{TMMresults}.
 
-While the current experimental validations demonstrate that the \texttt{AlgorithmAnalysis.jl} package accurately generates worst-case performance guarantees for several prominent first-order optimization methods, we can explore other other methods to test compatibility. Future work should focus on systematically testing and verifying the package against a wider range of first-order unconstrained optimization algorithms. This extended analysis will further confirm the robustness of the package's implementation of the Lyapunov fucntion-based approach and highlight any potential limitations to be remedied and improved.
-
-Additionally, the program currently does not support automatic ''lifting dimension'', a step of the Lyapunov method to algorithm analysis in \cite{tutorial}. While the user can manually add a lifting dimension by defining the analyze algorithm using more updates than the required 2. A function which can create these extra updated states, label them, and add them to the analysis process can allow the user to implement lifting dimension having only to enter how many extra updated states they wish to use. The lifting dimension will increase the size of the Lyapunov functions and introduce additional interpolated points and therefore additional constraints. As a result, the optimization problem we are solving to certify a convergence rate will becore more complexto the optimization problem while this research work is to implement this step and measure its effect on the tightness of the convergence rate guarantee.
-
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = .8 \textwidth]{TMMresults.pdf}
+    \caption{Convergence rate guarantee of triple momentum with lifting dimensions zero, one, and two,over smooth strongly convex function classes}
+    \label{TMMresults}
+\end{figure}

@@ -7,12 +7,13 @@
 %% BASIC INFORMATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \name{Lam Ngoc}{Ha}
-\title{Algorithm Analysis: Julia\texttrademark Package Implementation of Optimization Algorithm Analysis Using Lyapunov Function}
+% \title{Algorithm Analysis: Julia\texttrademark Package Implementation of Optimization Algorithm Analysis Using Lyapunov Function}
+\title{Algorithm Analysis: Automatic Lyapunov-based Analysis of First-Order Methods In Julia}
 \school{Miami University}
 \college{Engineering and Computing}
-\department{Electrical and Computer Engineering}
+\department{Department of Electrical and Computer Engineering}
 \location{Oxford}{Ohio}
-\year{2024}
+\year{2025}
 
 % \advisor{Dr. Advisor}
 \listadd{\advisors}{Dr. Bryan Van Scoy}
@@ -56,7 +57,7 @@
       end,export,false,for,function,immutable,import,importall,if,%
       macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
       using,while, @show, rate, @algorithm, DifferentiableFunctional, first_order_stationary_point,
-      SectorBounded, R$ ^n $},%
+      SectorBounded, R$^n$, lift, SmoothStronglyConvex},%
    sensitive=true,%
    morecomment=[l]\#,%
    morecomment=[n]{\#=}{=\#},%
@@ -124,8 +125,7 @@
 
 \usepackage[normalem]{ulem}
 \newcommand{\comment}[1]{\textcolor{blue}{#1}}
-% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
-
+% !TeX program = lualatex
 
 % automatically look for graphics in these folders
 \graphicspath{{graphics/}}
@@ -169,17 +169,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
 
+\setcounter{page}{3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% ABSTRACT (200 word max, one paragraph)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-  Many problems that appear in science and engineering can be considered optimization problems, and first-order iterative algorithms are used to solve large scale problems in fields such as machine learning or data science. This makes the case for the ability to compare the performance of any set of algorithms in any application to find the best performing one. Currently however, analyzing algorithms is difficult for anyone without existing knowledge of the subject, regardless of the chosen method. In this thesis paper, we demonstrate the Algorithm Analysis program, a Julia package that provides a simple and more accessible way to analyze any optimization algorithm by leveraging the Lyapunov-based analysis approach. Simultaneously, we show that by creating a language specific to the domain of optimization algorithms, the Algorithm Analysis package can serve as a platform on which different methods to perform algorithm analysis can be implemented.
+  First-order iterative algorithms are widely employed to solve large-scale optimization problems, many of which often appear in science or engineering. A relevant example of such a problem is in the field of machine learning, where huge amounts of computational power are spent optimizing model errors. Consequently, the ability to systematically compare algorithm performance across any given application to find the most efficient method can save time and energy. However, existing methods for algorithm analysis often have shortcomings ranging from the rigorousness of the result to user accessibility. In this thesis, we introduce the AlgorithmAnalysis.jl Julia package, a Lyapunov function-based framework for robust algorithm analysis accessible to a broad user base. 
 \end{abstract}
-
-% the title page is the first numbered page (not the abstract),
-% but the first page number appears on the table of contents
-\setcounter{page}{3}
-
 % table of contents
 \tableofcontents
 
@@ -190,7 +186,7 @@
 \input{chapters/dedication}
 
 % acknowledgements (optional)
-\input{chapters/acknowledgements}
+% \input{chapters/acknowledgements}
 
 % acronyms (optional)
 % \input{chapters/acronyms}
@@ -205,6 +201,7 @@
 \input{chapters/4 - more.tex}
 \input{chapters/5 - results.tex}
 \input{chapters/6 - conclusion.tex}
+\input{chapters/7 - conclusion.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
